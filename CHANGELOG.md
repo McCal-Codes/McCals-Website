@@ -1,5 +1,483 @@
 # Changelog
 
+## 2026-09-12
+
+### Three API Routes Nothing Called Were Live in Production
+
+- `api/pdf-proxy.ts` fetched whatever URL a caller put in `?url=` and returned the bytes as `application/pdf`, with `Access-Control-Allow-Origin: *` and a one year immutable cache. No allowlist, no scheme check, no size cap, no rate limit. Confirmed live before removal: a request naming `example.com` came back 200 with that site's HTML served as a PDF from our domain. Anything fetched through it would have been attributable to mcc-cal.com and pinned at the edge for a year, and the whole body was read into memory first.
+- `api/schedule/availability-enhanced.js` and `api/schedule/book-enhanced.js` were earlier forks of the two booking endpoints, carrying their own hardcoded copy of `BOOKING_CONFIGS` from before that moved into `_lib`. Neither knew about blackout dates, notice periods or the owner timezone handling, and `book-enhanced` wrote a real Google Calendar event without recording the booking in Supabase, so anything booked through it would have been invisible to the reschedule and cancel flow. Both answered from their own handler code in production, so they were reachable, just not by us.
+- Nothing in the repository referenced any of the three. That is what made them a problem rather than clutter: a route stops being reviewed the moment it stops being called, but Vercel keeps deploying every file under `api/` regardless.
+- `api/_lib/rate-limit.js` went too. It was a second, unused rate limiter sitting beside the one every endpoint actually imports.
+
+### The Availability Endpoint Now Says No
+
+- `api/schedule/availability.js` was the one public endpoint with no rate limit, and it is the one that turns each request into a Google Calendar `events.list` call. It sets `no-store`, so nothing was absorbed at the edge either: every request reached the origin and spent quota that is not ours to give away. Limited to 60 per minute per caller, which is far above real use, since the booking widget fetches once per month view.
+- Two static tests now hold the line. One asserts every file under `api/` is referenced somewhere in `src/`, by fetch URL or by direct import, so an unreachable route cannot go live unnoticed again. The other asserts every route either calls the rate limiter or sets an `s-maxage`, the two ways an endpoint can bound how much origin work a caller can demand.
+- The second test was wrong on its first pass: it searched for the name `applyRateLimit`, which the import line satisfies, so a file that imported the limiter and never called it went green. It matches the call now. Both tests were confirmed to fail on purpose, one against a planted unreferenced route and one against the rate limit removed again.
+
+### Tailwind Was Configured and Never Ran
+
+- `postcss.config.js` loaded only autoprefixer, so `@tailwind base; @tailwind components; @tailwind utilities;` shipped verbatim into the production stylesheet, where a browser skips an at-rule it does not recognise. The installed `tailwindcss` was v4, whose entry point is `@import "tailwindcss"`, so even with the plugin loaded those v3 directives would have produced nothing.
+- The cost was not the dead config. Class names like `mt-8`, `text-sm` and `opacity-70` sat on live pages doing nothing: the booking error on `/book-a-podcast` and `/grab-a-coffee` was meant to be small and dimmed with space above it, and the gallery error text on `/events`, `/concerts`, `/nature` and `/portraits` likewise. None of it applied, and nothing in the build said so.
+- Turning Tailwind on was the wrong repair. `@tailwind base` is preflight, a global reset that would have restyled every page at once. This site is styled with CSS modules and hand written stylesheets, so the fix was to finish removing a tool that was never wired up. The inert class names are gone, which is not a visual change: they were doing nothing before and they are doing nothing now. The spacing and type they were reaching for can be written properly, deliberately, as a separate change.
+- Two guards: no stylesheet may carry a `@tailwind` directive, and no component may use a Tailwind utility class, so a class that would silently do nothing cannot be added back. Both confirmed to fail on purpose.
+
+### Two Routes That Could Not Be Reached
+
+- `/showcase` and `/api-test` are registered in `App.tsx` and code split into their own chunks, but neither appears in `STATIC_PAGE_ROUTES`, so no HTML is prerendered for them and both return 404 in production. They have been unreachable demo pages carrying most of the site's Tailwind usage.
+- `src/components/ui/` held `ImageSpinner` and `VercelImage`, imported by nothing outside that directory.
+- `@vercel/next` was a production dependency of a Vite single page app, referenced nowhere. `api/_lib/rate-limit.js` was a second, unused rate limiter beside the one every endpoint imports; it went with the API cleanup.
+
+### Every Manifest Rebuild Looked Like a Change, and Bought a Second Production Build
+
+- The generators stamped `generated: new Date().toISOString()` on every run, so a manifest rebuilt from unchanged photographs still came out different. `seo-auto-update.yml` regenerates the manifests after a merge and commits whatever changed. It already checked for changes before committing, but the check always passed, because the timestamp always moved.
+- That commit lands inside `sites/mcc-cal-vite`, which is the Vercel root directory, so it satisfied `ignoreCommand` and triggered a second full production build across the projects, for a diff of one line per file. Around a quarter of merges to main carried a `chore: update SEO assets [automated]` commit doing exactly this.
+- There is a second cost. `generate-sitemap.js` reads `generated` and publishes it as the page's `<lastmod>`, so the sitemap told search engines that every gallery had been modified today, every day. A lastmod that is always current carries no information and is discounted accordingly.
+- One shared `writeManifestIfChanged` now backs all eight generators. It compares the new manifest against the file on disk with the timestamp fields blanked on both sides, and writes only when something else differs. Keeping the old timestamp is also the more truthful value: the manifest describes the same photographs it described before, so the date it was actually assembled is the date to keep.
+- Two generators already claimed to do this. `generate-concert-manifest.js` and `generate-portrait-manifest.js` both compared the whole serialised file, timestamp included, under a comment saying "idempotent", so neither ever matched and the guarded write always fired. `generate-nature-manifest.js` did it correctly, but only for its per-collection `metadata.generated`, never for the aggregate. That correct version is what this generalises.
+- The webhook notification now reports whether a write actually happened rather than always saying `written: true`.
+- Proven both ways. On `main`, one full `npm run manifest:generate` with no source changes dirties seven manifests. With this, two consecutive full runs leave the working tree clean.
+- `scripts/cloudflare/add-shoot.js` carried a literal non-breaking space inside a regex, which is an error under `no-irregular-whitespace` and so broke `npm run lint:scripts` for any change under `scripts/`. Written as `\u00A0` now, which is the same character and visible in a diff. Behaviour confirmed unchanged.
+
+## 2026-09-12
+
+### Contact Messages and Quote Requests Were Publicly Readable
+
+- `contact_submissions` and `quote_requests` each carried a policy named "Public can view own ..." that was `FOR SELECT TO anon USING (true)`. There is no "own" in it: the condition is simply true, so the public anon key that ships inside the client bundle could read every row, with names, email addresses and message bodies. Proven before the fix by seeding a row and reading it back over the REST API with nothing but that key.
+- The matching anon `INSERT` policies let anything write directly to those tables, bypassing the honeypot, the timing check and the rate limiting in `api/contact.js` and `api/quote.js` entirely.
+- A migration fixing this was written on 2026-07-11 and never applied. Its own header said so, in a note that had been true for two months. The fix existed, was reviewed and was committed; the one step that mattered was skipped, and nothing checked.
+- Applied now. Anon `SELECT` returns `[]`, anon `INSERT` returns 401, and `portfolio_images` still returns 200 so the galleries are untouched. All three form endpoints were re-tested against production afterwards and still store, still email and still discard honeypot submissions, because every legitimate write goes through the service role, which bypasses row level security.
+- Both tables held zero rows the whole time, so nothing real was ever exposed. That is luck rather than design.
+
+### Every Page Was Preloading the Homepage Hero, at a Width Vercel Rejects
+
+- The hero preload inline in `index.html` guarded only on hostname, never on path. Every route is prerendered from that same file, so the preload shipped on all 70 of them. Confirmed in production: `/events`, `/contact-us` and `/terms` each carried it. A visitor to any of those fetched a 217 KB homepage photograph at the highest priority the browser has, never displayed it, and let it compete with that page's real LCP image for bandwidth and connections.
+- Its width list also ended in 2560, which is not in `images.sizes` in `vercel.json`. Confirmed live: `w=1920` and `w=2048` return 200, `w=2560` returns 400. So on any viewport wide enough to select that candidate the preload was discarded and the hero downloaded a second time.
+- The 2560 width is a repeat. `imageWidths.static.test.ts` was written to prevent exactly this and names the case in its own docstring, but it only walked `src/` for `.ts` and `.tsx`, so the one file carrying an inline srcset was the one file it could not see. It now scans `index.html` too and understands the `var widths = [...]` form. Verified by reintroducing 2560 and watching it fail.
+- A second guard asserts the preload still checks `location.pathname`, so the scope cannot regress silently either.
+- Editing that inline script changed its SHA-256, and the content security policy in both `vercel.json` files still pinned the old one. The existing CSP hash test caught it, which is the only reason this did not ship as a policy that blocks its own preload. Both files updated.
+
+
+## 2026-09-12
+
+### The Smoke Test Cleans Up the Calendar It Now Writes To
+
+- Configuring Google Calendar credentials changed what `npm run smoke:forms` does. The booking check used to take the mock path and touch nothing outside Supabase; it now writes a real event to the Podcast Bookings calendar. Cleanup removed the database row and left the event, so every run added another "Grab a Coffee - [smoke] booking" to a live calendar. Six had accumulated during the work that configured the credentials.
+- Cleanup now deletes the events the run created, using the same service account the booking endpoint uses, read from `.env`. A 410 counts as success, since the event being already gone is the outcome we wanted.
+- Without those credentials locally it prints the event ids it could not remove rather than exiting quietly, matching how the script already handles a missing Supabase key. The point of this script is that a green result means something, so it should never imply it tidied up when it did not.
+
+
+## 2026-09-11
+
+### Booking Confirmation Emails Have Never Sent, and Google Credentials Turned That Into a 500
+
+- `sendConfirmationEmail` passed `location` into `buildBookingEmails`, but `location` was only ever declared inside `createCalendarEvent` and inside the request handler. In the module-scoped function it was a free variable, so every call threw `ReferenceError: location is not defined` before a single message was built. This arrived with the in-person location option.
+- Nothing reported it. The mock booking path calls the function with `.catch()` attached, so the throw was swallowed, the endpoint answered 200, and the booking was stored. Only the emails were missing, silently, on every booking since that feature landed.
+- Adding Google Calendar credentials exposed it as an outage. The real path awaited the same call without a catch, so the throw reached the handler's catch and answered 500, after the calendar event and the Supabase row had both been written. The booking existed; the visitor was told it failed; a retry then hit the conflict check against the event the first attempt created.
+- `location` is a parameter now, passed from both call sites, and the real path catches a failed email the way the mock path already did. A booking that reached the calendar and the database must not report failure because a message did not go out.
+- The lint config is why this was invisible. `eslint.config.mjs` applied `globals.browser` to every `.js` file and node globals to `api/**` on top, and flat config merges those rather than replacing, so `location`, `document` and `window` were all defined inside server code and `no-undef` never fired. Server paths are excluded from the browser block now and carry the recommended rules themselves. Verified with a probe file: `'location' is not defined` is an error again.
+- One legitimate exception: `scripts/check-performance-budget.js` drives Playwright, and its `page.evaluate` and `page.addInitScript` callbacks really do run in the browser, so that file keeps both global sets.
+
+### Published Credits Live On the Album, Not in a Strip Above It
+
+- `/journalism` carried a "Published proof" strip above the filters, repeating the title, date and outlet of three albums that were already on the page. The credit now appears only where it belongs, at the bottom of the album's own lightbox, so nothing is duplicated and the credit travels with the work rather than sitting in a separate list.
+- The lightbox credit used to require `articleUrl`. Only one of the seven published albums has a direct article link; the other six carry just the outlet. So the strip, which linked `articleUrl || outletUrl`, was the only thing crediting them, and removing it without this change would have credited one album and silently dropped six. The lightbox now falls back to the outlet, and says which it is: "View story on TribLive" when the link reaches the article, plain "TribLive" when it only reaches the masthead. Sending a reader to a homepage under "View story" promises a story it does not reach.
+- Four of the six missing article links were found and verified, so five of the seven published albums now reach the actual story rather than a masthead. Each was confirmed to carry the byline before being recorded: the TribLive groundbreaking piece credits "Caleb McCartney | For tribLive" in a photo caption and describes the May 5 ceremony the album covers, and the three Point Park Globe pieces were taken from the author archive and each checked for the name in the page. The remaining two stay outlet-only and are correct as they are: the New York Post blocks automated access so the Clinton piece could not be verified, and no Globe article exists for Tim Walz in Erie.
+- The "Published" badge on the album cards is gone. It was rendered *instead of* the copy-link button, so the seven published albums were the only ones a visitor could not copy a link to. All albums now have that button.
+- The "Published" filter chip stays. It is a useful way to see the published work as a set, and it is what a test already relies on.
+- Around 2.7 KB of CSS for the strip and the badge went with them, along with a rule that positioned an element that no longer exists.
+
+
+## 2026-09-10
+
+### The Accessibility Statement Said Things the Code Did Not Do
+
+- The page reported its own effective and last assessed dates as `new Date()`, so it told every visitor it had been assessed that same day, forever. A conformance claim that is always current is not a claim. Both are now pinned to a fixed date that gets bumped by hand when the site is genuinely reviewed, and the JSON-LD `dateModified` was doing the same thing to search engines and is pinned to match.
+- The cookie inventory listed `mccal_session`, `mccal_consent` and `mccal_theme`. None of the three existed anywhere in the codebase. The five keys the site really writes, `mccal_cookie_consent`, `mccal_consent_date`, `mcc-theme`, `mcc_quote_draft_v2` and `podcast-feed-v2.5`, went undeclared, as did `dev-site-changelog`, which visitors pick up because `/changelog` is a public route. All six are listed now.
+- The page also framed everything as cookies when this site sets none of its own. A search for `document.cookie` returns nothing; everything under our own name is local storage, which stays on the device and is never sent with a request. The inventory says which is which, and durations now read "until cleared" rather than inventing an expiry. The analytics rows dropped `_gid` and `_gat`, which belong to Universal Analytics, in favour of the `_ga` and `_ga_<id>` pair GA4 actually sets, and only once analytics consent is granted.
+- It claimed testing with Axe DevTools, Lighthouse, NVDA and VoiceOver. There is no axe dependency in the project, the only Lighthouse workflow sits in `.github/workflows/archive/`, and the one axe workflow cannot fire or fail (#264). The assessment section now describes what is actually done and says plainly that automated checks are not yet running on every change, rather than claiming coverage that does not exist.
+- The conformance posture itself was already honest, "partially conformant" and "we aim to conform", so it was left alone.
+- `accessibility-policy.test.ts` keeps it from drifting again. It reads the source, collects every storage key the app declares, and compares both directions: a key the code writes but the page omits fails, and a key the page publishes that no code declares fails. Comparing against the declarations rather than searching the source matters, because the inventory lives in `src/` too, so a text search finds the listing itself and passes vacuously. That self-reference is how three fictional keys survived. Verified by reintroducing `mccal_theme` and watching both halves go red.
+
+### A Photograph Too Large for the CDN to Serve
+
+- `Nature/Flowers & Plants/IMGP9549.jpg` was 24.3 MB. jsDelivr refuses anything over 20 MB, so it answered 403 while its 17.5 MB sibling in the same folder answered 200, and the Vercel optimiser in front of it answered 502 at every width because it cannot fetch what the origin refuses. The image is genuinely broken, though it is easy to miss: it is ninth of ten inside one collection, and the galleries only ever show collection covers, so nothing reaches it without opening that lightbox and paging most of the way through. Checking the site will not reveal it.
+- The everyday cost was the larger one. `CAL_4406.jpg`, the cover of that same collection, is 15.8 MB and returns 200, so it never errored; it just meant every visitor to `/nature` triggered an image transform against a 15.8 MB source. Across the ten oversized files that is 140 MB of origin fetches feeding the optimiser. The 403 was the loud symptom, not the main problem.
+- Fifteen Nature images are now bounded at 2048px on the long edge at quality 80, which is what the rest of the site already uses: Portrait and Concert both sit at a median 2048px and about 250 KB, and Nature was simply never put through the optimiser. The 24.3 MB frame is now 229 KB at 2048x1258. Across the folder that is 144 MB less to serve, and the EXIF, IPTC, XMP and ICC data survives, so the embedded copyright and licensing statement still travel with each photograph.
+- `optimize-images.js` gained `--max-edge=N`, which bounds the long edge for both orientations. The existing 3840x2160 box quietly penalised portrait frames: a 4000x6016 image fits inside it only by dropping to 1436x2160, roughly half the resolution a landscape from the same camera would keep. The default is unchanged, so no other portfolio moves.
+- A guard in `repo-data-integrity.test.ts` now fails on any portfolio image over 5 MB. The ceiling is 5 rather than 20 because 20 only catches the file that has already broken, and at 250 KB typical, anything near 5 MB has skipped the optimiser and is costing visitors bandwidth long before it costs them the picture. Verified by planting a 6 MB file and watching it fail.
+- This reclaims the bytes for visitors immediately. It does not shrink the repository, since the previous versions stay in history until the rewrite in #265.
+
+### Nature Albums Now Publish Without a Build
+
+- Uploading a shoot cost a full production build. The photographs were already fetched at runtime, but the manifest listing them was baked into the deployment, so `seo-auto-update` had to regenerate it and commit it back into the app directory before anything appeared. Journalism was the exception: it read Supabase at runtime and published with no build at all. Nature now does the same.
+- What gated it was a single string. `useManifest` compared the requested type against the literal `'journalism'`, so every other gallery skipped the merge, and so did the `photojournalism` alias, which quietly rendered a staler gallery than `/journalism` did. That comparison is now a table of galleries, and the alias is in it.
+- Reads are paged. The previous query was a single unpaged `select('*')`, and PostgREST caps a response at its configured maximum, 1000 by default, without reporting an error: the gallery simply renders fewer photographs than were uploaded. The events portfolio already holds 1,635 images, so an unpaged read would have dropped roughly 600 of them the moment that gallery was wired up. A page that comes back short ends the loop, so the fix holds whatever the server's limit turns out to be. A page that errors discards what came before it, because half a gallery that looks whole is worse than falling back to the static manifest that still has all of it. Verified by reintroducing the unpaged read and watching the guard fail.
+- The select lists the nine columns the galleries read instead of `*`, which was pulling focal points, dimensions and migration bookkeeping into every visitor's payload.
+- Supabase images carry their own R2 address, and the nature adapter now uses it. It previously built a jsDelivr path from the collection's folder name, and a Supabase collection has no folder on disk, so a published shoot would have 404'd on every frame. Covers were the same story in miniature: only the static pipeline writes thumbnails under `Nature/thumbs/`, so a Supabase collection keeps its full image as the cover rather than pointing at a file that was never generated.
+- `alt_text` arrives as `alt` rather than `description`. The adapter resolves alt as `alt ?? caption ?? description`, so mapped to description it would have sat behind the caption and a screen reader would have read the caption instead of the text written to be the alt. Lightroom fills both, and they say different things.
+- Blank metadata no longer becomes a blank alt. `add-shoot.js` writes empty strings rather than nulls (`const altText = caption || headline || ''`), which is the ordinary case for a Lightroom export carrying no IPTC or XMP. Mapped with `??`, which only falls through on null and undefined, that empty string survived all the way to the img element and a screen reader announced the photograph as decorative, with the generated fallback never firing. The sources and the nature adapter now use `||` so a blank falls through to a real description. Verified by restoring `??` and watching the guard fail.
+- A merge that fails now returns the static manifest instead of throwing. The static content is already in hand by the time the merge runs, so letting an enhancement's failure become an error page inverts the point of merging. Verified by removing the guard and watching all three wiring tests report an errored gallery.
+- The merge no longer blocks the gallery. `fetchManifestJson` awaited it and the hook only reported success once it settled, so an unreachable Supabase held every dual-sourced gallery on a skeleton until the five second timeout fired. The comment beside that timeout already claimed the merge "must never be what the visitor is waiting for", which was the intent rather than the behaviour. The static manifest is now handed over the moment it arrives and the merge is applied afterwards as an upgrade, so the timeout bounds a background task rather than a visitor's wait. Journalism and nature get this too. Verified by folding the merge back into the fetch and watching both new guards report a gallery stuck on `loading`.
+- Collection names are compared with case and punctuation ignored, so a shoot published under "Flowers and Plants" replaces the "Flowers & Plants" folder rather than appearing beside it.
+- Nothing is migrated. Static collections with no Supabase counterpart are untouched, and with no nature rows uploaded yet the gallery renders exactly as before: verified in the browser at 11 collections, no broken images and no console errors, with journalism unchanged beside it.
+- `docs/workflows/portfolio-image-import.md` claimed uploads to any portfolio go live with no deploy. That was only ever true for journalism. It now says which galleries read Supabase and which still need wiring.
+
+
+## 2026-09-09
+
+### A Repeatable Way to Check the Forms Actually Work
+
+- `npm run smoke:forms` posts to the contact, quote and booking endpoints against production, or `--url` against a preview or localhost, and reports what happened. It checks the returned id rather than the status code, because that is the thing these endpoints were lying about: contact and quote answered 200 with "Message received" for months while the function was crashing on load, and later while neither Supabase nor Resend was configured. An id only comes back when a row was really written.
+- It also fills the booking honeypot and asserts nothing is created, and says so when a booking comes back mock, which means Google Calendar credentials are absent and nothing reached a real calendar.
+- Everything it creates is sent from a fixed marker address, so `--cleanup-only` deletes exactly what the script made and nothing a visitor submitted. Cleanup needs `SUPABASE_SERVICE_ROLE_KEY` in `.env`; without it the script says so and prints what to remove rather than failing silently.
+
+
+## 2026-09-08
+
+### The Calendar Event Would Have Broken Booking, Not Completed It
+
+- Adding Google Calendar credentials was the last step to making bookings land on a real calendar. It would instead have broken them. The event carried `attendees: [{ email: requester.email }]`, and Google refuses that from a service account without Domain-Wide Delegation. The refusal is not survivable: `createCalendarEvent` throws on a non-OK response and the throw escapes before the Supabase insert and before both confirmation emails, so every booking would have lost its record and its emails along with the calendar entry. Bookings work today only because the credentials are absent and the handler takes the mock path.
+- The requester is not left without a calendar entry. Their confirmation already carries an RFC 5545 invite as an attachment and an Add to Google Calendar link, and the attachment sets `METHOD:REQUEST` so mail clients treat it as an invitation. What is given up against Domain-Wide Delegation is RSVP tracking; what is avoided is granting a service account the right to impersonate users across the whole Workspace domain in order to run a booking form.
+- `calendar-event.static.test.ts` pins it. The field is an easy one to re-add while reading the code, and the failure only appears once credentials exist, which is the worst time to find out. Verified by re-adding the field and watching the guard fail.
+- The token request asked for the full `calendar` scope, which permits sharing and permanently deleting entire calendars, for a route that creates one event and lists events to check conflicts. It now asks for `calendar.events`. Google's guidance is to choose the most narrowly focused scope available.
+
+
+## 2026-09-07
+
+### Consent Decides Whether Anything Is Measured, and Now Something Is
+
+- The accessibility page wrote cookie preferences to localStorage and nothing ever read them. `installGa4()` ran unconditionally from `main.tsx`, Vercel Analytics alongside it, so "Reject All" changed nothing while being presented as a working control. A shared `lib/consent.ts` is now read by the GA4 bootstrap, the analytics init and every event call, and a decision applies immediately rather than on the next page load. GA4 is configured with Consent Mode v2, whose default state has to be declared before any tag loads; the site runs no advertising, so every ad signal stays denied.
+- The default with no choice recorded is granted. That is deliberate: the consent UI exists only on the accessibility page and there is no site-wide banner, so denying by default would silence analytics for every visitor who never opens that page. Serving EU visitors properly needs a banner and an opt-in default.
+- Three events fired site-wide before this and none on a revenue path, so there was no way to see which galleries produce enquiries or where the three-step quote form loses people. `utils/funnel.ts` wires the contact form, the quote form's individual steps, the booking flow and lightbox opens. Submissions use `generate_lead`, GA4's recommended event, which populates the Lead acquisition report rather than sitting in a custom bucket.
+
+### Emails People Can Read, and a Location That Might Not Be a Video Call
+
+- Notification emails were plain-text dumps of section headers. All four messages now share a layout built for mail clients rather than browsers: table layout, because Outlook renders through Word's HTML engine; inline styles, because Gmail strips style blocks on forward; 600px, no web fonts, no background images. Every message carries a plain-text alternative, which HTML-only mail was scored down for lacking.
+- Subject lines carry enough to triage from the inbox list, and replies reach the person who wrote in rather than the no-reply sender. Booking notifications previously had no reply path at all.
+- Sessions can be booked in person, with an address that reaches the calendar event, both emails and the .ics attachment. Choosing in person without giving an address is refused on the client and falls back to a video call on the server, because a calendar entry reading "in person" and nothing else is worse than a quietly virtual one.
+- Apple Mail and Outlook add events from the .ics attachment but Gmail does not, so both messages now carry a Google Calendar link as well.
+- `confirmationMessage` said "I've sent a confirmation to your email with the meeting details" inside the confirmation email, talking about itself. The client also held its own copy of the confirmation title and message, drifted from the server's, and the confirmation screen showed the booking type's default location rather than where the session was actually booked.
+- The quote form restored a saved draft silently, so a returning visitor met their old answers with no explanation and no way to clear them. It now says so, with a way to start over.
+
+### Vercel Spend
+
+- Three Vercel projects rebuilt on every push with no Ignored Build Step, so a change touching only the main site spent minutes rebuilding the admin and dev projects. Each now builds only when its own directory changed.
+- Image optimization is billed per transformation, cache read and cache write, charged on every cache miss and stale. `minimumCacheTTL` was unset, so a variant was re-transformed on every revalidation rather than once a month. `qualities` was unset, which mattered more than cost: `/_vercel/image` is public, so every distinct `q=` value produced its own billable cache entry and the query string could be walked indefinitely. Both are now pinned, and `sizes` dropped the five widths nothing requests.
+- `imageWidths.static.test.ts` exists to stop a width reaching the optimizer that is not allowlisted, after a 2560w srcset entry once shipped as "Image unavailable". Its patterns only matched a bare array, so the ternary in `FeaturedPortfolio.tsx` was invisible to it and three production widths had never been checked. Verified by injecting a bad width and watching the guard fail.
+
+
+## 2026-09-06
+
+### Booking Works Again, and Availability Is Something You Can Edit
+
+- `/book-a-podcast` returned 400 on every submission: the page offered a 60-minute session while the server refused anything under 90. There were three copies of the booking configuration, two routes and the client, and they had drifted. They are now one module, with a parity test asserting the duration the client sends falls inside the range the server accepts, because this class of bug is invisible until someone tries to book.
+- Fixing that exposed four more, each of which would have blocked the flow on its own. The grid filtered slots on `slot.available` while the API sent `{ time, display }`, so every date on both booking pages read "No available times." The confirmation screen read `booking.requester`, which no API response has ever returned, so a successful booking rendered the error boundary, the calendar event was created, the emails sent, and the visitor was shown "Something went wrong." The block labelled "Date & Time" never rendered the time.
+- Slot times were parsed as `new Date(\`${date}T${time}\`)`, which resolves against the *runtime's* zone. That is correct on a laptop in Eastern and four hours wrong on Vercel, where the runtime is UTC: a 9:00 AM booking was written to the calendar at 5:00 AM. The conversion is now explicit, and the tests assert absolute instants either side of both daylight-saving transitions so they cannot pass by coincidence. The same bug is fixed in conflict detection, where it meant double-bookings could slip through.
+- The booking honeypot used three different field names across the form, the request and the server, and was never sent at all; spam protection was the rate limit alone. "Book another" left the calendar empty, because resetting restored an identical object reference and the availability effect had nothing to react to.
+- Working hours were hardcoded, so changing when you could be booked meant a deploy. They now live in Supabase. A weekday holds any number of windows, since a day job in the middle of the day leaves a morning and an evening rather than one block, and each window carries its own notice period, free time bookable tomorrow, hours that need a shift swapped offered only two weeks out. Overlaps are prevented by a `btree_gist` exclusion constraint rather than application checks. Every failure path falls back to the previous hardcoded schedule instead of showing an empty calendar.
+- Confirmation emails now carry an RFC 5545 invite that lands in both calendars, and a link that lets the requester reschedule or cancel without an exchange of emails. That link is the only credential, so it is treated like a password reset: 256 bits from a CSPRNG, only the SHA-256 hash stored, and unknown, expired and malformed tokens are answered identically so the endpoint cannot be probed.
+- Emails were formatted without an explicit timezone, so a client who booked 9:00 AM Eastern was sent "1:00 PM UTC" and the message contradicted the page they had just used. Requester-supplied values were also interpolated straight into the HTML, so a booker could put markup in their notes and have it render in the inbox.
+
+### The Contact Form Was Returning 500
+
+- `contact.js` and `quote.js` constructed the Resend client at module scope, which throws when `RESEND_API_KEY` is absent. The environment variable was never set in production, so the function failed to initialise and **every contact and quote submission returned `FUNCTION_INVOCATION_FAILED`**. `schedule/book.js` already initialised lazily, which is why bookings validated correctly while the other two did not. All three now share that pattern and degrade to "stored, not emailed" rather than falling over.
+- The Resend SDK resolves with `{ data, error }` rather than rejecting, so `await resend.emails.send(...)` inside a `try/catch` never entered the catch on an API error. A rejected send, an unverified domain, an exhausted quota, a revoked key, reported success and logged nothing.
+
+### The 404 Page Could Not Render
+
+- Vercel serves `404.html` for a path matching no file, and the build never emitted one. Because this deployment resolves pages by filesystem match, a mistyped or retired URL got Vercel's own `NOT_FOUND` text and the app never booted, so the site's 404 page, which exists, and is routed, was unreachable.
+- Its stylesheet referenced `--color-text-primary` and similar, none of which this site defines, so it fell back to `#1a1a1a`: near-black text on the near-black background whenever the site's theme and the OS theme disagreed. The page was also a dead end with a single "Return home"; a 404 is usually a stale link, so it now shows the path that was asked for and offers the destinations someone is most likely to have wanted.
+- The error boundary sent `error.message` and the full component stack to GA4. Sentry already captures both with PII scrubbing configured, GA4 has none of that, and the component stack exceeds its parameter limit regardless. Its body copy was `#666` on the dark background, 3.37:1, so the one message a visitor reads when the site has already broken was itself unreadable.
+
+
+## 2026-09-05
+
+### The Sitemap Now Lists the Photographs
+
+- The portfolios render client-side, so a crawler that does not execute JavaScript saw none of the work. The sitemap listed exactly one image per page — the Open Graph card. It now emits portfolio images per route, building URLs the same way the app does so the two cannot drift apart and point at files that do not exist.
+- Dropped `<image:title>`, `<image:caption>`, `<image:license>` and `<image:geo_location>`. Google removed them from its documentation and reads only `<image:loc>`; emitting the rest implied coverage that was not there.
+- The per-URL cap was 500 against a protocol ceiling of 1,000, which was silently discarding 87 concert frames — unreachable to exactly the crawlers this sitemap exists for. Raised to the real limit: 1,577 image entries becomes 2,164, and concerts is complete at 587. Events still trims, at 1,635, but that is now the protocol's limit rather than an arbitrary one.
+
+### The Hero Dissolves Between Frames, and Picks the Right One
+
+- The hero cut between slides by swapping the `<img>` outright: skeleton, then a fade-in. It now dissolves on the GPU — both photographs sampled together and mixed across a swept noise threshold, pushed slightly apart at the midpoint so the change reads as a shift rather than a crossfade. Midtone-weighted film grain and a soft vignette are applied in the same pass, deliberately restrained: this sits over Caleb's own grading.
+- The layer is additive only. The `<img>` stays in the DOM as the LCP element, the accessible content, and what crawlers see; the canvas is `aria-hidden` and fades in once it has drawn. Every failure path unmounts it and leaves the original carousel — no WebGL context, a program that will not link, a texture that cannot be sampled, a lost context. It declines to run at all under `prefers-reduced-motion`, Save-Data, a slow `effectiveType`, or `deviceMemory` under 4GB.
+- Built on `ogl`, not three.js. This draws one fullscreen triangle from a hand-written shader, which was roughly 3% of three's API for 181KB gzip. The `ogl` chunk is 14KB — a 167KB saving — and is still fetched only after the hero has painted, so the homepage's entry chunk is unchanged.
+- A 2:3 studio portrait showed barely half its height across the desktop hero, and the square Logan frame lost a third of its own. Hero variants can now be tagged with the shape they were composed for, and selection filters to the current breakpoint: the 3:2 Liam frames carry the desktop band, the 2:3 Logan and Helen frames carry the phone column. Letterboxing portraits over a blurred copy of themselves was tried first and rejected — it works, but it is a music-player convention and reads as filler on a photographer's own site.
+- Every hero image request now uses one credentials mode. The `<img>`, the `rel=preload` in `index.html`, the idle preloader, and the WebGL texture fetch all set `crossorigin=anonymous`; a CORS and a no-CORS request for the same URL are separate cache entries, so mixing them downloaded each photograph twice. The texture also samples the exact variant the browser resolved from `srcSet` rather than a fixed 1920px URL, which was a second copy on every phone.
+- `check-performance-budget.js` no longer fails on GL driver *performance* hints. Headless CI renders WebGL in software and reports things like "GPU stall due to ReadPixels" that say nothing about the site; genuine WebGL errors still fail the budget.
+
+### Journalism Reads From Supabase As Well As the Manifest
+
+- Shoots uploaded through the admin app land in Supabase, while the committed manifest holds everything shot before that existed. `useManifest` now fetches both for the journalism portfolio and merges them, so a new upload appears without regenerating and committing a manifest. Images may carry a pre-built R2 URL that bypasses path construction; static entries are untouched.
+- The static manifest is treated as the floor, not a fallback of last resort. The Supabase leg is bounded at five seconds, because a request that *hangs* rather than fails would otherwise hold the gallery on a skeleton until the browser's own socket timeout — minutes — despite every photograph needed to render having already arrived. An unexpected manifest shape falls back to static-only instead of throwing, and an abort from navigating away is no longer logged as though the data layer failed.
+- R2 rejects non-ASCII in object metadata headers, so a single smart quote or em dash in an IPTC caption failed an entire upload. Typography is normalised to ASCII and the rest dropped for the header only; Supabase still gets the caption in full.
+- `.env*` is now ignored in the vite app so local credentials cannot be staged.
+
+## 2026-08-27
+
+### Blog/Portfolio Cross-Linking and a Photojournalism Excerpt Rewrite
+
+- Field Notes and the portfolio pages (Portraits/Events/Concerts/Journalism) had zero links between them in either direction - confirmed by grepping both for cross-references. Most Field Notes posts are personal/thesis essays with no real tie to the photography services, so rather than a generic "related posts" rule, added an explicit lookup (`RELATED_PORTFOLIO_LINKS` in `blog.tsx`) linking the two posts that are actually photojournalism-relevant ("Three Days With Boyd's Station", "The Capitalist Contradiction") to `/journalism`, rendered as a small "More From the Field" block. Added the reciprocal link from the Journalism portfolio page's intro copy back to `/blog`.
+- Rewrote the excerpt on "Three Days With Boyd's Station" (the one post that's a genuine documentary-photography piece) to open with "documentary photography and photojournalism" instead of just "photo essay" - this excerpt is what drives the post's meta description. Left the personal/thesis posts' copy untouched; forcing photography keywords into essays about grief, dreams, or trauma would misrepresent the content.
+- Adding a `Link` to `JournalismPortfolio.tsx` surfaced a pre-existing gap in its test: the component had never needed react-router context before, so `JournalismPortfolio.test.tsx` wasn't wrapped in a `MemoryRouter`. Fixed by wrapping both test renders, matching the pattern already used in `HeroCarousel.test.tsx`.
+
+### Dead Redirects and www/apex Duplicate Indexing
+
+- A fresh Search Console export showed `/terranova` and `/roadmap` both indexed and both 308-redirecting to `https://dev.mcc-cal.com/...`, a host that no longer resolves at all - anyone (including Googlebot) following either link hit a dead connection. Neither path has any matching content anywhere in the current codebase, so both redirect rules were removed outright rather than pointed somewhere new.
+- The same export showed `www.mcc-cal.com` and `mcc-cal.com` both serving identical 200 responses with no redirect between them - confirmed via `curl`, same etag/last-modified on both. Google had indexed several pages (`/projects`, `/request-a-quote`, `/letting-me-go`) under the `www.` variant specifically, splitting ranking signal for the same content across two URLs. Added a host-matched redirect (`www.mcc-cal.com/*` -> `mcc-cal.com/*`, 308) in both `vercel.json` files, consolidating to the bare domain since that's what `VITE_SITE_URL`, canonical tags, and every JSON-LD `@id`/`url` already assume.
+
+### SEO Keywording and On-Page Copy
+
+- The `keywords` arrays in `pageSeoData.json` only ever fed the `ImageObject` JSON-LD, never a `<meta name="keywords">` tag (Google ignores that tag anyway, and `usePageMeta.ts` never set one). Meanwhile the actual rendered copy on Portraits, Events, Concerts, and Journalism was 20-45 words per page - an H1 and one intro sentence before the portfolio grid - so several already-declared target terms (corporate headshots, LinkedIn headshots, conference photographer, documentary photographer, live music photographer, etc.) existed only in meta/structured data, not in anything a visitor or crawler actually reads.
+- Added the missing competitor-validated long-tail terms to `pageSeoData.json` (title/description/OG copy tweaked on Portraits and Events to work one in directly) and wove the same phrases into the real intro paragraphs on all four thin portfolio pages, plus the matching JSON-LD service `keywords` arrays.
+- Added 3 service-discovery and pricing-intent FAQ entries (corporate/LinkedIn headshots, event/conference pricing, travel) to `faq.tsx`, which automatically feed the existing `FAQPage` schema - the prior 7 questions were all logistics (turnaround, backups, releases), the exact gap AI Overview/AEO citations tend to reward.
+- Flagged `docs/standards/seo-starter-guide.md` as outdated: it was written for the retired Squarespace site (Squarespace admin UI, its auto-sitemap) and no longer describes how SEO works in the current Vite/React implementation.
+
+### GA4 Alongside Vercel Analytics
+
+- Added `src/utils/ga4.ts`: a lazy `gtag.js` loader gated behind `VITE_ENABLE_GA` + `VITE_GA_MEASUREMENT_ID`, with `send_page_view: false` since `RouteAnalytics` already fires a `page_view` event on every SPA navigation - letting gtag's own automatic pageview through too would have double-counted the first page.
+- `trackWebsiteEvent` now forwards every event to both Vercel Analytics and GA4 from the one existing call site, rather than wiring GA4 as a separate parallel tracker.
+- CSP updated in both `vercel.json` files (root and site - a test enforces they stay identical) to allow `googletagmanager.com`, `google-analytics.com`, and `analytics.google.com`.
+
+## 2026-08-24
+
+### Work Phone Number on the Contact Card
+
+- Added a `TEL;TYPE=WORK,VOICE` field to `caleb-mccartney.vcf`, the vCard downloaded from the "Save My Contact" button on `/links`.
+
+### /links Was 404ing in Production
+
+- Every route on this site is served as its own pre-rendered static HTML file (found via Vercel's cleanUrls filesystem matching); the `/:path*` -> `/index.html` SPA catch-all rewrite is never actually reached for a real request, confirmed by testing a nonexistent path and a nonexistent author slug - both 404 the same way `/links` did. `/links` was the first route ever deliberately left out of static pre-rendering (to keep it off the sitemap), so it was the first to hit this.
+- `scripts/generate-route-meta.js` now also pre-renders a small `HIDDEN_ROUTES` list (currently just `/links`) with the same mechanism as every other page, still entirely separate from `STATIC_PAGE_ROUTES`/the sitemap. `applyRouteMeta` gained an optional `robots` field to bake `noindex, nofollow` into the static file itself, on top of the existing `X-Robots-Tag` header.
+
+### A TestFlight Link on the Tap Card
+
+- Added "Join the News App Beta" to `/links`, pointing at the TestFlight enrollment link. It's an external destination, so it opens in a new tab like the social icons already do, unlike the existing internal links (`Grab a Coffee`, `Book a Podcast`) which stay in-app.
+### mcc-cal-dev's Vercel Builds Were Downloading Browsers They Never Use
+
+- Every deploy of `sites/mcc-cal-dev` took ~20 minutes because installing `playwright` (a devDependency used only by the local, manual `sync:sites:shots` screenshot script) triggers a postinstall download of Chromium, Firefox, and WebKit - well over a gigabyte - on every cold build container. The actual `build` script never touches Playwright. Set `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1` on the install step in `vercel.json`; confirmed `npm ci` drops to ~2s and the build still succeeds.
+
+### A Hidden Tap-Card Page for the Physical NFC Card
+
+- Added `/links`: a standalone, Linktree-style page reachable only by direct URL, built for a physical NFC business card. Not in nav, footer, or the sitemap, and disallowed in `robots.txt`.
+- Registered unconditionally in the router rather than behind the existing DEV-only pattern used by `/showcase`, `/api-test`, and `/changelog`, since this page has to work in production for the physical tag to work.
+- Includes a "Save My Contact" vCard download (a static `.vcf` file rather than a JS-generated blob, more reliable across iOS/Android "save contact" flows) and a `links_page_view` analytics event keyed off `?src=` on the URL, so taps from the physical card are distinguishable from any other way someone reaches the link.
+- Layout is entirely built off the site's existing `--mcc-*` CSS custom properties, so dark/light mode work without extra code, and sizing uses `clamp()` tied to viewport height so the card fits common phone screens without scrolling.
+
+### React Router and shell-quote Security Patches
+
+- Bumped `react-router-dom` to 6.30.6 to close GHSA-jjmj-jmhj-qwj2, an open redirect that could be turned into XSS, present in 6.30.2 through 6.30.4.
+- Pinned `shell-quote` to 1.9.0+ in this site's own lockfile (already fixed at the repo root by an earlier Dependabot PR), closing a quadratic-complexity denial of service pulled in transitively through `concurrently`.
+- Two other open `react-router` advisories only have a fix in v7, a major version bump touching every file that imports `react-router-dom`. Reviewed both: one only affects apps doing manual SSR hydration, which this is not; the other requires attacker-controlled input reaching a navigation target, and nothing in this codebase builds a `Link`/`navigate` target from user input. Dismissed on GitHub with recorded reasoning rather than forcing an unrelated major upgrade.
+
+## 2026-08-12
+
+### One Legal Page Became Three
+
+- `policies-legal.tsx` was 1,075 lines holding 30 sections, and its own navigation already admitted what it was: License, Privacy Policy, Cookie Policy, Terms & Conditions. Four documents sharing one URL. A client could not be sent the terms without being sent everything, and none of the documents could be found on its own.
+- Split into `/licensing`, `/privacy` (privacy and cookies together) and `/terms` (the 24-subsection client agreement). `/policies-legal` stays as an index — it is linked from the footer, FAQ, podcast page and contact form, and it keeps the old `#license`, `#privacy` and `#terms` anchors so external fragment links still land somewhere useful. Fragments never reach the server, so they cannot be redirected.
+- Extracted `components/legal/LegalDocument.tsx`: table of contents with scrollspy and search, reading time, reading-progress bar, and the mobile drawer. All three documents share it, and it builds as its own chunk rather than being duplicated three times.
+- Wrote the licensing page properly rather than moving it. The old License section was a single paragraph; the new page covers what a licence grants, the four dimensions that scope one, editorial versus commercial use, releases, credit requirements, what is not permitted, and what to do about an image already published without a licence.
+- Added the `license` property to `generateImageObjectSchema`, alongside `acquireLicensePage`, `creditText`, `copyrightNotice` and `creator`. Google requires `license` for the Licensable badge and its absence fails silently — attribution still renders, the badge simply never appears.
+
+### Fixes Found While Splitting
+
+- The effective date was rendered from `new Date()`, so every legal document told every reader its terms had changed today. `LegalDocument` now requires the date as a prop, because it is a factual claim about a document rather than something to compute.
+- The terms page had an `h2` reading "Terms & Conditions" directly under an `h1` reading "Terms & Conditions". Correct when it was one document among four; redundant now. It reads "Overview", which is what the table of contents has always called it.
+- The prerendered title said "Policies and Legal" while the page set "Policies & Legal" at runtime. Crawlers see the prerendered one; they now agree.
+- The contact form's consent checkbox linked to the combined page for what is a privacy and terms agreement. It now names and links both.
+- The footer listed a single "Policies & Legal" entry; it lists Licensing, Privacy and Terms, which is what people look for.
+
+### Three Published Assignments Now Carry Their Credit
+
+- `Trump Returns Butler`, `Kamala Speaks Erie` and `Tim Walz Erie` were all marked `published: false` with no outlet, so they were absent from the "Recent published work" strip and carried no publication credit anywhere. All three ran in The Globe, Point Park University's student-run paper. Credited in each event's `tags.json`, which is where event metadata lives, following the worked example in `Fern Hollow Nature Center Groundbreaking`.
+- Published events go from 4 to 7 of 17. Once these images are re-stamped, `IPTC:Source` will carry the outlet the way the Fern Hollow frames already do.
+- `articleUrl` is left empty on all three: the direct links are not something that can be derived, and a wrong URL in structured data is worse than an absent one.
+
+### Two Files Were Lying About Their Format
+
+- `050924_Tim_Walz_Erie_PA.png` and `051024_Trump_Rally_Attendee_Butler_PA.png` were JPEGs with a `.png` extension. Browsers sniff content so they displayed correctly, which is why this went unnoticed — but they were served with the wrong Content-Type, and `exiftool` cannot write rights metadata to a file whose extension contradicts its contents.
+- Renamed to `.jpg` with `git mv`, caption keys updated, and every manifest that referenced them regenerated. This mattered more than it looked: the Tim Walz event has exactly one image, and that file was it.
+
+## 2026-08-11
+
+### Photographs Now Carry Their Own Rights and Captions
+
+- The published photographs carried no copyright, creator, credit or rights statement at all, and `scripts/optimize-images.js` was stripping whatever the originals had — sharp discards metadata unless told otherwise. Embedded metadata is the only attribution that survives an image being copied off the site.
+- `scripts/optimize-images.js` now calls `withMetadata()`. Verified by running a control image with full licensing tags through the exact pipeline settings: all fields were destroyed before, all survive now.
+- Added `scripts/metadata/embed-image-rights.js`, which writes IPTC/XMP rights fields via exiftool. sharp cannot do this — it exposes IPTC blocks as opaque buffers.
+- Fields follow the IPTC Photo Metadata Standard and the five Google reads for Google Images: Creator, Credit Line and Copyright Notice for attribution, plus Web Statement of Rights and Licensor URL to enable the Licensable badge. Written to XMP, IIM and EXIF so tools that read only one still find them.
+- Credit uses the AP form `Caleb McCartney/McCal Media`. The parenthetical `(Photo by …)` stays in caption text, where AP puts it.
+- Images are declared `digitalCapture` under the IPTC DigitalSourceType vocabulary — an explicit assertion of original photography rather than generated imagery. Applied only to real photographs.
+- Journalism images additionally receive their AP-style caption, headline, capture date, publishing outlet and keywords from the journalism manifest. Other portfolios get rights fields only; they have no caption data, and inventing captions would put false statements in the files.
+- Applied to the 531 journalism images (529 written). Scoped deliberately: these images are committed without Git LFS, so stamping rewrites every blob permanently — roughly 1.1 GB for all five portfolios against a 2.4 GB `.git`. The remaining portfolios are a separate decision.
+- The script is idempotent, skipping files that already carry the current Web Statement, so it can run on a schedule without rewriting thousands of binaries each pass.
+
+### Structured Data Can Finally Earn the Licensable Badge
+
+- `generateImageObjectSchema` emitted `contentUrl` and `author` but not `license`, which Google explicitly requires for badge eligibility. It now emits `license`, `acquireLicensePage`, `creditText`, `copyrightNotice` and `creator`, pointing at `/licensing` and `/request-a-quote`.
+- Added `image-rights-parity.test.ts`, asserting the page's JSON-LD and the metadata embedded in the files claim the same creator, credit, copyright and licensing URLs. Two sources of rights data that disagree would be worse than one.
+- The missing-`license` failure is silent — attribution still renders, the badge simply never appears — so it is now covered by a test rather than left to be noticed.
+
+### Two Mislabelled Image Files
+
+- `050924_Tim_Walz_Erie_PA.png` and `051024_Trump_Rally_Attendee_Butler_PA.png` are JPEGs with a `.png` extension. Browsers sniff content so they display correctly, but they are served with the wrong Content-Type and exiftool cannot write metadata to them. Reported by name rather than silently skipped; fixing them means renaming and regenerating the manifests that reference them.
+
+### Every Page Can Now Render Without a Browser
+
+- `Nav` read `window.innerWidth` inside a `useState` initializer, which runs during render. Because `Nav` is on every page, that single line made the entire app impossible to render outside a browser — the blocker for prerendering, which is the change that would lift both LCP and the site's structured-data coverage.
+- Fixed with a guarded lazy initializer. The resize effect now also runs on mount, so the desktop default is corrected immediately rather than only when the viewport happens to change — previously nothing re-evaluated it after the initial render.
+- Added `ssr-safety.test.tsx`, which renders nine pages with no DOM present and asserts each produces real markup rather than an empty shell. It runs in the node environment on purpose: under the project's jsdom default, `window` exists and the suite would pass without testing anything.
+- Guarded the `matchMedia` mock in the shared test setup so suites can opt into the node environment without the setup file failing before any test runs.
+- Verified by reintroducing the original line and confirming the suite fails.
+
+### Dynamic OG Images: Investigated and Dropped
+
+- The roadmap proposed generating per-page Open Graph images, on the premise that every blog post shared one image. That premise was wrong. `generate-route-meta.js` already gives each post its own lead photograph — 10 distinct images across the posts — and each portfolio has a purpose-made social card.
+- For a photography site the real photograph is a better share image than a generated text card, so building this would have been a downgrade. Recorded here so the idea is not revisited from the same false premise.
+
+## 2026-08-10
+
+### Sitemap Dates Crawlers Can Trust
+
+- 21 of 30 sitemap URLs carried no `lastmod`. That is the one sitemap signal Google still acts on — it schedules recrawls from it — and Google drops the signal entirely for sites that report it inaccurately.
+- Portfolio routes now take their `lastmod` from the `generated` stamp inside the manifest that renders them. That is the truthful answer for pages whose content changes when photos are added, and far better than the page component, which barely ever changes.
+- Removed `changefreq` and `priority` from every entry. Google has said for years that it ignores both.
+- Deriving dates from git turned out to be a trap: the repository is a shallow clone, so `git log` reports the boundary commit for every older file and would have dated roughly 20 pages identically. The generator now detects a shallow clone and omits the date rather than emitting a same-date-for-everything lie.
+- Dates already published in the committed sitemap are carried forward when they cannot be recomputed. The SEO Auto Update workflow checks out full history and can date the static content pages; without carry-forward, Vercel's shallow build would drop that work on every deploy.
+- Added `sitemap.static.test.ts`: every public route is listed, no `changefreq`/`priority`, all dates ISO-formatted, none in the future, portfolio routes always dated, and a guard against every entry sharing one date — the exact symptom of a bad date source.
+
+### Read-Only API Routes Cached at the Edge
+
+- `google-reviews` sent `no-store` on every response, so each request was a billed Google Places API call. Successful responses are now cached at the edge for an hour with a day of `stale-while-revalidate`.
+- `testimonials` sent `public, max-age=300`, which pins a copy in each visitor's browser where no deploy can clear it. Now `max-age=0` with `s-maxage=3600`, so browsers revalidate and the CDN does the serving.
+- Errors, rate-limit rejections, and the empty-array fallbacks are deliberately not given the success TTL. Caching "reviews unavailable" for an hour would outlast the blip that caused it. The degraded testimonials response gets 60 seconds instead.
+- `podcast-feed` and `manifests/[type]` were already correctly cached and are unchanged.
+- Added `api-cache-headers.test.ts`, which asserts the read-only routes set an edge TTL, that no route pins a long browser `max-age`, that degraded responses are cached far more briefly than real data, and that `contact` and `quote` are never edge-cached.
+
+## 2026-08-09
+
+### CSP Blocked Every Client-Side Supabase Call
+
+- `connect-src` never listed the Supabase origin, so every browser-side Supabase request was refused by CSP in production. Two features were affected and both fail silently to a fallback, which is why nothing looked broken: hero slides in `HeroCarousel`, and Google reviews in `TestimonialsSection` on `/about`. Added `https://*.supabase.co` to both `vercel.json` files.
+- Added `csp-connect-src.test.ts`, asserting every origin the bundle actually fetches from is permitted, that both configs agree, and that the directive is not opened to a bare wildcard. The bug was invisible without a test precisely because the call sites degrade quietly.
+- Found by loading the pull request's Vercel preview in a browser and reading the console, which is also how the hash-based `script-src` change was confirmed safe.
+- Note: the `mccal-media` Supabase project is currently paused, so these two features stay on their fallbacks until it is resumed. The CSP fix means they will work once it is, rather than being blocked a second way.
+
+### Sentry Off the Critical Path
+
+- Blocking JavaScript on the public site drops from ~175 KB to ~118 KB gzip, and from ~222 KB before this week's work — a 47% cut overall. Nothing paints on a client-rendered SPA until that JS lands.
+- The Sentry SDK (~57 KB gzip) no longer loads synchronously. `src/lib/sentry-lazy.ts` installs `error` / `unhandledrejection` handlers immediately, queues anything they catch, then loads and initializes the SDK after the `load` event and replays the queue into it. Boot-time errors are still reported; they just arrive slightly later.
+- The queue is bounded at 20 entries so an error loop during boot cannot grow it without limit.
+- `instrument.ts` now exports `initSentry()` instead of running on import, so nothing in the critical path statically depends on it.
+- Dropped `wrapCreateBrowserRouterV6`. It has to run at module scope to build the router, which forced the whole SDK into the entry chunk. Route-pattern transaction names — the main thing it provided — are now set from `RouteAnalytics` using the same `getSpeedInsightsRoute` helper Speed Insights already uses, so Sentry still sees `/blog/[slug]` rather than one transaction per post.
+- When no Sentry DSN is configured the SDK is never fetched at all. Previously a DSN-less build still downloaded it.
+- Ratcheted the `jsKb` performance budget from 200 to 150 now that there is real headroom. A budget far above actual usage catches nothing.
+
+### Hero Preload No Longer Discarded
+
+- `HeroCarousel` fetched Supabase slides on mount and could replace slide 0 — the LCP element that `index.html` preloads — throwing the preload away and restarting LCP after a full round trip. The fetch now waits for the `load` event, so the preloaded hero paints first and database-managed slides swap in afterwards at no cost.
+- Fixed the fetch's timeout handling: `clearTimeout` only ran on success, so a failed request left a pending abort timer for the rest of the component's life.
+
+### Content Security Policy Hardened
+
+- `script-src` no longer allows `'unsafe-inline'`. The two inline scripts in `index.html` (theme-flash prevention, hero preload) are allowed by SHA-256 hash instead, closing the main XSS gap in an otherwise strong header set.
+- Added `csp-inline-hashes.test.ts`, which recomputes the hashes from `index.html` and fails if either config drifts, if `'unsafe-inline'` returns, or if a hash is left behind for a deleted script. Without it, editing an inline script would silently break the page in production.
+- Verified in a browser against a server enforcing the production CSP: both inline scripts execute, no violations are reported, and an inline script whose hash is not allowlisted is correctly blocked.
+
+## 2026-08-08
+
+### Critical-Path Bundle Diet
+
+- Cut blocking JavaScript on the public site from ~222 KB to ~174 KB gzip (-21%). The site is a client-rendered SPA, so nothing paints until that JS lands — this moves FCP, TBT, and INP directly, and LCP as a knock-on.
+- Session Replay (rrweb, 41 KB gzip) no longer ships in the critical path. It was listed in `Sentry.init`'s `integrations`, which put it in the entry chunk; it now loads through a dynamic import after the `load` event. Imported from `@sentry/replay` rather than `@sentry/react` on purpose — the latter is already in the static graph, so a dynamic import of it resolves to the same module and Rollup has nothing to split off. Added `@sentry/replay` as an explicit dependency pinned to the SDK version.
+- Not using Sentry's `lazyLoadIntegration()`: it fetches from Sentry's CDN, which the `script-src` CSP in `vercel.json` blocks.
+- Replaced `import * as Sentry` with named imports in `main.tsx`, `App.tsx`, `instrument.ts`, and `ErrorBoundary.tsx`. Namespace imports defeat tree-shaking and pulled the full SDK into whatever chunk referenced them.
+- Added a `sentry-vendor` chunk, and pinned the replay packages to their own `sentry-replay` chunk — `@sentry/browser` statically re-exports `replayIntegration`, so without an explicit rule Rollup folded rrweb back into the eager chunk.
+- Lazy-loaded `PodcastPage`, which was the one route imported eagerly in `App.tsx` and therefore shipped to every visitor on every route. `HomePage` stays eager because it is the LCP route.
+- Entry chunk: 129.8 KB gzip to 25.7 KB.
+
+### Performance Budget Actually Runs
+
+- `check-performance-budget.js` counted only resources with `initiatorType === 'script'`, which is the entry chunk alone. Vite emits vendor chunks as `<link rel="modulepreload">` (initiatorType `link`), so roughly 150 KB of blocking JS was invisible to the budget. Now matched on the URL instead.
+- The check ignores `/_vercel/*` responses, which are served by Vercel's edge and always 404 against a local `vite preview` — that alone failed every route.
+- Repointed `playwright-performance.yml` at `npm run perf:budget` and re-enabled it on PRs touching `sites/mcc-cal-vite/**`. It had been disabled and still aimed at the retired `src/widgets/` paths, so the budget was never enforced.
+
+### Dependabot Automation Unblocked
+
+- Exempted Dependabot from the `require-changelog` guard: the bot never edits `CHANGELOG.md`, so the check could only ever fail and hold its PRs out of the auto-merge queue. Human PRs are still enforced.
+- Exempted Dependabot from the Copilot Instructions Guardian: dependency bumps match its `package.json` / `scripts/**` / `.github/workflows/**` paths filter but never change the repo behavior those instruction docs describe.
+- Restored `fetch-depth: 0` on the Copilot Instructions Guardian checkout. It had been set to `2`, but the job diffs `base.sha...head.sha` and a shallow clone does not contain the base commit, so the guard failed with `fatal: bad object <base sha>` on every pull request rather than actually checking anything.
+- Made the Dependabot auto-approve step non-fatal. It fails with `GitHub Actions is not permitted to approve pull requests` unless the repository setting is enabled, which was reporting a red check on every bot PR.
+
+## 2026-08-06
+
+### Technical Portfolio at dev.mcc-cal.com
+
+- Added `sites/mcc-cal-dev`, a standalone Vite + React app for the technical product portfolio. Separate Vercel project, own design system, own CSP, mirroring the `sites/mcc-cal-admin` precedent. Software work is no longer presented through a layout built for photographs.
+- Design system built on the McCal Media brand palette (Business Marketing Kit): warm charcoal ground, bone text, no accent chroma. Two values are interpolated rather than taken from the kit, both documented in `src/styles/tokens.css`: `--bg` extends the ramp darker for a screen ground, and `--dim` replaces the kit's `5B5553`, which is only 2.4:1 on the page background and fails AA at the metadata size.
+- Typography is Plus Jakarta Sans with IBM Plex Mono for metadata, both self-hosted as woff2 under `public/fonts/`. `font-src 'self'` means no external font host can load.
+- Content is a typed schema in `src/content/`. Adding a project is one entry in `projects.ts`; the index row, route, metadata table, and sticky section nav all derive from it. Projects without a written case study render an index row with no link rather than a page of filler.
+- Status is communicated by shape and text, never color alone (`StatusMarker`). Preview slots for captures that do not exist yet reserve the aspect ratio and say "capture pending" instead of showing stock imagery.
+- Fixed a latent scrollspy bug in `SectionNav`: the IntersectionObserver callback read only the `entries` delta, which goes stale when one scroll batches several section changes together. It now accumulates intersecting ids and re-derives the topmost. Not verified in a live browser, see below.
+
+### Migrated TerraNova, Roadmap, and Abridgd off the photography site
+
+- Removed `/terranova` and `/roadmap` from `sites/mcc-cal-vite`: routes, `public-routes.js`, `site-navigation.ts`, `pageSeoData.json`, and the page sources. Prerendered route meta drops from 31 to 29 pages.
+- Added permanent cross-domain redirects for both paths to `dev.mcc-cal.com`, in the root and app `vercel.json` (kept in sync per `vercel-config.test.ts`).
+- Deleted the orphaned, unrouted `abridged.tsx`, `abridged.module.css`, `styles/abridged.css`, and `data/abridged-data.ts`. Updated `seo.static.test.ts`, which read the deleted page.
+- `/projects` now lists the software work as external links to `dev.mcc-cal.com`; the About bio menu's Roadmap link points there too.
+- The dev site's roadmap deliberately did not carry over most of `roadmap-data.ts`. That content was a photography-business roadmap (service launches, client portal, marketplace, AI features) and does not belong in a technical publication. Only the software work that actually shipped or is actually queued survived.
+- Fixed a false positive in `ci-validate-workflows.js` and `ci-validate-scripts.js`. Both matched script references with a bare `scripts/...` pattern and resolved the result from the repo root, so an app-relative path like `sites/mcc-cal-dev/scripts/sync-github.js` had its leading directories chopped off and was reported as a missing file. They now match the full path.
+
+## 2026-07-15
+
+### Local Website Workflow
+
+- Added a local-first website workflow covering non-Drive checkouts, human-readable branch names, local verification, local site testing, and PR preview gates.
+
+## 2026-07-14
+
+### Portfolio Lightbox Local Image Loading
+
+- Fixed local Vite development for sparse checkouts by redirecting missing portfolio image files to the repo CDN instead of returning HTML to the lightbox.
+- Preserved natural image aspect ratios in the lightbox by fitting loaded images to the available stage by width or height.
+
+## 2026-07-11
+
+### Supabase Schema Tracking & Image Width Guard
+
+- Mirrored all four live-database migrations into `supabase/migrations/` (initial schema, RLS policies, portfolio_images, hero_slides) so the repo is the source of truth; removed the stale, never-applied `20260625000000_portfolio_images.sql` duplicate.
+- Added `20260711000000_tighten_public_form_table_policies.sql` dropping the over-permissive anon policies on `contact_submissions` and `quote_requests` (anon SELECT `USING (true)` exposed submitted PII to anyone with the public anon key; anon INSERT bypassed the API's spam protections). Not yet applied to the live database.
+- Added `imageWidths.static.test.ts`: every image width requested from Vercel's Image Optimization API must be in `vercel.json`'s `images.sizes` allowlist, preventing the hero-slideshow "Image unavailable" bug class.
+
+### Portfolio Lightbox Fixes & Polish
+
+- Added an error state with a retry button when a lightbox photo fails to load (previously the loading spinner spun indefinitely).
+- Neighbor-photo preloading now uses the same `srcset`/`sizes` as the visible image so the browser cache hits on next/previous.
+- Zooming keeps the viewed point stable (was snapping to the top of the image); double-click zooms toward the clicked point.
+- Added mouse drag-to-pan while zoomed and horizontal touch-swipe navigation when not zoomed.
+- Sharper image while zoomed: `sizes` scales with the zoom factor so a larger srcset candidate is fetched.
+- Zoom buttons use `aria-disabled` instead of `disabled` at their bounds so keyboard focus stays inside the dialog.
+- `role="group"` on the thumbnail strip, `96dvh` dialog height on mobile, removed a dead ref.
+- Added `PortfolioLightbox` unit tests (error/retry, zoom bounds, keyboard navigation, swipe, Escape).
+
+## 2026-06-14
+
+### Sentry Observability & Repository Hygiene
+
+- Added Sentry error/performance monitoring to frontend (`src/instrument.ts`, `src/lib/sentry-config.ts`) and API routes (`api/_lib/sentry.js`).
+- Fixed `captureApiException` to be async with `Sentry.flush(2000)` so envelopes are not dropped when Vercel serverless functions terminate. Updated all API call sites to `await` the helper.
+- Removed duplicate `onCaughtError: Sentry.reactErrorHandler()` from `main.tsx`; `ErrorBoundary.componentDidCatch` is the single capture path for boundary-caught errors.
+- Added `preconnect`/`dns-prefetch` resource hints for CDN origins in `index.html`.
+- Added Vitest coverage thresholds and `test:coverage` script.
+- Created `tsconfig.test.json` and `typecheck:test` script so test files are included in TypeScript type-checking.
+- Removed unused `react`/`react-dom`/`@types/react*` from root `package.json`.
+- Moved audit reports to `docs/archive/`; rewrote `docs/repo-improvement-plan.md` for current Vite architecture.
+- Added `.gitleaks.toml` to allowlist `.env.example` template files.
+
 ## 2026-06-02
 
 ### CI / Workflow Stability

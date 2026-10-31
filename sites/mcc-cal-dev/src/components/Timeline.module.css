@@ -1,0 +1,63 @@
+.list {
+  margin-top: 2rem;
+  max-width: var(--measure);
+}
+
+.item {
+  position: relative;
+  padding: 0 0 1.75rem 1.75rem;
+  border-left: 1px solid var(--border);
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  top: 0.45rem;
+  left: -3px;
+  width: 5px;
+  height: 5px;
+  background: var(--border-strong);
+}
+
+.item:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.current::before {
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-wash);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+}
+
+.marker {
+  color: var(--text);
+}
+
+.date,
+.badge {
+  color: var(--dim);
+}
+
+.current .badge {
+  color: var(--accent);
+}
+
+.title {
+  margin-top: 0.4rem;
+  font-size: var(--step-body);
+  color: var(--text);
+}
+
+.detail {
+  margin-top: 0.25rem;
+  font-size: var(--step-small);
+  color: var(--muted);
+  text-wrap: pretty;
+}

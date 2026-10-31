@@ -45,6 +45,21 @@ const FAQ_DATA: FAQItem[] = [
     answer:
       'Varies by project type. Concert coverage: 50-150 edited images. Corporate events: 100-300 images. Portrait sessions: 25-75 images. Specific deliverable counts are outlined in your project agreement.',
   },
+  {
+    question: 'Do you shoot corporate headshots or LinkedIn headshots?',
+    answer:
+      'Yes. On-location corporate headshots, LinkedIn headshots, and personal branding sessions are available for individuals, executives, and full teams, in addition to editorial portrait work. See the Portraits page for examples of past sessions.',
+  },
+  {
+    question: 'How much does event or conference photography cost in Pittsburgh?',
+    answer:
+      'Pricing depends on coverage length, number of locations, and turnaround needs, so every corporate event and conference project gets a custom quote rather than a flat rate. Request a quote for pricing based on your specific event.',
+  },
+  {
+    question: 'Do you travel outside Pittsburgh for assignments?',
+    answer:
+      'Yes. Coverage is based in Pittsburgh and Western Pennsylvania, with travel available for corporate, editorial, and political assignments further out, including past work in Washington, D.C. Travel fees may apply depending on distance.',
+  },
 ];
 
 const FAQPage = () => {

@@ -8,22 +8,30 @@ import { applyRateLimit } from '../_lib/rate-limit-redis.js';
 import { bookingSchema, safeParseBody } from '../_lib/validation.js';
 import { applyCors } from '../_lib/cors.js';
 import { getServiceClient, isSupabaseConfigured } from '../_lib/supabase-server.js';
+import { captureApiException } from '../_lib/sentry.js';
+import { BOOKING_CONFIGS, resolveLocation } from '../_lib/booking-config.js';
+import { buildBookingEmails } from '../_lib/booking-emails.js';
+import { OWNER_TIMEZONE, ownerWallTimeToUtc } from '../_lib/timezone.js';
+import { buildManageUrl, createManageToken } from '../_lib/booking-token.js';
+import { sendEmailOrThrow } from '../_lib/email.js';
 
 // Lazy-initialize Resend client to handle missing API key gracefully
 let resendClient = null;
-function getResendClient() {
+async function getResendClient() {
   if (!resendClient && process.env.RESEND_API_KEY) {
     try {
       resendClient = new Resend(process.env.RESEND_API_KEY);
     } catch (err) {
       console.error('Failed to initialize Resend client: - book.js:19', err.message);
+      await captureApiException(err, { route: 'schedule/book', operation: 'init_resend' });
     }
   }
   return resendClient;
 }
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || 'primary';
 const SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-const PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY && process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
+const PRIVATE_KEY =
+  process.env.GOOGLE_PRIVATE_KEY && process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
 const TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'contact@mcc-cal.com';
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || 'noreply@mcc-cal.com';
 const BOOKING_RATE_LIMIT = {
@@ -35,39 +43,22 @@ const BOOKING_RATE_LIMIT = {
 // Track mock bookings to prevent double-booking when Google credentials are missing
 const mockBookings = new Set();
 
-// Booking type configurations
-const BOOKING_CONFIGS = {
-  'grab-coffee': {
-    name: 'Grab a Coffee',
-    durationMinutes: 30,
-    maxDurationMinutes: 60,
-    location: 'Virtual (Google Meet)',
-    confirmationTitle: 'Coffee chat booked!',
-    confirmationMessage: "Looking forward to our conversation. I've sent a confirmation to your email with the meeting details.",
-  },
-  'book-podcast': {
-    name: 'Book a Podcast Recording',
-    durationMinutes: 90,
-    maxDurationMinutes: 120,
-    location: 'Virtual (Zoom or Google Meet)',
-    confirmationTitle: 'Podcast session booked!',
-    confirmationMessage: "We're all set to record. I've sent you a confirmation with details and a few tips to prepare for our conversation.",
-  },
-};
-
 async function getAccessToken() {
   const now = Math.floor(Date.now() / 1000);
   const header = { alg: 'RS256', typ: 'JWT' };
   const claim = {
     iss: SERVICE_ACCOUNT_EMAIL,
-    scope: 'https://www.googleapis.com/auth/calendar',
+    // calendar.events, not the full `calendar` scope. This route creates an
+    // event and reads events to check for conflicts; the full scope also
+    // permits sharing and permanently deleting entire calendars, which Google
+    // classes as highly sensitive and nothing here needs.
+    scope: 'https://www.googleapis.com/auth/calendar.events',
     aud: 'https://oauth2.googleapis.com/token',
     iat: now,
     exp: now + 3600,
   };
 
-  const base64UrlEncode = (obj) =>
-    Buffer.from(JSON.stringify(obj)).toString('base64url');
+  const base64UrlEncode = (obj) => Buffer.from(JSON.stringify(obj)).toString('base64url');
 
   const headerB64 = base64UrlEncode(header);
   const claimB64 = base64UrlEncode(claim);
@@ -99,16 +90,22 @@ async function getAccessToken() {
 }
 
 async function createCalendarEvent(accessToken, bookingData) {
-  const { eventTypeId, date, time, durationMinutes, requester } = bookingData;
+  const { eventTypeId, date, time, durationMinutes, requester, locationMode, locationDetail } =
+    bookingData;
   const config = BOOKING_CONFIGS[eventTypeId];
+  // The calendar event must carry the same address the emails do, or an
+  // in-person booking shows "Google Meet" on the day.
+  const location = resolveLocation(config, locationMode, locationDetail);
 
-  const startDateTime = new Date(`${date}T${time}`);
+  const startDateTime = ownerWallTimeToUtc(date, time);
   const endDateTime = new Date(startDateTime);
   endDateTime.setMinutes(startDateTime.getMinutes() + durationMinutes);
 
   const event = {
     summary: `${config.name} - ${requester.name}`,
-    description: `Booking with ${requester.name}\n\nEmail: ${requester.email}\n\nNotes: ${requester.notes || 'No notes provided'}`,
+    description: `Booking with ${requester.name}\n\nEmail: ${requester.email}\n\nNotes: ${
+      requester.notes || 'No notes provided'
+    }`,
     start: {
       dateTime: startDateTime.toISOString(),
       timeZone: requester.timezone || 'America/New_York',
@@ -117,8 +114,16 @@ async function createCalendarEvent(accessToken, bookingData) {
       dateTime: endDateTime.toISOString(),
       timeZone: requester.timezone || 'America/New_York',
     },
-    location: config.location,
-    attendees: [{ email: requester.email }],
+    location: location.label,
+    // The requester is deliberately not added as an attendee. Google rejects
+    // that from a service account without Domain-Wide Delegation, and the
+    // whole booking would fail with it: createCalendarEvent throws, so the
+    // Supabase row and both emails would be lost along with the event.
+    //
+    // They are not left without a calendar entry. The confirmation email
+    // carries an RFC 5545 .ics attachment and an Add to Google Calendar link,
+    // which is how they add it. This event exists to hold the slot on Caleb's
+    // calendar and to make the conflict check meaningful.
     reminders: {
       useDefault: false,
       overrides: [
@@ -137,7 +142,7 @@ async function createCalendarEvent(accessToken, bookingData) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(event),
-    }
+    },
   );
 
   if (!response.ok) {
@@ -149,10 +154,10 @@ async function createCalendarEvent(accessToken, bookingData) {
 }
 
 async function checkForConflicts(accessToken, date, time, durationMinutes) {
-  const startDateTime = new Date(`${date}T${time}`);
+  const startDateTime = ownerWallTimeToUtc(date, time);
   const endDateTime = new Date(startDateTime);
   endDateTime.setMinutes(startDateTime.getMinutes() + durationMinutes);
-  
+
   // Add 30 min buffer (max buffer between booking types)
   const checkStart = new Date(startDateTime);
   checkStart.setMinutes(checkStart.getMinutes() - 30);
@@ -163,7 +168,7 @@ async function checkForConflicts(accessToken, date, time, durationMinutes) {
     `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events?timeMin=${checkStart.toISOString()}&timeMax=${checkEnd.toISOString()}&singleEvents=true`,
     {
       headers: { Authorization: `Bearer ${accessToken}` },
-    }
+    },
   );
 
   if (!response.ok) {
@@ -173,7 +178,7 @@ async function checkForConflicts(accessToken, date, time, durationMinutes) {
 
   const data = await response.json();
   const events = data.items || [];
-  
+
   // Check if any event overlaps with our slot
   return events.some((event) => {
     const eventStart = new Date(event.start?.dateTime || `${event.start?.date}T00:00:00`);
@@ -199,90 +204,72 @@ async function checkSupabaseBookingConflict(date, time, durationMinutes) {
     return false;
   }
 
-  const requestStart = new Date(`${date}T${time}`);
+  const requestStart = ownerWallTimeToUtc(date, time);
   const requestEnd = new Date(requestStart);
   requestEnd.setMinutes(requestStart.getMinutes() + durationMinutes);
 
   return (bookings || []).some((booking) => {
-    const bookedStart = new Date(`${date}T${booking.booking_time || '00:00:00'}`);
+    const bookedStart = ownerWallTimeToUtc(date, booking.booking_time || '00:00:00');
     const bookedEnd = new Date(bookedStart);
     bookedEnd.setMinutes(bookedStart.getMinutes() + (booking.duration_minutes || 60));
     return requestStart < bookedEnd && requestEnd > bookedStart;
   });
 }
 
-async function sendConfirmationEmail(booking, config) {
-  const resend = getResendClient();
+async function sendConfirmationEmail(
+  booking,
+  config,
+  requesterTimezone = OWNER_TIMEZONE,
+  manageUrl = null,
+  location = null,
+) {
+  const resend = await getResendClient();
   if (!resend) {
-    console.warn('[sendConfirmationEmail] Resend not configured, skipping email - book.js:188');
+    console.warn('[sendConfirmationEmail] Resend not configured, skipping email');
     return;
   }
 
-  const startDate = new Date(booking.start.dateTime);
-  const dateDisplay = startDate.toLocaleDateString('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-  const timeDisplay = startDate.toLocaleTimeString('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true,
-    timeZoneName: 'short',
+  // Message construction lives in _lib/booking-emails.js so it can be asserted
+  // and previewed without a Resend key or a real inbox.
+  const emails = buildBookingEmails({
+    booking,
+    config,
+    requesterTimezone,
+    manageUrl,
+    ownerEmail: TO_EMAIL,
+    location,
   });
 
   try {
-    // Send to user
-    await resend.emails.send({
+    await sendEmailOrThrow(resend, {
       from: FROM_EMAIL,
       to: booking.requester.email,
-      subject: config.confirmationTitle,
-      html: `
-        <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h1 style="color: #1a1a1a;">${config.confirmationTitle}</h1>
-          <p>Hi ${booking.requester.name},</p>
-          <p>Your ${config.name.toLowerCase()} is confirmed for:</p>
-          <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <p style="margin: 0;"><strong>Date:</strong> ${dateDisplay}</p>
-            <p style="margin: 8px 0 0;"><strong>Time:</strong> ${timeDisplay}</p>
-            <p style="margin: 8px 0 0;"><strong>Location:</strong> ${config.location}</p>
-          </div>
-          <p>${config.confirmationMessage}</p>
-          <p style="margin-top: 30px; color: #666; font-size: 14px;">
-            Need to reschedule? Reply to this email or contact me at ${TO_EMAIL}
-          </p>
-        </div>
-      `,
+      replyTo: TO_EMAIL,
+      subject: emails.requester.subject,
+      attachments: emails.attachments,
+      html: emails.requester.html,
+      text: emails.requester.text,
     });
 
-    // Send notification to admin
-    await resend.emails.send({
+    await sendEmailOrThrow(resend, {
       from: FROM_EMAIL,
       to: TO_EMAIL,
-      subject: `[Booking] ${config.name} - ${booking.requester.name}`,
-      text: [
-        `New booking received!`,
-        ``,
-        `=== BOOKING DETAILS ===`,
-        `Type: ${config.name}`,
-        `Date: ${dateDisplay}`,
-        `Time: ${timeDisplay}`,
-        ``,
-        `=== CONTACT ===`,
-        `Name: ${booking.requester.name}`,
-        `Email: ${booking.requester.email}`,
-        ``,
-        `=== NOTES ===`,
-        booking.requester.notes || 'No notes provided',
-        ``,
-        `Google Calendar Event: ${booking.eventLink || 'Created'}`,
-        `Submitted: ${new Date().toISOString()}`,
-      ].join('\n'),
+      // Replying to the notification reaches the person who booked.
+      replyTo: emails.owner.replyTo,
+      subject: emails.owner.subject,
+      attachments: emails.attachments,
+      html: emails.owner.html,
+      text: emails.owner.text,
     });
   } catch (err) {
-    console.error('[sendConfirmationEmail] Failed to send email: - book.js:255', err instanceof Error ? err.message : err);
-    // Don't throw - booking should succeed even if email fails
+    console.error(
+      '[sendConfirmationEmail] Failed to send email:',
+      err instanceof Error ? err.message : err,
+    );
+    await captureApiException(err, {
+      route: 'schedule/book',
+      operation: 'send_confirmation_email',
+    });
   }
 }
 
@@ -310,7 +297,16 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { eventTypeId, date, time, durationMinutes, requester } = parsed.data;
+  const {
+    eventTypeId,
+    date,
+    time,
+    durationMinutes,
+    requester,
+    requesterTimezone,
+    locationMode,
+    locationDetail,
+  } = parsed.data;
 
   // Validation
   if (!eventTypeId || !date || !time || !durationMinutes || !requester?.name || !requester?.email) {
@@ -326,23 +322,38 @@ export default async function handler(req, res) {
   // Validate duration is within allowed range
   const config = BOOKING_CONFIGS[eventTypeId];
   if (durationMinutes < config.durationMinutes || durationMinutes > config.maxDurationMinutes) {
-    res.status(400).json({ 
-      error: `Duration must be between ${config.durationMinutes} and ${config.maxDurationMinutes} minutes` 
+    res.status(400).json({
+      error: `Duration must be between ${config.durationMinutes} and ${config.maxDurationMinutes} minutes`,
     });
     return;
   }
 
+  // Credential for the self-service reschedule/cancel link in the confirmation
+  // email. Generated once per request so both the stored hash and the emailed
+  // link refer to the same token; the raw value is never persisted.
+  const manageToken = createManageToken();
+  const manageUrl = buildManageUrl(manageToken.token);
+
+  // Virtual unless the requester asked to meet in person and said where.
+  const location = resolveLocation(config, locationMode, locationDetail);
+
   // Development mode: return mock booking without external services
-  const isDev = !process.env.VERCEL && (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
+  const isDev =
+    !process.env.VERCEL && (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
   if (isDev) {
     if (process.env.DEBUG_BOOKING === '1') {
-      console.log('[schedule/book] DEV MODE: Mock booking created - book.js:309', { eventTypeId, date, time, requester: requester.name });
+      console.log('[schedule/book] DEV MODE: Mock booking created - book.js:309', {
+        eventTypeId,
+        date,
+        time,
+        requester: requester.name,
+      });
     }
-    
-    const startDateTime = new Date(`${date}T${time}`);
+
+    const startDateTime = ownerWallTimeToUtc(date, time);
     const endDateTime = new Date(startDateTime);
     endDateTime.setMinutes(startDateTime.getMinutes() + durationMinutes);
-    
+
     res.status(200).json({
       booking: {
         id: `dev-mock-${Date.now()}`,
@@ -369,28 +380,32 @@ export default async function handler(req, res) {
 
   const hasSupabaseConflict = await checkSupabaseBookingConflict(date, time, durationMinutes);
   if (hasSupabaseConflict) {
-    res.status(409).json({ error: 'This time slot is no longer available. Please select another time.' });
+    res
+      .status(409)
+      .json({ error: 'This time slot is no longer available. Please select another time.' });
     return;
   }
 
   // If Google credentials missing, create mock booking
   if (!SERVICE_ACCOUNT_EMAIL || !PRIVATE_KEY) {
     console.warn('[schedule/book] Google credentials not set, creating mock booking - book.js:341');
-    
+
     const slotKey = `${date}:${time}`;
-    
+
     if (mockBookings.has(slotKey)) {
-      res.status(409).json({ error: 'This time slot is no longer available. Please select another time.' });
+      res
+        .status(409)
+        .json({ error: 'This time slot is no longer available. Please select another time.' });
       return;
     }
-    
-    const startDateTime = new Date(`${date}T${time}`);
+
+    const startDateTime = ownerWallTimeToUtc(date, time);
     const endDateTime = new Date(startDateTime);
     endDateTime.setMinutes(startDateTime.getMinutes() + durationMinutes);
-    
+
     // Mark slot as booked
     mockBookings.add(slotKey);
-    
+
     // Save to Supabase even for mock bookings (for testing)
     let bookingId = null;
     if (isSupabaseConfigured()) {
@@ -405,20 +420,27 @@ export default async function handler(req, res) {
           booking_time: time,
           duration_minutes: durationMinutes,
           notes: requester.notes || null,
+          location: location.label,
           status: 'confirmed',
           deposit_paid: false,
           total_amount: null,
+          manage_token_hash: manageToken.hash,
+          manage_token_expires_at: manageToken.expiresAt,
         })
         .select('id')
         .single();
-      
+
       if (dbError) {
         console.error('[schedule/book] Mock booking DB error: - book.js:379', dbError);
+        await captureApiException(dbError, {
+          route: 'schedule/book',
+          operation: 'insert_mock_booking',
+        });
       } else {
         bookingId = bookingRecord?.id;
       }
     }
-    
+
     // Send email notification even for mock bookings
     const mockBooking = {
       id: `mock-${Date.now()}`,
@@ -431,12 +453,18 @@ export default async function handler(req, res) {
       },
       eventLink: '#mock-booking',
     };
-    
+
     // Send email notification (don't await, let it run async)
-    sendConfirmationEmail(mockBooking, config).catch(err => {
-      console.error('[schedule/book] Failed to send confirmation email: - book.js:400', err);
-    });
-    
+    sendConfirmationEmail(mockBooking, config, requesterTimezone, manageUrl, location).catch(
+      async (err) => {
+        console.error('[schedule/book] Failed to send confirmation email: - book.js:400', err);
+        await captureApiException(err, {
+          route: 'schedule/book',
+          operation: 'send_mock_confirmation_email',
+        });
+      },
+    );
+
     res.status(200).json({
       booking: {
         id: bookingId || mockBooking.id,
@@ -451,15 +479,24 @@ export default async function handler(req, res) {
 
   try {
     const accessToken = await getAccessToken();
-    
+
     // Check for conflicts before booking
     const hasConflict = await checkForConflicts(accessToken, date, time, durationMinutes);
     if (hasConflict) {
-      res.status(409).json({ error: 'This time slot is no longer available. Please select another time.' });
+      res
+        .status(409)
+        .json({ error: 'This time slot is no longer available. Please select another time.' });
       return;
     }
-    
-    const calendarEvent = await createCalendarEvent(accessToken, req.body);
+
+    // parsed.data, not req.body. The handler validates into `parsed` at the top
+    // and every other use reads from it, including the conflict check just
+    // above, but this one call took the raw body. So the booking that got
+    // created was not the booking that was checked, and zod's bounds were
+    // bypassed on exactly the fields that end up in a calendar event:
+    // locationDetail is capped at 200 for that reason, and durationMinutes is
+    // added to a Date with setMinutes.
+    const calendarEvent = await createCalendarEvent(accessToken, parsed.data);
 
     const config = BOOKING_CONFIGS[eventTypeId];
     const booking = {
@@ -478,7 +515,7 @@ export default async function handler(req, res) {
     let bookingId = null;
     if (isSupabaseConfigured()) {
       const supabase = getServiceClient();
-      
+
       // Insert booking record
       const { data: bookingRecord, error: dbError } = await supabase
         .from('bookings')
@@ -490,15 +527,19 @@ export default async function handler(req, res) {
           booking_time: time,
           duration_minutes: durationMinutes,
           notes: requester.notes || null,
+          location: location.label,
           status: 'confirmed',
           deposit_paid: false,
           total_amount: null,
+          manage_token_hash: manageToken.hash,
+          manage_token_expires_at: manageToken.expiresAt,
         })
         .select('id')
         .single();
-      
+
       if (dbError) {
         console.error('[schedule/book] Database error saving booking: - book.js:464', dbError);
+        await captureApiException(dbError, { route: 'schedule/book', operation: 'insert_booking' });
       } else {
         bookingId = bookingRecord?.id;
 
@@ -513,14 +554,35 @@ export default async function handler(req, res) {
           .eq('slot_time', time);
 
         if (slotError) {
-          console.error('[schedule/book] Failed to mark slot unavailable: - book.js:479', slotError);
+          console.error(
+            '[schedule/book] Failed to mark slot unavailable: - book.js:479',
+            slotError,
+          );
+          await captureApiException(slotError, {
+            route: 'schedule/book',
+            operation: 'mark_slot_unavailable',
+          });
           // Log for monitoring but don't fail the booking - calendar event is already created
           // Consider: add to monitoring/alerting system for manual cleanup
         }
       }
     }
 
-    await sendConfirmationEmail(booking, config);
+    // Deliberately not fatal. By this point the calendar event exists and the
+    // Supabase row is written, so throwing here would answer 500 for a booking
+    // that was in fact confirmed: the visitor retries, and the second attempt
+    // hits the conflict check against the event the first one created. The
+    // mock path already treated a failed email this way; the real path did not,
+    // which is why adding Google credentials turned every booking into a 500.
+    await sendConfirmationEmail(booking, config, requesterTimezone, manageUrl, location).catch(
+      async (err) => {
+        console.error('[schedule/book] Failed to send confirmation email:', err);
+        await captureApiException(err, {
+          route: 'schedule/book',
+          operation: 'send_confirmation_email',
+        });
+      },
+    );
 
     res.status(200).json({
       booking: {
@@ -533,6 +595,7 @@ export default async function handler(req, res) {
     });
   } catch (err) {
     console.error('[schedule/book] Booking creation failed: - book.js:498', err);
+    await captureApiException(err, { route: 'schedule/book', operation: 'create_booking' });
     res.status(500).json({ error: 'Failed to create booking. Please try again.' });
   }
 }

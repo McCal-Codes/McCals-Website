@@ -87,7 +87,7 @@ const editorialHighlights = [
   },
   {
     label: 'Availability',
-    value: 'Pittsburgh based with Washington, D.C. editorial readiness',
+    value: 'Pittsburgh based, available for Washington, D.C. assignments',
   },
 ];
 
@@ -201,9 +201,9 @@ const HomePage = () => {
   });
 
   return (
-    <div className="site-layout site-layout--home pt-0">
+    <div className="site-layout site-layout--home">
       <Nav />
-      <main className="site-main mt-0">
+      <main className="site-main">
         <HeroCarousel />
         <HomeEditorialBand />
       </main>

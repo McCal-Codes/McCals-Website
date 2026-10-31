@@ -1,15 +1,30 @@
 import { defineConfig, type Connect, type Plugin, type ViteDevServer } from 'vite';
 import react from '@vitejs/plugin-react';
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { resolve } from 'path';
 import fs from 'fs';
 import path from 'path';
+import { spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const PUBLIC_DIR = resolve(__dirname, './public-vite');
 const SKIP_DIR_NAME = 'one-nation-divided';
+const PUBLIC_COPY_TIMEOUT_MS = Number(process.env.PUBLIC_COPY_TIMEOUT_MS ?? 5_000);
+const REPO_CDN_BASE = 'https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main';
+const vercelEnv = process.env.VERCEL_ENV ?? process.env.VITE_VERCEL_ENV ?? 'development';
+const resolvedSiteUrl =
+  vercelEnv === 'production'
+    ? 'https://mcc-cal.com'
+    : (process.env.VITE_SITE_URL ?? 'https://mcc-cal.com').replace(/\/$/, '');
+const shouldUploadSentrySourceMaps = Boolean(
+  process.env.SENTRY_AUTH_TOKEN && process.env.SENTRY_ORG && process.env.SENTRY_PROJECT,
+);
+const sentryRelease = process.env.VERCEL_GIT_COMMIT_SHA
+  ? `mcc-cal-vite@${process.env.VERCEL_GIT_COMMIT_SHA}`
+  : undefined;
 
 /**
  * Production build only: copy `public-vite` into `dist` but never enter a folder named `one-nation-divided`
@@ -17,6 +32,7 @@ const SKIP_DIR_NAME = 'one-nation-divided';
  */
 function copyPublicSkipDeadFolder(): Plugin {
   let outDirAbs = '';
+  const skippedAssets: string[] = [];
 
   const walk = (fromRoot: string, toRoot: string, rel: string) => {
     const dir = rel ? path.join(fromRoot, rel) : fromRoot;
@@ -35,12 +51,22 @@ function copyPublicSkipDeadFolder(): Plugin {
       const relNext = rel ? path.join(rel, ent.name) : ent.name;
       const srcPath = path.join(fromRoot, relNext);
       const destPath = path.join(toRoot, relNext);
+      if (ent.name.endsWith('.drive-stuck')) {
+        continue;
+      }
       if (ent.isDirectory()) {
         fs.mkdirSync(destPath, { recursive: true });
         walk(fromRoot, toRoot, relNext);
       } else {
         fs.mkdirSync(path.dirname(destPath), { recursive: true });
-        fs.copyFileSync(srcPath, destPath);
+        const result = spawnSync('/bin/cp', ['-p', srcPath, destPath], {
+          stdio: 'ignore',
+          timeout: PUBLIC_COPY_TIMEOUT_MS,
+        });
+        if (result.error || result.status !== 0) {
+          fs.rmSync(destPath, { force: true });
+          skippedAssets.push(relNext);
+        }
       }
     }
   };
@@ -52,9 +78,21 @@ function copyPublicSkipDeadFolder(): Plugin {
       outDirAbs = path.resolve(config.root, config.build.outDir);
     },
     closeBundle() {
+      if (PUBLIC_COPY_TIMEOUT_MS <= 0) {
+        this.warn('Skipped public-vite copy because PUBLIC_COPY_TIMEOUT_MS=0');
+        return;
+      }
+      skippedAssets.length = 0;
       walk(PUBLIC_DIR, outDirAbs, '');
+      for (const rel of skippedAssets) {
+        this.warn(`Skipped public asset that could not be copied: ${rel}`);
+      }
     },
   };
+}
+
+function encodeUrlPath(urlPath: string): string {
+  return urlPath.split('/').map(encodeURIComponent).join('/');
 }
 
 // Plugin to serve portfolio images from src/images during dev
@@ -98,7 +136,12 @@ const servePortfolioImages = () => ({
           res.setHeader('Cache-Control', 'public, max-age=3600');
           fs.createReadStream(filePath).pipe(res);
         } else {
-          next();
+          const portfolioPath = decodedUrl.replace(/^\/+/, '');
+          const cdnUrl = `${REPO_CDN_BASE}/src/images/Portfolios/${encodeUrlPath(portfolioPath)}`;
+          res.statusCode = 302;
+          res.setHeader('Location', cdnUrl);
+          res.setHeader('Cache-Control', 'no-store');
+          res.end();
         }
       } catch {
         next();
@@ -117,6 +160,17 @@ export default defineConfig(({ command }) => ({
       brotliSize: true,
       filename: 'dist/stats.html',
     }),
+    command === 'build' &&
+      shouldUploadSentrySourceMaps &&
+      sentryVitePlugin({
+        org: process.env.SENTRY_ORG,
+        project: process.env.SENTRY_PROJECT,
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        release: sentryRelease ? { name: sentryRelease } : undefined,
+        sourcemaps: {
+          filesToDeleteAfterUpload: ['dist/**/*.map'],
+        },
+      }),
     command === 'build' && copyPublicSkipDeadFolder(),
   ].filter(Boolean) as Plugin[],
   /** `vite build` uses a manual public copy so a locked `one-nation-divided` tree cannot abort the build. */
@@ -129,7 +183,7 @@ export default defineConfig(({ command }) => ({
   build: {
     // 'hidden' generates sourcemaps for error tracking (e.g. Sentry)
     // without exposing them publicly in the browser DevTools
-    sourcemap: 'hidden',
+    sourcemap: shouldUploadSentrySourceMaps ? 'hidden' : false,
     rollupOptions: {
       output: {
         manualChunks(id) {
@@ -152,14 +206,31 @@ export default defineConfig(({ command }) => ({
           if (normalizedId.includes('/node_modules/@tanstack/react-query/')) {
             return 'query-vendor';
           }
+          if (normalizedId.includes('/node_modules/@sentry/')) {
+            // Session Replay is rrweb, the heaviest dependency in the app. It is
+            // loaded through a dynamic import in src/instrument.ts, but @sentry/browser
+            // also statically re-exports `replayIntegration`, so Rollup would otherwise
+            // fold it back into the chunk the entry depends on. Pinning it to its own
+            // chunk keeps it off the critical path.
+            if (
+              normalizedId.includes('/node_modules/@sentry/replay/') ||
+              normalizedId.includes('/node_modules/@sentry/replay-canvas/') ||
+              normalizedId.includes('/node_modules/@sentry/feedback/')
+            ) {
+              return 'sentry-replay';
+            }
+            return 'sentry-vendor';
+          }
           return undefined;
         },
       },
     },
   },
   define: {
-    'import.meta.env.VITE_VERCEL_ENV': JSON.stringify(
-      process.env.VERCEL_ENV ?? process.env.VITE_VERCEL_ENV ?? 'development'
+    'import.meta.env.VITE_SITE_URL': JSON.stringify(resolvedSiteUrl),
+    'import.meta.env.VITE_VERCEL_ENV': JSON.stringify(vercelEnv),
+    'import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA': JSON.stringify(
+      process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.VITE_VERCEL_GIT_COMMIT_SHA ?? ''
     ),
   },
   server: {

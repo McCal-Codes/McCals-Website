@@ -31,6 +31,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { notify } = require('../utils/manifest-webhook');
+const { writeManifestIfChanged } = require('./write-manifest.js');
 
 const POSTS_DIR = path.resolve(__dirname, '../../src/content/blog/posts');
 const MANIFEST_OUT = path.resolve(__dirname, '../../src/content/blog/blog-manifest.json');
@@ -183,11 +184,11 @@ async function generate() {
     posts,
   };
 
-  await fs.writeFile(MANIFEST_OUT, JSON.stringify(manifest, null, 2), 'utf8');
+  const written = await writeManifestIfChanged(MANIFEST_OUT, manifest);
 
   if (!SKIP_NOTIFY) {
     try {
-      await notify('blog', { path: MANIFEST_OUT, written: true });
+      await notify('blog', { path: MANIFEST_OUT, written });
     } catch (error) {
       warn(`Failed to notify webhook: ${error?.message}`);
     }

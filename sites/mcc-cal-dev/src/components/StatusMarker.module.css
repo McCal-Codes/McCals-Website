@@ -1,0 +1,40 @@
+.marker {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5em;
+  font-family: var(--font-mono);
+  font-size: var(--step-meta);
+  font-weight: 500;
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--muted);
+}
+
+.glyph {
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+/*
+  Color is decoration here. The glyph shape and the text label already carry the
+  state, so every rule below could be deleted without losing information.
+*/
+.active-alpha .glyph,
+.active-development .glyph {
+  color: var(--accent);
+}
+
+.active-alpha,
+.active-development {
+  color: var(--text);
+}
+
+.prototype .glyph,
+.research .glyph {
+  color: var(--muted);
+}
+
+.archived {
+  color: var(--dim);
+}

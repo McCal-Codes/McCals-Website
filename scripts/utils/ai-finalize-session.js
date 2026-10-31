@@ -3,7 +3,7 @@
  * AI Finalize Session
  * - Appends a short summary to each instructions file under a "Recent updates" section
  * - Bumps version if requested (package.json version and optional widget version file naming is manual)
- * - Appends a Docs/Meta entry to CHANGELOG.md
+ * - Writes a changelog fragment under changelog.d/
  *
  * Usage:
  *   node scripts/ai-finalize-session.js --summary "What changed" [--bump patch|minor|major]
@@ -28,7 +28,7 @@ function discoverInstructions() {
 }
 
 const INSTRUCTIONS = discoverInstructions();
-const CHANGELOG = path.join(ROOT, 'CHANGELOG.md');
+const FRAGMENT_DIR = path.join(ROOT, 'changelog.d');
 const PKG = path.join(ROOT, 'package.json');
 
 
@@ -55,7 +55,9 @@ function appendRecentUpdate(file) {
     let txt = fs.readFileSync(file, 'utf8');
     const marker = 'Recent updates';
     const idx = txt.indexOf(marker);
-    const entry = `- ${new Date().toISOString()} — ${summary}\n`;
+    // Colon rather than an em-dash: this text is written into repository
+    // files, and house style avoids em-dashes in prose.
+    const entry = `- ${new Date().toISOString()}: ${summary}\n`;
     if (idx === -1) {
       // append a section
       txt += `\n\n${marker}\n\n${entry}`;
@@ -78,30 +80,35 @@ function appendRecentUpdate(file) {
   }
 }
 
+/**
+ * Writes a changelog fragment rather than editing CHANGELOG.md.
+ *
+ * Two things changed here. Entries now live in changelog.d/ so that two pull
+ * requests stop conflicting on the same lines of one file, and the line no
+ * longer reads "AI session", which was attribution written into the repository
+ * by a script. This repository carries none, and the check in
+ * .github/workflows/no-ai-attribution.yml enforces that.
+ *
+ * The old version also searched CHANGELOG.md for the literal heading
+ * "## [1.6.2] - Unreleased" and silently did nothing when it was absent.
+ */
 function updateChangelog() {
   try {
-    const exists = fs.existsSync(CHANGELOG);
-    if (!exists) return;
     const now = new Date().toISOString().slice(0, 10);
-    const line = `- ${now}: AI session — ${summary}`;
-    let txt = fs.readFileSync(CHANGELOG, 'utf8');
-    const target = '## [1.6.2] - Unreleased';
-    const idx = txt.indexOf(target);
-    if (idx !== -1) {
-      // Insert under Docs/Meta section if present; else add one
-      if (!/### Docs\/Meta/.test(txt)) {
-        txt = txt.replace(target, `${target}\n### Docs/Meta\n${line}`);
-      } else {
-        txt = txt.replace(/### Docs\/Meta[\s\S]*?(?=\n## |$)/, (block) => {
-          // append line to the block
-          return block.trimEnd() + `\n${line}`;
-        });
-      }
-      fs.writeFileSync(CHANGELOG, txt);
-      console.log('✅ CHANGELOG updated - ai-finalize-session.js:101');
+    fs.mkdirSync(FRAGMENT_DIR, { recursive: true });
+    const file = path.join(FRAGMENT_DIR, `session-${now}.md`);
+    const line = `- ${summary}`;
+
+    if (fs.existsSync(file)) {
+      const existing = fs.readFileSync(file, 'utf8').trimEnd();
+      if (existing.includes(line)) return;
+      fs.writeFileSync(file, `${existing}\n${line}\n`, 'utf8');
+    } else {
+      fs.writeFileSync(file, `### Repository maintenance\n\n${line}\n`, 'utf8');
     }
+    console.log(`✅ Changelog fragment written: ${path.relative(ROOT, file)}`);
   } catch (e) {
-    console.warn(`⚠️  Could not update CHANGELOG: ${e.message} - ai-finalize-session.js:104`);
+    console.warn(`⚠️  Could not write changelog fragment: ${e.message}`);
   }
 }
 

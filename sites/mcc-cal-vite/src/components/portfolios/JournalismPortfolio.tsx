@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { useManifest, imageUrl } from '../portfolio/useManifest';
 import { sortPortfolioGroups } from '../portfolio/sortGroups';
 import type { PortfolioGroup } from '../portfolio/types';
@@ -13,6 +14,7 @@ import PortfolioSkeleton from '../LoadingStates/PortfolioSkeleton';
 interface JournalismImage {
   filename: string;
   path: string;
+  url?: string; // pre-built URL (e.g. R2/Supabase-sourced); bypasses imageUrl.journalism() when present
   description?: string;
   caption?: string;
   tags?: string[];
@@ -45,11 +47,11 @@ import { generateId } from '@/utils/portfolio-ids';
 function normalise(events: JournalismEvent[]): PortfolioGroup[] {
   return events.map((event) => {
     const images = event.images.map((img) => ({
-      url: imageUrl.journalism(event.folderPath, img.path),
+      url: img.url ?? imageUrl.journalism(event.folderPath, img.path),
       filename: img.filename,
       caption: img.caption,
       description: img.description,
-      alt: img.caption ?? `${event.eventName}, ${img.filename}`,
+      alt: img.caption ?? event.eventName,
     }));
 
     return {
@@ -85,7 +87,7 @@ const editorialProof = [
   },
   {
     label: 'Availability',
-    value: 'Pittsburgh based, Washington, D.C. editorial readiness',
+    value: 'Pittsburgh based, available for Washington, D.C. assignments',
   },
 ];
 
@@ -120,17 +122,17 @@ export default function JournalismPortfolio() {
     return groups.filter((g) => g.category === activeFilter);
   }, [groups, activeFilter]);
 
-  const publishedWork = useMemo(
-    () => groups.filter((group) => group.published).slice(0, 3),
-    [groups],
-  );
-
   return (
     <div className={portfolioStyles.pfRoot}>
-      <h2 className={portfolioStyles.pfHeading}>Photojournalism</h2>
+      <h1 className={portfolioStyles.pfHeading}>Photojournalism</h1>
       <p className={portfolioStyles.pfSubheading}>
-        Politics, civic events, community stories, and sports, edited for captions,
-        context, and deadline handoff.
+        A Pittsburgh photojournalist and documentary photographer covering politics, civic events,
+        community stories, and sports for editorial clients, edited for captions, context, and
+        deadline handoff. Read the reporting behind some of this work in{' '}
+        <Link to="/blog" className={portfolioStyles.pfInlineLink}>
+          Field Notes
+        </Link>
+        .
       </p>
 
       {status === 'loading' && (
@@ -161,12 +163,6 @@ export default function JournalismPortfolio() {
             />
           ) : (
             <>
-              <PortfolioFilters
-                filters={filters}
-                active={activeFilter}
-                onChange={setActiveFilter}
-              />
-              <PortfolioGrid groups={filtered} initialCount={12} batchSize={6} />
               <dl className={portfolioStyles.pfEditorialProof} aria-label="Editorial proof points">
                 {editorialProof.map((item) => (
                   <div key={item.label} className={portfolioStyles.pfEditorialProofItem}>
@@ -175,35 +171,12 @@ export default function JournalismPortfolio() {
                   </div>
                 ))}
               </dl>
-              {publishedWork.length > 0 && (
-                <section className={portfolioStyles.pfPublishedStrip} aria-labelledby="published-work-heading">
-                  <div className={portfolioStyles.pfPublishedStripHeader}>
-                    <p className={portfolioStyles.pfPublishedStripEyebrow}>Published proof</p>
-                    <h3 id="published-work-heading">Recent published work</h3>
-                  </div>
-                  <div className={portfolioStyles.pfPublishedList}>
-                    {publishedWork.map((group) => {
-                      const outlet = group.outletName ?? 'Published outlet';
-                      const destination = group.articleUrl || group.outletUrl;
-                      return (
-                        <article key={group.id} className={portfolioStyles.pfPublishedItem}>
-                          <p className={portfolioStyles.pfPublishedOutlet}>
-                            {destination ? (
-                              <a href={destination} target="_blank" rel="noopener noreferrer">
-                                {outlet}
-                              </a>
-                            ) : (
-                              outlet
-                            )}
-                          </p>
-                          <h4>{group.title}</h4>
-                          <p>{[group.dateDisplay, group.category].filter(Boolean).join(', ')}</p>
-                        </article>
-                      );
-                    })}
-                  </div>
-                </section>
-              )}
+              <PortfolioFilters
+                filters={filters}
+                active={activeFilter}
+                onChange={setActiveFilter}
+              />
+              <PortfolioGrid groups={filtered} initialCount={12} batchSize={6} />
             </>
           )}
         </>

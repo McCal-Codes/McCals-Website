@@ -8,6 +8,10 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './src/test/setup.ts',
+    // Many suites dynamically import the app or API handlers; cold transforms on a
+    // loaded machine (parallel workers, Windows) can pass the 5s default.
+    testTimeout: 20_000,
+    hookTimeout: 20_000,
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
@@ -19,6 +23,15 @@ export default defineConfig({
         '**/dist/**',
         '**/scripts/**',
       ],
+      // Baseline thresholds — intentionally low so they pass today without measuring.
+      // Run `npm run test:coverage` to see real numbers, then ratchet these up.
+      // (Not yet wired as a hard CI gate — see test:coverage script.)
+      thresholds: {
+        lines: 20,
+        functions: 20,
+        branches: 40,
+        statements: 20,
+      },
     },
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
   },

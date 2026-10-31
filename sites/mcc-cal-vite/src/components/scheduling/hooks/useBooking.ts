@@ -6,14 +6,20 @@ import type {
   RequesterInfo,
 } from '../types/booking';
 import { getBookingTypeById } from '../config/bookingTypes';
-import { getRequesterTimezone } from '../utils/timezone';
+import { getRequesterTimezone, OWNER_TIMEZONE } from '../utils/timezone';
+import type { Booking, LocationMode } from '../types/booking';
+import { trackBookingStep, trackFormError, trackLead } from '@/utils/funnel';
 import { formatDateForInput, addDays } from '../utils/dateHelpers';
 
 interface UseBookingReturn {
   state: BookingState;
   selectDate: (date: string) => void;
   selectTime: (time: string) => void;
-  submitBookingDetails: (info: RequesterInfo) => Promise<void>;
+  submitBookingDetails: (
+    info: RequesterInfo,
+    hpField?: string,
+    place?: { locationMode: LocationMode; locationDetail: string },
+  ) => Promise<void>;
   goBack: () => void;
   reset: () => void;
   availability: DayAvailability[];
@@ -37,6 +43,12 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
   const [availability, setAvailability] = useState<DayAvailability[]>([]);
   const [isLoadingAvailability, setIsLoadingAvailability] = useState(false);
   const [availabilityError, setAvailabilityError] = useState<string | null>(null);
+
+  // `getInitialState` resolves the event type back to the same module-level
+  // object from BOOKING_TYPES, so after reset() the effect below sees an
+  // unchanged dependency and never refetches. This counter gives it something
+  // that actually changes, so "book another" repopulates the calendar.
+  const [reloadKey, setReloadKey] = useState(0);
 
   // Fetch availability when event type is selected
   useEffect(() => {
@@ -75,9 +87,10 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
     };
 
     fetchAvailability();
-  }, [state.selectedEventType]);
+  }, [state.selectedEventType, reloadKey]);
 
   const selectDate = useCallback((date: string) => {
+    trackBookingStep(eventTypeId, 'date_selected');
     setState((prev) => ({
       ...prev,
       step: 'selecting-time',
@@ -85,19 +98,29 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
       selectedTime: null,
       error: null,
     }));
-  }, []);
+  }, [eventTypeId]);
 
   const selectTime = useCallback((time: string) => {
+    trackBookingStep(eventTypeId, 'time_selected');
     setState((prev) => ({
       ...prev,
       step: 'entering-details',
       selectedTime: time,
       error: null,
     }));
-  }, []);
+  }, [eventTypeId]);
 
-  const submitBookingDetails = useCallback(async (info: RequesterInfo) => {
+  const submitBookingDetails = useCallback(async (
+    info: RequesterInfo,
+    hpField = '',
+    place?: { locationMode: LocationMode; locationDetail: string },
+  ) => {
     setState((prev) => ({ ...prev, isLoading: true, error: null }));
+
+    // An HTTP failure is classified at the point it happens and then rethrown,
+    // so the catch must not report it a second time. The thrown message is the
+    // server's own text, which makes it useless to test against.
+    let errorReported = false;
 
     try {
       const requesterTimezone = getRequesterTimezone();
@@ -115,30 +138,71 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
           durationMinutes: state.selectedEventType!.durationMinutes,
           requester: info,
           requesterTimezone,
+          // Honeypot. The server drops the request when this is non-empty, so
+          // the name has to match what it reads (`hp_field`). The form used to
+          // call it `website` and never sent it, leaving nothing to check.
+          hp_field: hpField,
+          // Absent means virtual, which the server treats as the default.
+          locationMode: place?.locationMode,
+          locationDetail: place?.locationDetail || undefined,
         }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
+        // Classified by status rather than by the server's message: that text
+        // is unbounded and server-controlled, and analytics is the wrong place
+        // for it. Sentry already has the detail.
+        errorReported = true;
+        trackFormError('booking', `http_${response.status}`);
         throw new Error(data.error || 'Failed to create booking');
       }
+
+      // The API returns only what the calendar owns: id, start, end and
+      // eventLink, while `Booking` (and ConfirmationView) also need the date,
+      // time and requester. Reading those straight off `data.booking` left
+      // `requester` undefined, so the confirmation screen threw on
+      // `booking.requester.notes` and every successful booking ended in the
+      // error boundary. Compose it from the state we already hold instead.
+      const confirmedBooking: Booking = {
+        id: data.booking?.id ?? '',
+        eventTypeId: state.selectedEventType!.id,
+        date: state.selectedDate!,
+        time: state.selectedTime!,
+        durationMinutes: state.selectedEventType!.durationMinutes,
+        requester: info,
+        status: 'confirmed',
+        createdAt: new Date().toISOString(),
+        requesterTimezone,
+        ownerTimezone: OWNER_TIMEZONE,
+        location:
+          place?.locationMode === 'in-person' && place.locationDetail
+            ? place.locationDetail
+            : state.selectedEventType!.location,
+      };
+
+      trackBookingStep(eventTypeId, 'confirmed');
+      trackLead('booking', { booking_type: eventTypeId });
 
       setState((prev) => ({
         ...prev,
         step: 'confirmed',
-        confirmedBooking: data.booking,
+        confirmedBooking,
         isLoading: false,
         requesterInfo: info,
       }));
     } catch (err) {
+      if (!errorReported) {
+        trackFormError('booking', 'network');
+      }
       setState((prev) => ({
         ...prev,
         isLoading: false,
         error: err instanceof Error ? err.message : 'Failed to create booking',
       }));
     }
-  }, [state.selectedEventType, state.selectedDate, state.selectedTime]);
+  }, [eventTypeId, state.selectedEventType, state.selectedDate, state.selectedTime]);
 
   const goBack = useCallback(() => {
     setState((prev) => {
@@ -166,6 +230,7 @@ export function useBooking(eventTypeId: string): UseBookingReturn {
     setState(getInitialState(eventTypeId));
     setAvailability([]);
     setAvailabilityError(null);
+    setReloadKey((key) => key + 1);
   }, [eventTypeId]);
 
   return {

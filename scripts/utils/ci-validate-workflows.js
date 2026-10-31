@@ -49,8 +49,12 @@ for (const wf of wfFiles) {
   const wfPath = path.join(workflowsDir, wf);
   const txt = fs.readFileSync(wfPath, 'utf8');
 
-  // Find script references like scripts/whatever.js or globs like scripts/manifest/**
-  const scriptMatches = txt.match(/scripts\/[\w\-\.\/\*\{\}\[\]]+/g) || [];
+  // Find script references like scripts/whatever.js or globs like scripts/manifest/**.
+  // Any leading directory segments are part of the match: a workflow may legitimately
+  // reference an app-relative path such as sites/mcc-cal-dev/scripts/sync-github.js,
+  // and matching only the `scripts/...` tail would resolve it from the repo root and
+  // report a file that exists as missing.
+  const scriptMatches = txt.match(/(?<![\w\-.])(?:[\w\-.]+\/)*scripts\/[\w\-\.\/\*\{\}\[\]]+/g) || [];
   for (const sRaw of scriptMatches) {
     const s = sRaw.trim();
     if (/[*?\{\[]/.test(s)) {

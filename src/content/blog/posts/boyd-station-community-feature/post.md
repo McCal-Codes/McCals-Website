@@ -4,7 +4,7 @@ title: "Three Days With Boyd's Station"
 authorId: "mccal"
 date: "2025-06-12"
 category: "Feature"
-excerpt: "A June 2025 photo essay from Cynthiana, Ky., documents community life around Boyd's Station, an arts and journalism residency project in Harrison County."
+excerpt: "A June 2025 documentary photography and photojournalism essay from Cynthiana, Ky., covering community life around Boyd's Station, an arts and journalism residency project in Harrison County."
 leadImage: "images/lead.jpg"
 leadImageWidth: 3840
 leadImageHeight: 2555

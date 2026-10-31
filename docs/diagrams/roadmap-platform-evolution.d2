@@ -1,0 +1,56 @@
+direction: right
+
+foundation: {
+  label: "Foundation Complete\nVite + React site\nPortfolio manifests\nSEO and performance"
+  shape: rectangle
+  style.fill: "#171718"
+  style.stroke: "#d4af37"
+  style.font-color: "#f5efe3"
+}
+
+expansion: {
+  label: "Service Expansion\nVideo production\nDesign systems\nEnhanced booking"
+  shape: rectangle
+  style.fill: "#202021"
+  style.stroke: "#b6aaa0"
+  style.font-color: "#f5efe3"
+}
+
+operations: {
+  label: "Client Operations\nSelf-service booking\nProject tracking\nClient portal beta"
+  shape: rectangle
+  style.fill: "#202021"
+  style.stroke: "#7fa8d8"
+  style.font-color: "#f5efe3"
+}
+
+automation: {
+  label: "Automation Layer\nAI-assisted editing\nGallery generation\nAnalytics dashboard"
+  shape: rectangle
+  style.fill: "#202021"
+  style.stroke: "#80cfa9"
+  style.font-color: "#f5efe3"
+}
+
+platform: {
+  label: "Creative Platform\nMulti-creator portfolios\nCommunity features\nEducation and marketplace"
+  shape: rectangle
+  style.fill: "#2a2214"
+  style.stroke: "#d4af37"
+  style.font-color: "#f5efe3"
+}
+
+foundation -> expansion: "Q3 2026" {
+  style.stroke: "#d4af37"
+  style.font-color: "#d4af37"
+}
+expansion -> operations: "booking + portal" {
+  style.stroke: "#b6aaa0"
+}
+operations -> automation: "delivery systems" {
+  style.stroke: "#80cfa9"
+}
+automation -> platform: "Q1 2027" {
+  style.stroke: "#d4af37"
+  style.font-color: "#d4af37"
+}

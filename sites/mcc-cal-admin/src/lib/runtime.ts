@@ -11,6 +11,7 @@ export const runtimeConfig = {
 export const ADMIN_NAV_ITEMS: NavItem[] = [
   { label: 'Dashboard', hint: 'Health, boundaries, rollout', to: '/' },
   { label: 'Bookings', hint: 'Scheduling ops scope', to: '/bookings' },
+  { label: 'Availability', hint: 'When people can book you', to: '/availability' },
   { label: 'Operations', hint: 'Admin actions and safeguards', to: '/operations' },
   { label: 'Content', hint: 'Publishing model and studio strategy', to: '/content' },
   { label: 'Settings', hint: 'Environment and project setup', to: '/settings' },

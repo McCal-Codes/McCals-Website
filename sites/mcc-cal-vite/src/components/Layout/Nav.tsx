@@ -12,6 +12,14 @@ const Link = React.forwardRef<HTMLAnchorElement, React.ComponentProps<typeof Rou
 );
 Link.displayName = 'ViewTransitionLink';
 
+function getSubmenuHiddenState(isMobile: boolean, isOpen: boolean) {
+  if (isMobile) {
+    return !isOpen;
+  }
+
+  return undefined;
+}
+
 const Nav: React.FC = () => {
   const { pathname } = useLocation();
   const navRef = useRef<HTMLElement>(null);
@@ -19,7 +27,13 @@ const Nav: React.FC = () => {
   const [workSubmenuOpen, setWorkSubmenuOpen] = useState(false);
   const [projectsSubmenuOpen, setProjectsSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  // Guarded and lazy: reading `window` in the initial state runs during render, which
+  // throws anywhere the component is rendered outside a browser. The effect below
+  // corrects the value on mount, so the desktop default is never what a real visitor
+  // ends up with.
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== 'undefined' && window.innerWidth <= 768,
+  );
   const isWorkNavPath = WORK_NAV_ITEMS.some((item) => isActiveNavItem(pathname, item));
 
   useEffect(() => {
@@ -31,6 +45,9 @@ const Nav: React.FC = () => {
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    // Run once on mount as well as on resize, matching the scroll effect above. Without
+    // this the initial value is only ever corrected when the viewport happens to change.
+    handleResize();
     window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -104,7 +121,7 @@ const Nav: React.FC = () => {
         aria-label="Primary navigation"
       >
         <div className="mcc-nav__brand">
-          <Link to="/" title="Home — Caleb McCartney" aria-label="Home — Caleb McCartney">
+          <Link to="/" title="Home, Caleb McCartney" aria-label="Home, Caleb McCartney">
             Caleb McCartney
           </Link>
         </div>
@@ -136,9 +153,9 @@ const Nav: React.FC = () => {
                   to="/featured-work"
                   aria-current={isWorkNavPath ? 'page' : undefined}
                   onClick={(e) => {
-                    if (isMobile) {
+                    if (isMobile && !workSubmenuOpen) {
                       e.preventDefault();
-                      setWorkSubmenuOpen((v) => !v);
+                      setWorkSubmenuOpen(true);
                     }
                   }}
                 >
@@ -169,15 +186,15 @@ const Nav: React.FC = () => {
               <ul
                 className="mcc-nav__submenu"
                 id="mcc-nav-submenu-work"
-                role="menu"
                 aria-label="Work submenu"
+                aria-hidden={getSubmenuHiddenState(isMobile, workSubmenuOpen)}
+                hidden={getSubmenuHiddenState(isMobile, workSubmenuOpen)}
                 style={isMobile ? { display: workSubmenuOpen ? 'flex' : 'none' } : undefined}
               >
                 {WORK_NAV_ITEMS.map((item) => (
                   <li key={item.to}>
                     <Link
                       to={item.to}
-                      role="menuitem"
                       aria-current={isActiveNavItem(pathname, item) ? 'page' : undefined}
                     >
                       {item.label}
@@ -194,9 +211,9 @@ const Nav: React.FC = () => {
                   to="/projects"
                   aria-current={isProjectsNavPath(pathname) ? 'page' : undefined}
                   onClick={(e) => {
-                    if (isMobile) {
+                    if (isMobile && !projectsSubmenuOpen) {
                       e.preventDefault();
-                      setProjectsSubmenuOpen((v) => !v);
+                      setProjectsSubmenuOpen(true);
                     }
                   }}
                 >
@@ -227,15 +244,15 @@ const Nav: React.FC = () => {
               <ul
                 className="mcc-nav__submenu"
                 id="mcc-nav-submenu-projects"
-                role="menu"
                 aria-label="Projects submenu"
+                aria-hidden={getSubmenuHiddenState(isMobile, projectsSubmenuOpen)}
+                hidden={getSubmenuHiddenState(isMobile, projectsSubmenuOpen)}
                 style={isMobile ? { display: projectsSubmenuOpen ? 'flex' : 'none' } : undefined}
               >
                 {PROJECT_NAV_ITEMS.map((item) => (
                   <li key={item.to}>
                     <Link
                       to={item.to}
-                      role="menuitem"
                       aria-current={isActiveNavItem(pathname, item) ? 'page' : undefined}
                     >
                       {item.label}

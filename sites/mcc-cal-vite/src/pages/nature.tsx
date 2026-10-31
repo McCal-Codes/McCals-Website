@@ -87,7 +87,7 @@ export default function NaturePage() {
         {status === 'error' && (
           <div className={portfolioStyles.pfError}>
             <span>Failed to load nature portfolio.</span>
-            <span className="text-xs opacity-70">{error}</span>
+            <span>{error}</span>
           </div>
         )}
 

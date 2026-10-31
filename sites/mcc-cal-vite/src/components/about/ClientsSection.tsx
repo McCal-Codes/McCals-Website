@@ -135,6 +135,12 @@ function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
           className={styles.clientLink}
           title={`View related work or organization site for ${client.name}`}
           aria-label={`View related work or organization site for ${client.name} (opens in new tab)`}
+          // The marquee repeats the list to scroll seamlessly, and the copies
+          // are aria-hidden so they are not announced twice. Hiding them was
+          // not enough: their links stayed in the tab order, so a keyboard user
+          // tabbed through every logo a second time into content a screen
+          // reader insisted was not there.
+          tabIndex={isDuplicate ? -1 : undefined}
         >
           {cardContent}
           <span className={styles.externalIndicator} aria-hidden="true">
@@ -161,6 +167,7 @@ function ClientCard({ client, isDuplicate, index }: ClientCardProps) {
         className={styles.clientLink}
         title={`View related work or organization site for ${client.name}`}
         aria-label={`View related work or organization site for ${client.name}`}
+        tabIndex={isDuplicate ? -1 : undefined}
       >
         {cardContent}
       </Link>

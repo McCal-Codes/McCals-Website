@@ -1,13 +1,14 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { STATIC_PAGE_ROUTES } from './config/public-routes.js';
 import pageSeoData from './content/pageSeoData.json';
+import type { PageSeoEntry } from './content/pageSeo';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-type PageSeoRecord = Record<string, { route: string; title: string; description: string; imagePath: string }>;
+type PageSeoRecord = Record<string, PageSeoEntry>;
 
 const pageSeo = pageSeoData as PageSeoRecord;
 
@@ -37,16 +38,22 @@ describe('static SEO metadata', () => {
   });
 
   it('uses the canonical mcc-cal.com host in SEO fallbacks', () => {
+    // Every page, not two named ones. The list used to be a hardcoded pair, so
+    // it checked two files out of thirty and broke outright when both were
+    // deleted as dead code, rather than simply covering less.
     const legacyHost = ['https://mccalmedia', 'com'].join('.');
-    const pageSources = [
-      resolve(__dirname, 'pages', 'abridged.tsx'),
-      resolve(__dirname, 'pages', 'design-systems.tsx'),
-      resolve(__dirname, 'pages', 'video.tsx'),
-    ]
-      .map((file) => readFileSync(file, 'utf8'))
-      .join('\n');
+    const pagesDir = resolve(__dirname, 'pages');
+    const pages = readdirSync(pagesDir).filter(
+      (f) => (f.endsWith('.tsx') || f.endsWith('.ts')) && !f.includes('.test.'),
+    );
 
-    expect(pageSources).not.toContain(legacyHost);
+    expect(pages.length).toBeGreaterThan(10);
+
+    const offenders = pages.filter((f) =>
+      readFileSync(resolve(pagesDir, f), 'utf8').includes(legacyHost),
+    );
+
+    expect(offenders).toEqual([]);
   });
 
   it('keeps the source homepage sharing head aligned with home SEO data', () => {
@@ -54,8 +61,37 @@ describe('static SEO metadata', () => {
     const home = pageSeo.home;
 
     expect(indexSource).toContain(`<meta name="description" content="${home.description}"`);
-    expect(indexSource).toContain(`<meta property="og:description" content="${home.ogDescription}"`);
-    expect(indexSource).toContain(`<meta name="twitter:description" content="${home.ogDescription}"`);
+    expect(indexSource).toContain(
+      `<meta property="og:description" content="${home.ogDescription}"`,
+    );
+    expect(indexSource).toContain(
+      `<meta name="twitter:description" content="${home.ogDescription}"`,
+    );
+    expect(indexSource).toContain('<meta name="robots" content="max-image-preview:large"');
+    expect(indexSource).toContain('<meta property="og:image:width" content="1200"');
+    expect(indexSource).toContain('<meta property="og:image:height" content="630"');
     expect(indexSource).not.toMatch(/XXX|TODO|PLACEHOLDER|mccalmedia\.com/i);
+  });
+
+  it('keeps browser-discovered public assets available', () => {
+    const publicDir = resolve(__dirname, '..', 'public-vite');
+    const expectedAssets = [
+      'brand/favicon.svg',
+      'brand/favicon-dark.svg',
+      'brand/favicon-light-32x32.png',
+      'brand/favicon-dark-32x32.png',
+      'brand/favicon-light-16x16.png',
+      'brand/favicon-dark-16x16.png',
+      'brand/apple-touch-icon.png',
+      'brand/web-app-manifest-192x192.png',
+      'brand/web-app-manifest-512x512.png',
+      'images/social/homepage-og.jpg',
+      'og.png',
+      'site.webmanifest',
+    ];
+
+    for (const asset of expectedAssets) {
+      expect(existsSync(resolve(publicDir, asset)), `${asset} should exist`).toBe(true);
+    }
   });
 });

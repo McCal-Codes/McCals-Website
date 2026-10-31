@@ -1,0 +1,32 @@
+/*
+ * The canvas sits directly over the hero <img>, matching its box exactly.
+ * It starts transparent and only fades in once a frame has been drawn, so a
+ * slow WebGL init or a failed texture never blanks the photograph underneath.
+ */
+.canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.ready {
+  opacity: 1;
+}
+
+/*
+ * Belt and braces: the component already refuses to mount under reduced
+ * motion, but if it is ever rendered anyway the canvas stays hidden and the
+ * plain <img> keeps the hero legible.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .canvas {
+    opacity: 0 !important;
+    transition: none !important;
+  }
+}

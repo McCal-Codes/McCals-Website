@@ -1,0 +1,58 @@
+/*
+  Self-hosted fonts. The CSP is `font-src 'self'`, so no external font host will load.
+
+  Plus Jakarta Sans: humanist-geometric, open apertures, a warmer voice than a
+  strictly neutral grotesque. Chosen to sit alongside the rounder geometric sans
+  used on the McCal Media brand card.
+
+  IBM Plex Mono: the technical layer. Humanist rather than mechanical, so metadata
+  reads as editorial detail rather than as a code editor.
+*/
+
+@font-face {
+  font-family: 'Jakarta';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/jakarta-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Jakarta';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/jakarta-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Jakarta';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/jakarta-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Jakarta';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/jakarta-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/plex-mono-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/plex-mono-500.woff2') format('woff2');
+}

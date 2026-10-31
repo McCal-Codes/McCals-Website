@@ -21,6 +21,15 @@ describe('adaptPortraits', () => {
               folderPath: 'Studio/Jordan',
               totalImages: 2,
               images: ['Jordan/250425_jordan_001.jpg', 'Jordan/250425_jordan_002.jpg'],
+              tags: ['portrait', 'editorial', 'creative portrait'],
+              imageMetadata: {
+                '250425_jordan_002.jpg': {
+                  caption:
+                    'Jordan poses for a studio portrait in Pittsburgh, Pa., April 25, 2025. (Photo by Caleb McCartney)',
+                  description: 'A studio portrait of Jordan against a clean backdrop.',
+                  alt: 'Jordan poses for a studio portrait.',
+                },
+              },
             },
           ],
           looseImages: [],
@@ -34,9 +43,14 @@ describe('adaptPortraits', () => {
       category: 'Studio',
       dateDisplay: 'April 2025',
       dateISO: '2025-04',
-      tags: ['studio', 'professional'],
+      tags: ['editorial', 'creative portrait'],
     });
     expect(groups[0]?.coverImage.url).toContain('/Portrait/Studio/Jordan/250425_jordan_001.jpg');
-    expect(groups[0]?.images[1]?.alt).toBe('Jordan, studio portrait image 2');
+    expect(groups[0]?.images[1]).toMatchObject({
+      alt: 'Jordan poses for a studio portrait.',
+      caption:
+        'Jordan poses for a studio portrait in Pittsburgh, Pa., April 25, 2025. (Photo by Caleb McCartney)',
+      description: 'A studio portrait of Jordan against a clean backdrop.',
+    });
   });
 });

@@ -12,7 +12,8 @@
       "Pittsburgh photographer",
       "Pittsburgh photojournalist",
       "political photojournalist",
-      "event coverage"
+      "event coverage",
+      "Pittsburgh photographer for hire"
     ]
   },
   "about": {
@@ -24,7 +25,12 @@
     "imagePath": "/about/caleb-mccartney-photo.jpg",
     "imageAlt": "Portrait of Pittsburgh photographer Caleb McCartney.",
     "imageName": "Caleb McCartney portrait",
-    "keywords": ["Caleb McCartney", "McCal Media", "Pittsburgh photographer", "photojournalist"]
+    "keywords": [
+      "Caleb McCartney",
+      "McCal Media",
+      "Pittsburgh photographer",
+      "photojournalist"
+    ]
   },
   "contactUs": {
     "route": "/contact-us",
@@ -35,7 +41,11 @@
     "imagePath": "/about/caleb-mccartney-photo.jpg",
     "imageAlt": "Portrait of Caleb McCartney, founder of McCal Media.",
     "imageName": "Caleb McCartney contact portrait",
-    "keywords": ["contact Pittsburgh photographer", "McCal Media contact", "photography inquiry"]
+    "keywords": [
+      "contact Pittsburgh photographer",
+      "McCal Media contact",
+      "photography inquiry"
+    ]
   },
   "requestAQuote": {
     "route": "/request-a-quote",
@@ -46,7 +56,11 @@
     "imagePath": "/about/caleb-mccartney-photo.jpg",
     "imageAlt": "Caleb McCartney with a camera, available for photography assignments.",
     "imageName": "McCal Media quote request",
-    "keywords": ["photography quote", "Pittsburgh photographer pricing", "event photography quote"]
+    "keywords": [
+      "photography quote",
+      "Pittsburgh photographer pricing",
+      "event photography quote"
+    ]
   },
   "featuredWork": {
     "route": "/featured-work",
@@ -88,21 +102,31 @@
     "imagePath": "/images/social/journalism-og.jpg",
     "imageAlt": "Former President Barack Obama speaks to supporters at a campaign rally in Pittsburgh.",
     "imageName": "Barack Obama campaign rally photography",
-    "keywords": ["photojournalism", "political photography", "Pittsburgh photojournalist"]
+    "keywords": [
+      "photojournalism",
+      "political photography",
+      "Pittsburgh photojournalist",
+      "documentary photographer Pittsburgh",
+      "editorial photographer"
+    ]
   },
   "portraits": {
     "route": "/portraits",
-    "title": "Pittsburgh Headshot Photographer | Caleb McCartney",
-    "description": "Pittsburgh headshot photographer for professional headshots, portrait sessions, editorial portraits, and brand-forward personal imagery.",
-    "ogTitle": "Pittsburgh Headshot Photographer | Caleb McCartney",
-    "ogDescription": "Professional headshots, portraits, and editorial sessions by Caleb McCartney in Pittsburgh.",
+    "title": "Pittsburgh Corporate Headshot Photographer | Caleb McCartney",
+    "description": "Pittsburgh headshot photographer for corporate headshots, LinkedIn headshots, personal branding portraits, and executive and editorial sessions.",
+    "ogTitle": "Pittsburgh Corporate & LinkedIn Headshot Photographer",
+    "ogDescription": "Corporate headshots, LinkedIn headshots, personal branding portraits, and editorial sessions by Caleb McCartney in Pittsburgh.",
     "imagePath": "/images/social/portraits-og.jpg",
     "imageAlt": "Studio portrait of Logan Spiker by Caleb McCartney.",
     "imageName": "Studio portrait photography",
     "keywords": [
       "headshot photographer Pittsburgh",
       "portrait photographer Pittsburgh",
-      "professional headshots"
+      "professional headshots",
+      "corporate headshots Pittsburgh",
+      "LinkedIn headshots",
+      "personal branding photography",
+      "executive headshots"
     ]
   },
   "nature": {
@@ -114,21 +138,26 @@
     "imagePath": "/images/social/nature-og.jpg",
     "imageAlt": "A steel truss bridge spans a Pittsburgh river at sunset.",
     "imageName": "Pittsburgh bridge landscape photography",
-    "keywords": ["nature photography", "landscape photography", "Pittsburgh landscape photography"]
+    "keywords": [
+      "nature photography",
+      "landscape photography",
+      "Pittsburgh landscape photography"
+    ]
   },
   "events": {
     "route": "/events",
     "title": "Pittsburgh Event Photographer | Caleb McCartney",
     "description": "Pittsburgh event photographer for corporate events, conferences, nonprofit gatherings, campus programs, and branded activations.",
     "ogTitle": "Pittsburgh Event Photographer | Caleb McCartney",
-    "ogDescription": "Corporate event photography, conference coverage, and brand-friendly live documentation in Pittsburgh.",
+    "ogDescription": "Pittsburgh corporate event photographer and conference photographer for live documentation, conferences, and branded activations.",
     "imagePath": "/images/social/events-og.jpg",
     "imageAlt": "Guests sing along under bright club lights during a Howl at the Moon event.",
     "imageName": "Howl at the Moon event photography",
     "keywords": [
       "event photographer Pittsburgh",
       "corporate event photography",
-      "conference photographer"
+      "conference photographer",
+      "corporate event photographer Pittsburgh"
     ]
   },
   "concerts": {
@@ -140,7 +169,13 @@
     "imagePath": "/images/social/concerts-og.jpg",
     "imageAlt": "Heading North performs under red and blue club lighting at Bottle Rocket.",
     "imageName": "Heading North live music photography",
-    "keywords": ["concert photographer Pittsburgh", "live music photography", "venue photography"]
+    "keywords": [
+      "concert photographer Pittsburgh",
+      "live music photography",
+      "venue photography",
+      "live music photographer",
+      "Pittsburgh music photographer"
+    ]
   },
   "blog": {
     "route": "/blog",
@@ -151,7 +186,12 @@
     "imagePath": "/images/social/journalism-og.jpg",
     "imageAlt": "Campaign rally photograph representing McCal Media field reporting.",
     "imageName": "McCal Media field notes",
-    "keywords": ["McCal Media blog", "field notes", "visual essays", "photojournalism blog"]
+    "keywords": [
+      "McCal Media blog",
+      "field notes",
+      "visual essays",
+      "photojournalism blog"
+    ]
   },
   "authors": {
     "route": "/authors",
@@ -162,7 +202,11 @@
     "imagePath": "/about/caleb-mccartney-photo.jpg",
     "imageAlt": "Portrait of Caleb McCartney, McCal Media author and photographer.",
     "imageName": "McCal Media authors",
-    "keywords": ["McCal Media authors", "Caleb McCartney author", "photography writer"]
+    "keywords": [
+      "McCal Media authors",
+      "Caleb McCartney author",
+      "photography writer"
+    ]
   },
   "authorMccal": {
     "route": "/authors/mccal",
@@ -173,7 +217,11 @@
     "imagePath": "/about/caleb-mccartney-photo.jpg",
     "imageAlt": "Portrait of Caleb McCartney.",
     "imageName": "Caleb McCartney author profile",
-    "keywords": ["Caleb McCartney", "author profile", "McCal Media author"]
+    "keywords": [
+      "Caleb McCartney",
+      "author profile",
+      "McCal Media author"
+    ]
   },
   "podcast": {
     "route": "/podcast",
@@ -184,7 +232,11 @@
     "imagePath": "/brand/abridged-icon.png",
     "imageAlt": "McCal Media podcast brand artwork.",
     "imageName": "McCal Media podcast",
-    "keywords": ["McCal Media podcast", "photography podcast", "storytelling podcast"]
+    "keywords": [
+      "McCal Media podcast",
+      "photography podcast",
+      "storytelling podcast"
+    ]
   },
   "bookPodcast": {
     "route": "/book-a-podcast",
@@ -195,7 +247,11 @@
     "imagePath": "/brand/abridged-icon.png",
     "imageAlt": "McCal Media mark for podcast booking.",
     "imageName": "McCal Media podcast booking",
-    "keywords": ["book podcast session", "podcast production Pittsburgh", "audio storytelling"]
+    "keywords": [
+      "book podcast session",
+      "podcast production Pittsburgh",
+      "audio storytelling"
+    ]
   },
   "grabCoffee": {
     "route": "/grab-a-coffee",
@@ -206,7 +262,11 @@
     "imagePath": "/about/caleb-mccartney-photo.jpg",
     "imageAlt": "Portrait of Caleb McCartney for coffee chat scheduling.",
     "imageName": "Grab a coffee with Caleb McCartney",
-    "keywords": ["coffee chat", "photography consultation", "creative collaboration"]
+    "keywords": [
+      "coffee chat",
+      "photography consultation",
+      "creative collaboration"
+    ]
   },
   "faq": {
     "route": "/faq",
@@ -217,7 +277,11 @@
     "imagePath": "/about/caleb-mccartney-photo.jpg",
     "imageAlt": "Caleb McCartney, Pittsburgh photographer, for McCal Media FAQ.",
     "imageName": "McCal Media photography FAQ",
-    "keywords": ["photography FAQ", "McCal Media booking", "photography licensing"]
+    "keywords": [
+      "photography FAQ",
+      "McCal Media booking",
+      "photography licensing"
+    ]
   },
   "projects": {
     "route": "/projects",
@@ -228,18 +292,11 @@
     "imagePath": "/images/social/homepage-og.jpg",
     "imageAlt": "Documentary photography representing McCal Media projects.",
     "imageName": "McCal Media projects",
-    "keywords": ["McCal Media projects", "photography projects", "creative technology"]
-  },
-  "terranova": {
-    "route": "/terranova",
-    "title": "Terranova Creative Work | McCal Media",
-    "description": "Terranova is a McCal Media creative project page for experimental visual storytelling, photography, and digital presentation work.",
-    "ogTitle": "Terranova | McCal Media",
-    "ogDescription": "Experimental visual storytelling, photography, and digital presentation work from McCal Media.",
-    "imagePath": "/brand/abridged-icon.png",
-    "imageAlt": "McCal Media mark for the Terranova creative project.",
-    "imageName": "Terranova creative project",
-    "keywords": ["Terranova", "visual storytelling", "creative project"]
+    "keywords": [
+      "McCal Media projects",
+      "photography projects",
+      "creative technology"
+    ]
   },
   "accessibility": {
     "route": "/accessibility",
@@ -250,17 +307,76 @@
     "imagePath": "/brand/abridged-icon.png",
     "imageAlt": "McCal Media brand mark for accessibility information.",
     "imageName": "McCal Media accessibility statement",
-    "keywords": ["accessibility statement", "website accessibility", "McCal Media accessibility"]
+    "keywords": [
+      "accessibility statement",
+      "website accessibility",
+      "McCal Media accessibility"
+    ]
   },
   "policiesLegal": {
     "route": "/policies-legal",
-    "title": "Policies and Legal | McCal Media",
+    "title": "Policies & Legal | McCal Media",
     "description": "Review McCal Media policies for terms, licensing, privacy, copyright, accessibility, image use, and client project agreements.",
-    "ogTitle": "Policies and Legal | McCal Media",
+    "ogTitle": "Policies & Legal | McCal Media",
     "ogDescription": "Terms, licensing, copyright, privacy, image use, and client agreement policies for McCal Media.",
     "imagePath": "/brand/abridged-icon.png",
     "imageAlt": "McCal Media brand mark for policies and legal information.",
     "imageName": "McCal Media policies and legal",
-    "keywords": ["McCal Media policies", "photography licensing", "copyright policy", "terms"]
+    "keywords": [
+      "McCal Media policies",
+      "photography licensing",
+      "copyright policy",
+      "terms"
+    ]
+  },
+  "licensing": {
+    "route": "/licensing",
+    "title": "Image Licensing | McCal Media",
+    "description": "Usage rights for photography by Caleb McCartney. How licences are scoped, editorial and commercial use, credit requirements, and how to license an image.",
+    "ogTitle": "Image Licensing | McCal Media",
+    "ogDescription": "How to license photography by Caleb McCartney, scope, credit, and editorial versus commercial use.",
+    "imagePath": "/about/caleb-mccartney-photo.jpg",
+    "imageAlt": "Portrait of Pittsburgh photographer Caleb McCartney.",
+    "imageName": "McCal Media image licensing",
+    "keywords": [
+      "image licensing",
+      "photo licensing",
+      "photography usage rights",
+      "editorial licensing",
+      "Pittsburgh photographer licensing",
+      "stock photo licence"
+    ]
+  },
+  "privacy": {
+    "route": "/privacy",
+    "title": "Privacy & Cookies | McCal Media",
+    "description": "How McCal Media collects, uses, and protects personal information, and how cookies are used on this site.",
+    "ogTitle": "Privacy & Cookies | McCal Media",
+    "ogDescription": "How McCal Media handles personal data and cookies.",
+    "imagePath": "/about/caleb-mccartney-photo.jpg",
+    "imageAlt": "McCal Media brand mark for privacy information.",
+    "imageName": "McCal Media privacy policy",
+    "keywords": [
+      "privacy policy",
+      "cookie policy",
+      "data handling",
+      "McCal Media privacy"
+    ]
+  },
+  "terms": {
+    "route": "/terms",
+    "title": "Terms & Conditions | McCal Media",
+    "description": "Service terms for McCal Media photography: consultation, cost and fees, intellectual property, cancellations, liability, and governing law.",
+    "ogTitle": "Terms & Conditions | McCal Media",
+    "ogDescription": "Service terms and client agreement for McCal Media photography.",
+    "imagePath": "/about/caleb-mccartney-photo.jpg",
+    "imageAlt": "McCal Media brand mark for terms and conditions.",
+    "imageName": "McCal Media terms and conditions",
+    "keywords": [
+      "terms and conditions",
+      "photography contract",
+      "client agreement",
+      "service terms"
+    ]
   }
 }

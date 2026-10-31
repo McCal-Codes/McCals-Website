@@ -1,3 +1,11 @@
+> **⚠️ Outdated — Squarespace era.** This guide was written for the retired Squarespace version of
+> the site (Squarespace admin UI, its auto-generated sitemap, etc.) and does not describe how SEO
+> works in the current Vite/React implementation. For the current setup, see
+> `sites/mcc-cal-vite/src/content/pageSeoData.json` (per-page title/description/OG/keywords),
+> `sites/mcc-cal-vite/src/hooks/usePageMeta.ts` (how meta tags are applied), and
+> `sites/mcc-cal-vite/src/config/public-routes.js` (route list, sitemap priorities). Treat the
+> content below as historical reference only.
+
   /journal/market-square-business-impact/
 /journal/drag-in-pittsburgh-history/
 ```

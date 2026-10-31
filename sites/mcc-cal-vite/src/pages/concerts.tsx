@@ -66,7 +66,7 @@ export default function ConcertsPage() {
         {
           alternateName: ['Pittsburgh Concert Photographer', 'Live Music Photography'],
           category: 'Concert photographer',
-          keywords: ['concert photographer pittsburgh', 'music photographer', 'live music photography'],
+          keywords: ['concert photographer pittsburgh', 'music photographer', 'live music photography', 'live music photographer', 'pittsburgh music photographer'],
         },
       ),
       generateSeoImageSchema(PAGE_SEO),
@@ -81,8 +81,9 @@ export default function ConcertsPage() {
         </p>
         <h1 className={portfolioStyles.pfHeading}>Live Music & Venue Coverage</h1>
         <p className={portfolioStyles.pfIntro}>
-          Photojournalistic concert photography for artists, venues, promoters, and editorial teams
-          that need fast, usable images from live shows in Pittsburgh and beyond.
+          As a Pittsburgh live music photographer and concert photographer, I provide
+          photojournalistic coverage for artists, venues, promoters, and editorial teams that need
+          fast, usable images from live shows in Pittsburgh and beyond.
         </p>
 
         {status === 'loading' && (
@@ -92,7 +93,7 @@ export default function ConcertsPage() {
         {status === 'error' && (
           <div className={portfolioStyles.pfError}>
             <span>Failed to load concerts.</span>
-            <span className="text-xs opacity-70">{error}</span>
+            <span>{error}</span>
           </div>
         )}
 

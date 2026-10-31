@@ -11,6 +11,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const { notify } = require('../utils/manifest-webhook');
 const { IMAGE_EXTENSION_RE, dedupeImageEntries } = require('../utils/image-manifest-dedupe.js');
+const { writeManifestIfChanged } = require('./write-manifest.js');
 
 // Configuration
 const BASE_PORTRAIT = path.join(process.cwd(), 'src', 'images', 'Portfolios', 'Portrait');
@@ -24,6 +25,95 @@ async function exists(filePath) {
   } catch {
     return false;
   }
+}
+
+async function readJsonFile(filePath, label) {
+  if (!(await exists(filePath))) {
+    return null;
+  }
+
+  try {
+    const content = await fs.readFile(filePath, 'utf8');
+    return JSON.parse(content);
+  } catch (error) {
+    console.warn(
+      `[WARN] Invalid portrait ${label} metadata:`,
+      path.relative(process.cwd(), filePath),
+      error && error.message,
+    );
+    return null;
+  }
+}
+
+async function loadTagsMetadata(folderPath) {
+  return readJsonFile(path.join(folderPath, 'tags.json'), 'tags');
+}
+
+async function loadCaptions(folderPath) {
+  return readJsonFile(path.join(folderPath, 'captions.json'), 'captions');
+}
+
+function getCaptionForImage(captions, filename) {
+  if (!captions) return null;
+  if (captions[filename]) return captions[filename];
+
+  const extension = path.extname(filename);
+  const basename = path.basename(filename, extension);
+  const alternateExtensions = ['.webp', '.jpg', '.jpeg', '.png', '.avif'];
+
+  for (const alternateExtension of alternateExtensions) {
+    const alternate = `${basename}${alternateExtension}`;
+    if (captions[alternate]) return captions[alternate];
+  }
+
+  for (const [captionFilename, caption] of Object.entries(captions)) {
+    const captionBasename = path.basename(captionFilename, path.extname(captionFilename));
+    if (captionBasename === basename) return caption;
+  }
+
+  return null;
+}
+
+function textOrUndefined(value) {
+  if (typeof value !== 'string') return undefined;
+
+  const trimmed = value.trim();
+  return trimmed || undefined;
+}
+
+function normaliseTags(tags) {
+  if (!Array.isArray(tags)) return [];
+
+  return [
+    ...new Set(
+      tags
+        .map((tag) => String(tag).trim())
+        .filter(Boolean),
+    ),
+  ];
+}
+
+function buildImageMetadata(images, captions) {
+  if (!captions) return undefined;
+
+  const imageMetadata = {};
+
+  for (const image of images) {
+    const perImage = getCaptionForImage(captions, image) || {};
+    const caption = textOrUndefined(perImage.caption);
+    const description = textOrUndefined(perImage.description);
+    const alt = textOrUndefined(perImage.alt);
+
+    if (!caption && !description && !alt) continue;
+
+    imageMetadata[image] = {
+      ...(caption ? { caption } : {}),
+      ...(description ? { description } : {}),
+      ...(alt ? { alt } : {}),
+    };
+  }
+
+  return Object.keys(imageMetadata).length ? imageMetadata : undefined;
 }
 
 async function isDirectory(dirPath) {
@@ -71,6 +161,7 @@ async function getImageFiles(folderPath) {
  */
 async function getAlbumsForCollection(collectionPath) {
   const entries = await fs.readdir(collectionPath);
+  const collectionCaptions = await loadCaptions(collectionPath);
   const albums = [];
   let flattenedImages = [];
   const looseImages = [];
@@ -84,13 +175,22 @@ async function getAlbumsForCollection(collectionPath) {
       const albumImagesRaw = await getImageFiles(entryPath);
       const albumPrefix = path.basename(entryPath);
       const albumImages = albumImagesRaw.map((img) => path.posix.join(albumPrefix, img));
+      const albumMetadata = await loadTagsMetadata(entryPath);
+      const albumCaptions = await loadCaptions(entryPath);
+      const albumImageMetadata = buildImageMetadata(albumImagesRaw, albumCaptions);
 
-      albums.push({
+      const album = {
         albumName: albumPrefix,
         folderPath: path.relative(BASE_PORTRAIT, entryPath).replace(/\\/g, '/'),
         totalImages: albumImagesRaw.length,
         images: albumImages,
-      });
+      };
+
+      const albumTags = normaliseTags(albumMetadata?.tags);
+      if (albumTags.length) album.tags = albumTags;
+      if (albumImageMetadata) album.imageMetadata = albumImageMetadata;
+
+      albums.push(album);
 
       flattenedImages = flattenedImages.concat(albumImages);
     } else if (stats.isFile() && IMAGE_EXTENSION_RE.test(entry)) {
@@ -103,9 +203,10 @@ async function getAlbumsForCollection(collectionPath) {
 
   // Add any loose images that live directly in the collection folder
   const dedupedLooseImages = dedupeImageEntries(looseImages);
+  const looseImageMetadata = buildImageMetadata(dedupedLooseImages, collectionCaptions);
   flattenedImages = dedupeImageEntries(flattenedImages.concat(dedupedLooseImages));
 
-  return { albums, flattenedImages, looseImages: dedupedLooseImages };
+  return { albums, flattenedImages, looseImages: dedupedLooseImages, imageMetadata: looseImageMetadata };
 }
 
 /**
@@ -134,7 +235,7 @@ function generateTags(collectionName) {
  * Generate manifest.json for a single portrait collection folder
  */
 async function generateManifestForFolder(collectionName, folderPath) {
-  const { albums, flattenedImages, looseImages } = await getAlbumsForCollection(folderPath);
+  const { albums, flattenedImages, looseImages, imageMetadata } = await getAlbumsForCollection(folderPath);
   const tags = generateTags(collectionName);
 
   const manifest = {
@@ -145,6 +246,7 @@ async function generateManifestForFolder(collectionName, folderPath) {
     albums,
     looseImages,
     tags,
+    ...(imageMetadata ? { imageMetadata } : {}),
     metadata: {
       generated: new Date().toISOString(),
       version: '1.0.0',
@@ -208,7 +310,7 @@ async function scanAndGenerateManifests() {
     totalCollections: collections.length,
     totalImages: collections.reduce((sum, c) => sum + c.totalImages, 0),
     collections: collections.map(
-      ({ collectionName, folderPath, totalImages, images, tags, albums, looseImages }) => ({
+      ({ collectionName, folderPath, totalImages, images, tags, albums, looseImages, imageMetadata }) => ({
         collectionName,
         folderPath,
         totalImages,
@@ -216,28 +318,28 @@ async function scanAndGenerateManifests() {
         tags,
         albums,
         looseImages,
+        ...(imageMetadata ? { imageMetadata } : {}),
       }),
     ),
   };
 
   // Write aggregated portrait manifest (idempotent)
   try {
-    const content = JSON.stringify(portraitManifest, null, 2) + '\n';
-    let writeIt = true;
-    if (await exists(MANIFEST_OUTPUT)) {
-      const existing = await fs.readFile(MANIFEST_OUTPUT, 'utf8');
-      if (existing === content) writeIt = false;
-    }
     // Honor --force CLI flag to always overwrite
     const FORCE = process.argv.includes('--force');
     if (FORCE) {
       console.log(
         '⚡ force provided: will overwrite aggregated manifest even if unchanged - generate-portrait-manifest.js:225',
       );
-      writeIt = true;
     }
+    // The previous check compared the whole serialised file, timestamp and all,
+    // so it never matched and the "idempotent" write always fired.
+    const writeIt = await writeManifestIfChanged(MANIFEST_OUTPUT, portraitManifest, {
+      serialize: (value) => JSON.stringify(value, null, 2) + '\n',
+      atomic: true,
+      force: FORCE,
+    });
     if (writeIt) {
-      await fs.writeFile(MANIFEST_OUTPUT, content, 'utf8');
       console.log('\n📊 Summary: - generate-portrait-manifest.js:230');
       console.log(`Collections: ${collections.length} - generate-portrait-manifest.js:231`);
       console.log(

@@ -214,6 +214,62 @@ export interface Database {
           updated_at?: string;
         };
       };
+      portfolio_images: {
+        Row: {
+          id: string;
+          portfolio_type: 'journalism' | 'concert' | 'portrait' | 'events' | 'nature';
+          collection_name: string;
+          storage_path: string;
+          filename: string;
+          alt_text: string | null;
+          caption: string | null;
+          width: number | null;
+          height: number | null;
+          focal_point_x: number | null;
+          focal_point_y: number | null;
+          tags: string[];
+          is_featured: boolean;
+          sort_order: number;
+          migrated_from: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          portfolio_type: 'journalism' | 'concert' | 'portrait' | 'events' | 'nature';
+          collection_name: string;
+          storage_path: string;
+          filename: string;
+          alt_text?: string | null;
+          caption?: string | null;
+          width?: number | null;
+          height?: number | null;
+          focal_point_x?: number | null;
+          focal_point_y?: number | null;
+          tags?: string[];
+          is_featured?: boolean;
+          sort_order?: number;
+          migrated_from?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          portfolio_type?: 'journalism' | 'concert' | 'portrait' | 'events' | 'nature';
+          collection_name?: string;
+          storage_path?: string;
+          filename?: string;
+          alt_text?: string | null;
+          caption?: string | null;
+          width?: number | null;
+          height?: number | null;
+          focal_point_x?: number | null;
+          focal_point_y?: number | null;
+          tags?: string[];
+          is_featured?: boolean;
+          sort_order?: number;
+          migrated_from?: string | null;
+          created_at?: string;
+        };
+      };
       testimonials: {
         Row: {
           id: string;

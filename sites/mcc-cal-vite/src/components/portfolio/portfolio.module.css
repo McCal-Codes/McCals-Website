@@ -4,10 +4,19 @@
    ============================================================ */
 
 /* --- Layout --- */
+:global(.site-container):has(.pfRoot) {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  padding-inline: 0;
+}
+
 .pfRoot {
-  max-width: 1600px;
+  box-sizing: border-box;
+  width: min(calc(100% - clamp(32px, 3.5vw, 96px)), 1840px);
+  max-width: none;
   margin: 60px auto;
-  padding: 40px 20px;
+  padding: clamp(32px, 4vw, 48px) 0;
   text-align: center;
   position: relative;
 }
@@ -72,96 +81,6 @@
   line-height: 1.45;
 }
 
-.pfPublishedStrip {
-  box-sizing: border-box;
-  width: min(100%, 980px);
-  margin: 0 auto 24px;
-  padding: 0;
-  border-top: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
-  display: grid;
-  grid-template-columns: minmax(180px, 0.56fr) minmax(0, 1.44fr);
-  gap: 0;
-  text-align: left;
-}
-
-.pfPublishedStripHeader {
-  display: grid;
-  gap: 7px;
-  align-content: start;
-  padding: 18px;
-  border-right: 1px solid color-mix(in srgb, var(--fg) 10%, transparent);
-}
-
-.pfPublishedStripHeader h3 {
-  margin: 0;
-  color: var(--fg);
-  font-size: clamp(1rem, 1.8vw, 1.2rem);
-  line-height: 1.25;
-  letter-spacing: 0;
-}
-
-.pfPublishedList {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-}
-
-.pfPublishedItem {
-  min-width: 0;
-  display: grid;
-  grid-template-columns: minmax(70px, 0.26fr) minmax(0, 1fr) minmax(92px, 0.38fr);
-  gap: 14px;
-  align-items: center;
-  padding: 13px 18px;
-  border-bottom: 1px solid color-mix(in srgb, var(--fg) 9%, transparent);
-}
-
-.pfPublishedItem:last-child {
-  border-bottom: 0;
-}
-
-.pfPublishedOutlet {
-  margin: 0;
-  color: var(--fg);
-  opacity: 0.7;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.pfPublishedOutlet a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.pfPublishedOutlet a:hover,
-.pfPublishedOutlet a:focus-visible {
-  color: var(--fg);
-  opacity: 1;
-  outline: none;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.pfPublishedItem h4 {
-  margin: 0;
-  color: var(--fg);
-  font-size: 0.92rem;
-  line-height: 1.3;
-  letter-spacing: 0;
-}
-
-.pfPublishedItem p:last-child {
-  margin: 0;
-  color: var(--fg);
-  opacity: 0.6;
-  font-size: 0.78rem;
-  line-height: 1.35;
-  text-align: right;
-}
-
 .pfIntro {
   max-width: 760px;
   margin: 0 auto 32px;
@@ -171,19 +90,31 @@
   line-height: 1.65;
 }
 
+.pfInlineLink {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: 0.9;
+}
+
+.pfInlineLink:hover,
+.pfInlineLink:focus-visible {
+  opacity: 1;
+}
+
 .pfFeaturedRoot {
-  max-width: 1440px;
+  max-width: 1720px;
   margin-top: 44px;
   padding-top: 30px;
 }
 
 .pfFeaturedHeader {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.72fr);
-  gap: 36px;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.58fr);
+  gap: clamp(24px, 4vw, 52px);
   align-items: end;
   margin: 0 auto 34px;
-  max-width: 1160px;
+  max-width: 1280px;
   text-align: left;
 }
 
@@ -218,34 +149,37 @@
 .pfFeaturedStats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 8px;
 }
 
 .pfFeaturedStat {
   display: flex;
   min-width: 0;
-  min-height: 104px;
+  min-height: 74px;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 16px;
-  border: 1px solid rgba(255,255,255,0.11);
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
   border-radius: 14px;
-  background: rgba(255,255,255,0.035);
+  background: rgba(255, 255, 255, 0.025);
   color: var(--fg);
   text-decoration: none;
-  transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
 }
 
 .pfFeaturedStat:hover,
 .pfFeaturedStat:focus-visible {
   transform: translateY(-2px);
-  border-color: rgba(255,255,255,0.24);
-  background: rgba(255,255,255,0.06);
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.06);
   text-decoration: none;
 }
 
 .pfFeaturedStatValue {
-  font-size: 1.45rem;
+  font-size: 1.28rem;
   font-weight: 800;
   line-height: 1;
 }
@@ -265,17 +199,14 @@
 }
 
 .pfFeaturedStatMeta {
-  margin-top: 4px;
-  color: var(--fg);
-  font-size: 0.78rem;
-  opacity: 0.62;
+  display: none;
 }
 
 .pfFeaturedEditorial {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.86fr);
-  gap: 18px;
-  max-width: 1160px;
+  grid-template-columns: minmax(0, 1.7fr) minmax(300px, 0.72fr);
+  gap: clamp(16px, 2vw, 24px);
+  max-width: 1280px;
   margin: 0 auto 30px;
   text-align: left;
 }
@@ -293,17 +224,17 @@
   min-height: 100%;
   overflow: hidden;
   border-radius: 16px;
-  background: rgba(255,255,255,0.035);
-  box-shadow: 0 24px 70px rgba(0,0,0,0.22);
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
   isolation: isolate;
 }
 
 .pfFeaturedStoryLead {
-  min-height: 620px;
+  min-height: clamp(460px, 40vw, 560px);
 }
 
 .pfFeaturedStorySupport {
-  min-height: 301px;
+  min-height: clamp(248px, 20vw, 271px);
 }
 
 .pfFeaturedStoryImageButton {
@@ -328,8 +259,13 @@
   z-index: 2;
   border-radius: inherit;
   background:
-    linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.3) 42%, rgba(0,0,0,0.88) 100%),
-    linear-gradient(90deg, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.03) 58%);
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.02) 0%,
+      rgba(0, 0, 0, 0.22) 46%,
+      rgba(0, 0, 0, 0.84) 100%
+    ),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0.02) 62%);
   pointer-events: none;
 }
 
@@ -345,9 +281,18 @@
   inset: 0;
 }
 
+.pfFeaturedStoryProtectedImage {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: inherit;
+}
+
 .pfFeaturedStoryImage {
   object-fit: cover;
-  transition: transform 0.42s ease, filter 0.42s ease;
+  transition:
+    transform 0.42s ease,
+    filter 0.42s ease;
 }
 
 .pfFeaturedStory:hover .pfFeaturedStoryImage,
@@ -363,14 +308,15 @@
   flex-direction: column;
   justify-content: flex-end;
   align-self: end;
-  gap: 10px;
-  max-width: 680px;
-  padding: 26px;
+  gap: 9px;
+  max-width: min(680px, 84%);
+  padding: clamp(22px, 3vw, 34px);
   color: #fff;
   pointer-events: none;
 }
 
 .pfFeaturedStorySupport .pfFeaturedStoryCopy {
+  max-width: 90%;
   padding: 20px;
 }
 
@@ -379,7 +325,7 @@
   flex-wrap: wrap;
   gap: 8px 12px;
   margin: 0;
-  color: rgba(255,255,255,0.78);
+  color: rgba(255, 255, 255, 0.78);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -394,27 +340,31 @@
 .pfFeaturedStoryTitle {
   margin: 0;
   color: #fff;
-  font-size: 2rem;
+  font-size: clamp(2rem, 3.2vw, 3rem);
   font-weight: 800;
   line-height: 1.08;
 }
 
 .pfFeaturedStorySupport .pfFeaturedStoryTitle {
-  font-size: 1.22rem;
+  font-size: clamp(1.14rem, 1.7vw, 1.36rem);
   line-height: 1.16;
 }
 
 .pfFeaturedStoryDescription {
   max-width: 620px;
   margin: 0;
-  color: rgba(255,255,255,0.84);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 0.98rem;
   line-height: 1.55;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 
 .pfFeaturedStorySupport .pfFeaturedStoryDescription {
-  display: -webkit-box;
-  overflow: hidden;
+  display: none;
   font-size: 0.86rem;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -425,7 +375,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 4px;
+  margin-top: 2px;
   pointer-events: auto;
 }
 
@@ -446,15 +396,15 @@
 }
 
 .pfFeaturedStoryButton {
-  border: 1px solid rgba(255,255,255,0.88);
-  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.92);
   color: #080808;
   cursor: pointer;
 }
 
 .pfFeaturedStoryLink {
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.28);
   color: #fff;
   text-decoration: none;
 }
@@ -468,18 +418,18 @@
 }
 
 .pfFeaturedGrid {
-  max-width: 1160px;
+  max-width: 1560px;
   margin-inline: auto;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(320px, 22vw, 420px)), 1fr));
 }
 
 .pfFeaturedCategoryNote {
   max-width: 1160px;
   margin: 22px auto 0;
   padding: 22px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
-  background: rgba(255,255,255,0.035);
+  background: rgba(255, 255, 255, 0.035);
   color: var(--fg);
   text-align: center;
 }
@@ -509,12 +459,16 @@
   }
 
   .pfFeaturedStoryLead {
-    min-height: 560px;
+    min-height: min(68vh, 660px);
   }
 
   .pfFeaturedSupportStack {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: none;
+  }
+
+  .pfFeaturedStorySupport {
+    min-height: 420px;
   }
 
   .pfFeaturedGrid {
@@ -564,16 +518,17 @@
   }
 
   .pfFeaturedStatMeta {
-    font-size: 0.66rem;
+    display: none;
   }
 
   .pfFeaturedStoryLead,
   .pfFeaturedStorySupport {
-    min-height: 430px;
+    min-height: 460px;
   }
 
   .pfFeaturedStoryCopy,
   .pfFeaturedStorySupport .pfFeaturedStoryCopy {
+    max-width: 100%;
     padding: 18px;
   }
 
@@ -585,6 +540,8 @@
 
   .pfFeaturedStoryDescription {
     font-size: 0.9rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .pfFeaturedStoryActions {
@@ -592,9 +549,12 @@
     flex-direction: column;
   }
 
-  .pfFeaturedStoryButton,
-  .pfFeaturedStoryLink {
+  .pfFeaturedStoryButton {
     width: 100%;
+  }
+
+  .pfFeaturedStoryLink {
+    display: none;
   }
 }
 
@@ -609,11 +569,11 @@
 .pfPortraitMetric {
   padding: 18px 20px;
   border-radius: 22px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
-    rgba(0,0,0,0.18);
-  box-shadow: 0 18px 48px rgba(0,0,0,0.16);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+    rgba(0, 0, 0, 0.18);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -669,7 +629,9 @@
 }
 
 @keyframes pf-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* --- Filters --- */
@@ -682,33 +644,38 @@
 }
 
 .pfFilterBtn {
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--fg);
   padding: 10px 20px;
   border-radius: 999px;
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 600;
-  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
 .pfFilterBtn:hover {
   transform: translateY(-2px);
-  border-color: rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.06);
-  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
 }
 
 .pfFilterBtn[aria-pressed='true'],
 .pfFilterBtnActive {
-  background: rgba(255,255,255,0.95);
+  background: rgba(255, 255, 255, 0.95);
   color: #0a0a0a;
-  border-color: rgba(255,255,255,0.95);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
 /* --- Concert Artist Support --- */
@@ -724,35 +691,38 @@
   min-height: 44px;
   padding: 11px 20px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--fg);
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: transform 0.2s, background 0.2s, border-color 0.2s;
+  transition:
+    transform 0.2s,
+    background 0.2s,
+    border-color 0.2s;
 }
 
 .pfArtistSupportToggle:hover {
   transform: translateY(-2px);
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .pfArtistSupportPanel {
   margin-top: 16px;
   padding: 22px;
   border-radius: 24px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
-    rgba(0,0,0,0.2);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+    rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   text-align: left;
-  box-shadow: 0 18px 48px rgba(0,0,0,0.16);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
 }
 
 .pfArtistSupportPanelHeader {
@@ -783,17 +753,19 @@
   min-height: 38px;
   padding: 8px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.16);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   background: transparent;
   color: var(--fg);
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.2s, border-color 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
 }
 
 .pfArtistSupportClose:hover {
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(255,255,255,0.28);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
 .pfArtistSupportList {
@@ -807,8 +779,8 @@
 .pfArtistSupportItem {
   padding: 18px;
   border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .pfArtistSupportItemHeader {
@@ -845,7 +817,7 @@
   min-height: 36px;
   padding: 8px 14px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.92);
+  background: rgba(255, 255, 255, 0.92);
   color: #0a0a0a;
   text-decoration: none;
   font-size: 0.82rem;
@@ -863,13 +835,13 @@
   min-height: 152px;
   border: 0;
   border-radius: 14px;
-  background: rgba(0,0,0,0.28);
+  background: rgba(0, 0, 0, 0.28);
 }
 
 .pfArtistSupportPlaceholder {
   padding: 18px;
   border-radius: 14px;
-  border: 1px dashed rgba(255,255,255,0.14);
+  border: 1px dashed rgba(255, 255, 255, 0.14);
   color: var(--fg);
   opacity: 0.72;
   font-size: 0.88rem;
@@ -897,8 +869,8 @@
 /* --- Portfolio grid --- */
 .pfGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(340px, 24vw, 460px)), 1fr));
+  gap: clamp(20px, 1.8vw, 32px);
   align-items: start;
   text-align: left;
   margin-bottom: 32px;
@@ -915,6 +887,18 @@
 @media (max-width: 600px) {
   .pfGrid {
     grid-template-columns: 1fr;
+  }
+
+  .pfCardOverlay {
+    padding: 14px;
+  }
+
+  .pfCardOverlay .pfCaptionRailDescription {
+    display: none;
+  }
+
+  .pfCardOverlay .pfCardTags {
+    display: none;
   }
 }
 
@@ -937,36 +921,16 @@
   .pfPublishedItem:last-child {
     border-bottom: 0;
   }
-
-  .pfPublishedStrip {
-    gap: 18px;
-  }
-
-  .pfPublishedStripHeader {
-    padding: 16px;
-    border-right: 0;
-    border-bottom: 1px solid color-mix(in srgb, var(--fg) 10%, transparent);
-  }
-
-  .pfPublishedItem {
-    grid-template-columns: 1fr;
-    gap: 5px;
-    padding: 14px 16px;
-  }
-
-  .pfPublishedItem p:last-child {
-    text-align: left;
-  }
 }
 
 .pfPortraitGrid {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(300px, 20vw, 380px)), 1fr));
+  gap: clamp(20px, 1.8vw, 30px);
 }
 
 .pfConcertGrid {
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(320px, 21vw, 410px)), 1fr));
+  gap: clamp(20px, 1.8vw, 30px);
 }
 
 .pfConcertGrid .pfCardImageFrame,
@@ -992,8 +956,8 @@
 }
 
 .pfNatureGrid {
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(340px, 24vw, 460px)), 1fr));
+  gap: clamp(22px, 2vw, 34px);
 }
 
 .pfNatureGrid .pfCardImageFrame,
@@ -1008,6 +972,7 @@
 
   .pfConcertGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
   }
 
   .pfPortraitGrid {
@@ -1053,6 +1018,38 @@
 .pfCardVisible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.pfProtectedImage {
+  position: relative;
+  display: block;
+  border-radius: inherit;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.pfProtectedImage img {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+
+.pfProtectedImageShield {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  border-radius: inherit;
+  background: transparent;
+}
+
+.pfFeaturedStory .pfFeaturedStoryProtectedImage {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: inherit;
 }
 
 .pfBlurImageFrame {
@@ -1118,7 +1115,9 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: inherit;
-  transition: transform 0.35s, filter 0.35s;
+  transition:
+    transform 0.35s,
+    filter 0.35s;
 }
 
 .pfCard .pfCardImage {
@@ -1173,8 +1172,8 @@
   color: inherit;
   opacity: 0.92;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1225,10 +1224,10 @@
   /* Stronger gradient for better text contrast on light/bright photos */
   background: linear-gradient(
     180deg,
-    rgba(0,0,0,0) 0%,
-    rgba(0,0,0,0.4) 50%,
-    rgba(0,0,0,0.85) 85%,
-    rgba(0,0,0,0.95) 100%
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.85) 85%,
+    rgba(0, 0, 0, 0.95) 100%
   );
   color: #fff;
   border-radius: inherit;
@@ -1251,9 +1250,9 @@
   color: #fff;
   /* Multi-layer text shadow for maximum contrast on varied backgrounds */
   text-shadow:
-    0 0 20px rgba(0,0,0,0.8),
-    0 2px 4px rgba(0,0,0,0.9),
-    0 1px 2px rgba(0,0,0,0.8);
+    0 0 20px rgba(0, 0, 0, 0.8),
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    0 1px 2px rgba(0, 0, 0, 0.8);
   letter-spacing: -0.01em;
 }
 
@@ -1261,8 +1260,8 @@
   margin: 2px 0 0;
   font-size: 0.72rem;
   font-weight: 600;
-  color: rgba(255,255,255,0.9);
-  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   display: flex;
@@ -1278,11 +1277,11 @@
   margin: 8px 0 0;
   font-size: 0.85rem;
   font-weight: 400;
-  color: rgba(255,255,255,0.95);
+  color: rgba(255, 255, 255, 0.95);
   line-height: 1.45;
   text-shadow:
-    0 0 15px rgba(0,0,0,0.7),
-    0 1px 3px rgba(0,0,0,0.8);
+    0 0 15px rgba(0, 0, 0, 0.7),
+    0 1px 3px rgba(0, 0, 0, 0.8);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -1291,6 +1290,39 @@
 }
 
 /* Card badges */
+/*
+ * The card's primary control.
+ *
+ * The card used to be an <article role="button" tabindex="0"> that contained
+ * the copy-link <button>, which axe reports as nested-interactive: a control
+ * must not contain focusable descendants, and a screen reader user met two
+ * overlapping controls with no way to tell them apart. The article is a plain
+ * container now and this button carries the action, stretched over the card.
+ *
+ * z-index 2 puts it above the image and level with the overlay, which is
+ * pointer-events: none, and below .pfCardAnchor at 3 so the copy button stays
+ * clickable.
+ */
+.pfCardOpen {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.pfCardOpen:focus-visible {
+  outline: 2px solid var(--accent, #b8b0aa);
+  outline-offset: -4px;
+  border-radius: 16px;
+}
+
 .pfCardAnchor {
   position: absolute;
   top: 8px;
@@ -1300,15 +1332,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 50%;
   color: #fff;
   cursor: pointer;
   opacity: 0;
   transform: scale(0.9);
-  transition: opacity 0.2s, transform 0.2s, background 0.2s, border-color 0.2s;
+  transition:
+    opacity 0.2s,
+    transform 0.2s,
+    background 0.2s,
+    border-color 0.2s;
   z-index: 3;
   pointer-events: auto;
 }
@@ -1320,7 +1356,7 @@
 }
 
 .pfCardAnchor:hover {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
   border-color: #fff;
 }
 
@@ -1336,13 +1372,13 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(6px);
   padding: 5px 8px;
   border-radius: 999px;
   font-size: 0.68rem;
   font-weight: 600;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0.06em;
   pointer-events: none;
   z-index: 2;
@@ -1353,46 +1389,6 @@
   height: 12px;
   opacity: 0.7;
   flex-shrink: 0;
-}
-
-/* Published badge element */
-.pfCardPublished {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #fff;
-  background: rgba(0,0,0,0.75);
-  border: 1px solid rgba(255,255,255,0.15);
-  z-index: 3;
-}
-
-.pfCardPublishedDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #5fb189;
-  flex-shrink: 0;
-}
-
-.pfCardPublishedLabel {
-  font-size: 0.68rem;
-  font-weight: 600;
-  color: #fff;
-  letter-spacing: 0.04em;
-}
-
-/* When published badge is present, push anchor to right of it */
-.pfCardPublishedState .pfCardPublished ~ .pfCardAnchor,
-.pfCardPublishedState .pfCardAnchor {
-  left: auto;
-  right: 8px;
 }
 
 /* --- Load More --- */
@@ -1406,8 +1402,8 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 999px;
   color: var(--fg);
   font-size: 0.72rem;
@@ -1417,17 +1413,20 @@
   cursor: pointer;
   padding: 12px 24px;
   backdrop-filter: blur(8px);
-  transition: background 0.24s, border-color 0.24s, transform 0.24s;
+  transition:
+    background 0.24s,
+    border-color 0.24s,
+    transform 0.24s;
 }
 
 .pfLoadMoreBtn:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
 }
 
 .pfLoadMoreRemaining {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   padding: 3px 8px;
   border-radius: 999px;
   font-size: 0.68rem;
@@ -1440,7 +1439,7 @@
   display: none;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.92);
+  background: rgba(0, 0, 0, 0.92);
   z-index: var(--mcc-z-top);
   padding: 24px;
   backdrop-filter: blur(10px);
@@ -1482,9 +1481,9 @@
 .pfLightboxCounter {
   min-width: 64px;
   padding: 8px 12px;
-  border: 1px solid rgba(255,255,255,0.14);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 999px;
-  background: rgba(0,0,0,0.42);
+  background: rgba(0, 0, 0, 0.42);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -1497,24 +1496,29 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255,255,255,0.16);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 999px;
-  background: rgba(0,0,0,0.48);
+  background: rgba(0, 0, 0, 0.48);
   color: #fff;
   cursor: pointer;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  transition: background 0.2s, border-color 0.2s, transform 0.2s, opacity 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s,
+    opacity 0.2s;
 }
 
-.pfLightboxIconBtn:hover:not(:disabled),
+.pfLightboxIconBtn:hover:not(:disabled):not([aria-disabled='true']),
 .pfLightboxIconBtn:focus-visible {
-  background: rgba(255,255,255,0.14);
-  border-color: rgba(255,255,255,0.34);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.34);
   transform: translateY(-1px);
 }
 
-.pfLightboxIconBtn:disabled {
+.pfLightboxIconBtn:disabled,
+.pfLightboxIconBtn[aria-disabled='true'] {
   cursor: not-allowed;
   opacity: 0.38;
 }
@@ -1522,7 +1526,7 @@
 .pfLightboxZoomValue {
   min-width: 54px;
   padding: 0 4px;
-  color: rgba(255,255,255,0.84);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 0.76rem;
   font-weight: 700;
   text-align: center;
@@ -1552,22 +1556,33 @@
   scrollbar-gutter: stable;
 }
 
+.pfLightboxImageScroller[data-zoomed='false'] {
+  touch-action: auto;
+}
+
 .pfLightboxImageScroller[data-zoomed='true'] {
   overflow: auto;
   place-items: start center;
-  cursor: move;
+  cursor: grab;
+  touch-action: auto;
+}
+
+.pfLightboxImageScroller[data-zoomed='true'][data-dragging='true'] {
+  cursor: grabbing;
 }
 
 .pfLightboxImageFrame {
   position: relative;
-  width: fit-content;
+  width: min(100%, 1100px);
+  height: 100%;
   max-width: 100%;
   display: grid;
   place-items: center;
   overflow: hidden;
   border-radius: 14px;
+  touch-action: none;
   background:
-    linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
     rgba(9, 9, 10, 0.84);
 }
 
@@ -1582,6 +1597,52 @@
   overflow: visible;
 }
 
+.pfLightboxImageFrame[data-loaded='true'][data-fit='height'] {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+}
+
+.pfLightboxImageFrame[data-loaded='true'][data-fit='width'] {
+  width: min(100%, 1100px);
+  height: auto;
+  max-height: 100%;
+}
+
+.pfLightboxProtectedImage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.pfLightboxImageScroller[data-zoomed='true'] .pfLightboxProtectedImage {
+  place-items: start center;
+}
+
+.pfLightboxImageScroller[data-zoomed='false'] .pfLightboxProtectedImage,
+.pfLightboxImageScroller[data-zoomed='false'] .pfLightboxProtectedImage .pfProtectedImageShield,
+.pfLightboxImageScroller[data-zoomed='false'] .pfLightboxImg {
+  cursor: zoom-in;
+}
+
+.pfLightboxImageScroller[data-zoomed='true'] .pfLightboxProtectedImage,
+.pfLightboxImageScroller[data-zoomed='true'] .pfLightboxProtectedImage .pfProtectedImageShield,
+.pfLightboxImageScroller[data-zoomed='true'] .pfLightboxImg {
+  cursor: zoom-out;
+}
+
+.pfLightboxImageScroller[data-zoomed='true'][data-dragging='true'] .pfLightboxProtectedImage,
+.pfLightboxImageScroller[data-zoomed='true'][data-dragging='true']
+  .pfLightboxProtectedImage
+  .pfProtectedImageShield,
+.pfLightboxImageScroller[data-zoomed='true'][data-dragging='true'] .pfLightboxImg {
+  cursor: grabbing;
+}
+
 .pfLightboxImageLoading {
   position: absolute;
   inset: 0;
@@ -1590,13 +1651,49 @@
   place-content: center;
   justify-items: center;
   gap: 10px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: inherit;
-  color: rgba(255,255,255,0.72);
+  color: rgba(255, 255, 255, 0.72);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.pfLightboxImageError {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  min-height: min(42vh, 420px);
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.82rem;
+}
+
+.pfLightboxRetryBtn {
+  padding: 8px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.48);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.pfLightboxRetryBtn:hover,
+.pfLightboxRetryBtn:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .pfLightboxImg {
@@ -1623,20 +1720,23 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255,255,255,0.16);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 999px;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0, 0, 0, 0.45);
   color: #fff;
   cursor: pointer;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
 }
 
 .pfLightboxNavBtn:hover,
 .pfLightboxNavBtn:focus-visible {
-  background: rgba(255,255,255,0.14);
-  border-color: rgba(255,255,255,0.34);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.34);
   transform: translateY(-1px);
 }
 
@@ -1650,10 +1750,10 @@
   padding: 8px;
   overflow-x: auto;
   overflow-y: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 14px;
-  background: rgba(0,0,0,0.24);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+  background: rgba(0, 0, 0, 0.24);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
   scroll-padding-inline: 8px;
   scrollbar-width: thin;
 }
@@ -1664,13 +1764,13 @@
   aspect-ratio: 4 / 3;
   height: auto;
   padding: 0;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   cursor: pointer;
   opacity: 0.66;
   overflow: hidden;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
   transition:
     opacity 0.2s ease,
     border-color 0.2s ease,
@@ -1681,20 +1781,20 @@
 .pfLightboxThumb:hover,
 .pfLightboxThumb:focus-visible {
   opacity: 1;
-  border-color: rgba(255,255,255,0.42);
+  border-color: rgba(255, 255, 255, 0.42);
 }
 
 .pfLightboxThumb:focus-visible {
-  outline: 2px solid rgba(255,255,255,0.7);
+  outline: 2px solid rgba(255, 255, 255, 0.7);
   outline-offset: 3px;
 }
 
 .pfLightboxThumb[aria-current='true'] {
   opacity: 1;
-  border-color: rgba(255,255,255,0.88);
+  border-color: rgba(255, 255, 255, 0.88);
   box-shadow:
-    0 0 0 3px rgba(255,255,255,0.12),
-    0 10px 24px rgba(0,0,0,0.24);
+    0 0 0 3px rgba(255, 255, 255, 0.12),
+    0 10px 24px rgba(0, 0, 0, 0.24);
   transform: translateY(-1px);
 }
 
@@ -1704,8 +1804,14 @@
   width: 100%;
   height: 100%;
   border-radius: 9px;
-  background-color: rgba(8,8,10,0.86);
+  background-color: rgba(8, 8, 10, 0.86);
   background-size: cover;
+}
+
+.pfLightboxThumbProtectedImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 9px;
 }
 
 .pfLightboxThumbImg {
@@ -1720,6 +1826,7 @@
 .pfLightboxCaption {
   text-align: center;
   color: #fff;
+  width: min(100%, 920px);
   max-width: min(920px, calc(100vw - 48px));
   margin-inline: auto;
   padding: 2px clamp(12px, 2vw, 20px) 0;
@@ -1807,13 +1914,13 @@
   margin: 2px auto 0;
   padding: 6px 10px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.055);
-  border: 1px solid rgba(255,255,255,0.14);
-  color: rgba(255,255,255,0.78);
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .pfLightboxOutletLabel {
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
   font-size: 0.66rem;
   font-weight: 750;
   letter-spacing: 0.08em;
@@ -1821,7 +1928,7 @@
 }
 
 .pfLightboxOutletLink {
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.78rem;
   font-weight: 700;
 }
@@ -1843,13 +1950,13 @@
 }
 
 .pfLightboxClose {
-  border-color: rgba(255,255,255,0.28);
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
 .pfLightboxClose:hover:not(:disabled),
 .pfLightboxClose:focus-visible {
-  background: rgba(0,0,0,0.88);
-  border-color: rgba(255,255,255,0.65);
+  background: rgba(0, 0, 0, 0.88);
+  border-color: rgba(255, 255, 255, 0.65);
 }
 
 @media (max-width: 720px) {
@@ -1860,7 +1967,9 @@
   .pfLightboxDialog {
     width: 100%;
     height: 96vh;
+    height: 96dvh;
     max-height: 96vh;
+    max-height: 96dvh;
   }
 
   .pfLightboxToolbar {
@@ -1888,7 +1997,7 @@
   }
 
   .pfLightboxImageFrame {
-    width: fit-content;
+    width: 100%;
   }
 
   .pfLightboxImageFrame[data-loaded='false'] {
@@ -1947,6 +2056,47 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .pfFeaturedStat,
+  .pfFeaturedStoryImage,
+  .pfFilterBtn,
+  .pfArtistSupportToggle,
+  .pfArtistSupportClose,
+  .pfBlurImageFrame::before,
+  .pfBlurImage,
+  .pfCard,
+  .pfCard img,
+  .pfCardOverlay,
+  .pfCardAnchor,
+  .pfLoadMoreBtn,
+  .pfLightboxIconBtn,
+  .pfLightboxRetryBtn,
+  .pfLightboxImg,
+  .pfLightboxNavBtn,
+  .pfLightboxThumb,
+  .pfLightboxOutletLink,
+  .pfToast {
+    transition: none;
+  }
+
+  .pfSpinner {
+    animation: none;
+  }
+
+  .pfFeaturedStory:hover .pfFeaturedStoryImage,
+  .pfFeaturedStory:focus-within .pfFeaturedStoryImage,
+  .pfCard:hover img,
+  .pfCard:hover .pfCardAnchor,
+  .pfCard:focus-within .pfCardAnchor,
+  .pfLightboxIconBtn:hover:not(:disabled):not([aria-disabled='true']),
+  .pfLightboxIconBtn:focus-visible,
+  .pfLightboxNavBtn:hover,
+  .pfLightboxNavBtn:focus-visible,
+  .pfLightboxThumb[aria-current='true'] {
+    transform: none;
+  }
+}
+
 /* --- Copy toast --- */
 .pfToast {
   position: fixed;
@@ -1960,11 +2110,13 @@
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.04em;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   opacity: 0;
   pointer-events: none;
   z-index: calc(var(--mcc-z-top) + 2);
-  transition: opacity 0.3s, transform 0.3s;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
 }
 
 .pfToastShow {

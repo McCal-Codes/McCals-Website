@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import JournalismPortfolio from './JournalismPortfolio';
 
@@ -86,29 +87,42 @@ afterEach(() => {
 });
 
 describe('JournalismPortfolio', () => {
-  it('keeps the grid path while adding compact editorial proof', () => {
-    render(<JournalismPortfolio />);
+  it('keeps the grid and editorial proof, without a duplicate published strip', () => {
+    render(
+      <MemoryRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
+        <JournalismPortfolio />
+      </MemoryRouter>,
+    );
 
-    expect(screen.getByRole('heading', { name: 'Photojournalism' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'Photojournalism' })).toBeInTheDocument();
     expect(screen.getByLabelText('Editorial proof points')).toHaveTextContent(
       'Same-day selects, AP-style captions, clean assignment handoff',
     );
-    expect(screen.getByRole('heading', { name: 'Recent published work' })).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: 'Published' })).toBeInTheDocument();
+    // The published credit lives on the album itself now, at the bottom of the
+    // lightbox, rather than being duplicated in a strip above the grid.
+    expect(screen.queryByRole('heading', { name: 'Recent published work' })).toBeNull();
+    // A button, not a tab. The filters carried role="tab" inside a role="tablist"
+    // while having none of what that contract requires, and set aria-pressed,
+    // which is not allowed on role="tab". They are toggle buttons.
+    expect(screen.getByRole('button', { name: 'Published' })).toBeInTheDocument();
 
     const grid = screen.getByTestId('journalism-grid');
     expect(grid).toHaveTextContent('Election Night Watch');
     expect(grid).toHaveTextContent('Community Feature');
 
     const proof = screen.getByLabelText('Editorial proof points');
-    expect(grid.compareDocumentPosition(proof) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(proof.compareDocumentPosition(grid) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it('filters to published work without replacing the portfolio grid', async () => {
     const user = userEvent.setup();
-    render(<JournalismPortfolio />);
+    render(
+      <MemoryRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
+        <JournalismPortfolio />
+      </MemoryRouter>,
+    );
 
-    await user.click(screen.getByRole('tab', { name: 'Published' }));
+    await user.click(screen.getByRole('button', { name: 'Published' }));
 
     const grid = screen.getByTestId('journalism-grid');
     expect(grid).toHaveTextContent('Election Night Watch');

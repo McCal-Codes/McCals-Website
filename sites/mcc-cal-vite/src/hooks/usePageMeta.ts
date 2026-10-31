@@ -1,5 +1,9 @@
 import { useEffect } from 'react';
 
+const DEFAULT_OG_IMAGE_WIDTH = '1200';
+const DEFAULT_OG_IMAGE_HEIGHT = '630';
+const DEFAULT_OG_IMAGE_TYPE = 'image/jpeg';
+
 interface PageMeta {
   title: string;
   description: string;
@@ -11,6 +15,9 @@ interface PageMeta {
     image?: string;
     imageAlt?: string;
     type?: string;
+    imageWidth?: string | number;
+    imageHeight?: string | number;
+    imageType?: string;
   };
   twitter?: {
     title?: string;
@@ -20,6 +27,30 @@ interface PageMeta {
     card?: string;
   };
   jsonLd?: object;
+}
+
+function withPreviewDirectives(robots?: string) {
+  const directives = (robots || '')
+    .split(',')
+    .map((directive) => directive.trim())
+    .filter(Boolean);
+
+  if (!directives.some((directive) => directive.startsWith('max-image-preview:'))) {
+    directives.push('max-image-preview:large');
+  }
+
+  return directives.join(', ');
+}
+
+function inferImageType(image?: string, explicitType?: string) {
+  if (explicitType) return explicitType;
+  if (!image) return undefined;
+
+  const pathname = image.split(/[?#]/)[0]?.toLowerCase() || '';
+  if (pathname.endsWith('.png')) return 'image/png';
+  if (pathname.endsWith('.webp')) return 'image/webp';
+  if (pathname.endsWith('.gif')) return 'image/gif';
+  return DEFAULT_OG_IMAGE_TYPE;
 }
 
 function setMeta(name: string, content: string, attr: 'name' | 'property' = 'name') {
@@ -83,13 +114,28 @@ export function usePageMeta(meta: PageMeta) {
     document.title = meta.title;
     setMeta('description', meta.description);
     setLink('canonical', meta.canonical);
-    setOptionalMeta('robots', meta.robots);
+    setOptionalMeta('robots', withPreviewDirectives(meta.robots));
 
     setOptionalMeta('og:type', meta.og?.type, 'property');
     setOptionalMeta('og:title', meta.og?.title, 'property');
     setOptionalMeta('og:description', meta.og?.description, 'property');
     setOptionalMeta('og:image', meta.og?.image, 'property');
     setOptionalMeta('og:image:alt', meta.og?.imageAlt, 'property');
+    setOptionalMeta(
+      'og:image:width',
+      meta.og?.image ? String(meta.og.imageWidth ?? DEFAULT_OG_IMAGE_WIDTH) : undefined,
+      'property',
+    );
+    setOptionalMeta(
+      'og:image:height',
+      meta.og?.image ? String(meta.og.imageHeight ?? DEFAULT_OG_IMAGE_HEIGHT) : undefined,
+      'property',
+    );
+    setOptionalMeta(
+      'og:image:type',
+      inferImageType(meta.og?.image, meta.og?.imageType),
+      'property',
+    );
     setOptionalMeta('og:url', hasOpenGraph ? meta.canonical : undefined, 'property');
 
     setOptionalMeta('twitter:card', meta.twitter?.card);
@@ -117,6 +163,9 @@ export function usePageMeta(meta: PageMeta) {
     meta.og?.description,
     meta.og?.image,
     meta.og?.imageAlt,
+    meta.og?.imageWidth,
+    meta.og?.imageHeight,
+    meta.og?.imageType,
     hasOpenGraph,
     meta.twitter?.card,
     meta.twitter?.title,

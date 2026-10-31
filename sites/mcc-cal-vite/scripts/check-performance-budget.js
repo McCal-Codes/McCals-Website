@@ -8,7 +8,7 @@ const ROUTES = [
       cls: 0.1,
       lcp: 2500,
       fcp: 1800,
-      jsKb: 200,
+      jsKb: 150,
       cssKb: 80,
       imageKb: 750,
     },
@@ -19,7 +19,7 @@ const ROUTES = [
       cls: 0.1,
       lcp: 2500,
       fcp: 1800,
-      jsKb: 200,
+      jsKb: 150,
       cssKb: 80,
       imageKb: 1800,
     },
@@ -30,7 +30,7 @@ const ROUTES = [
       cls: 0.1,
       lcp: 2500,
       fcp: 1800,
-      jsKb: 200,
+      jsKb: 150,
       cssKb: 80,
       imageKb: 2800,
     },
@@ -53,15 +53,42 @@ async function measureRoute(browser, route, viewportName, viewport) {
   });
   const consoleIssues = [];
   const failedResponses = [];
+  const rateLimitedUrls = new Set();
+
+  // `/_vercel/*` is served by Vercel's edge, not by the app. It always 404s against
+  // a local `vite preview`, which would otherwise fail every route in this check.
+  const isEdgeOnlyPath = (url) => new URL(url).pathname.startsWith('/_vercel/');
+
+  // jsDelivr rate limits shared CI runner IPs with 403/429 on the gallery images,
+  // and the same image serves 200 minutes later. That is the CDN throttling the
+  // runner, not the site regressing, so it must not fail the budget. Any other
+  // status from the CDN (404, 5xx) still does.
+  const isCdnRateLimit = (url, status) =>
+    new URL(url).hostname === 'cdn.jsdelivr.net' && (status === 403 || status === 429);
+
+  // Performance hints emitted by the GL driver itself, not by page code. Headless
+  // CI renders WebGL in software, where compositing the hero canvas reports things
+  // like "GPU stall due to ReadPixels" that say nothing about the site and do not
+  // occur on real hardware. Only the Performance category is ignored, so genuine
+  // WebGL errors still fail the budget.
+  const isGlDriverPerformanceHint = (text) =>
+    /^\[\.WebGL-[^\]]*\]GL Driver Message \(\w+, Performance,/.test(text);
 
   page.on('console', (message) => {
-    if (['warning', 'error'].includes(message.type())) {
-      consoleIssues.push(`${message.type()}: ${message.text()}`);
-    }
+    if (!['warning', 'error'].includes(message.type())) return;
+    const url = message.location()?.url;
+    if (url && isEdgeOnlyPath(url)) return;
+    if (url && rateLimitedUrls.has(url)) return;
+    if (isGlDriverPerformanceHint(message.text())) return;
+    consoleIssues.push(`${message.type()}: ${message.text()}`);
   });
 
   page.on('response', (response) => {
-    if (response.status() >= 400) {
+    if (isCdnRateLimit(response.url(), response.status())) {
+      rateLimitedUrls.add(response.url());
+      return;
+    }
+    if (response.status() >= 400 && !isEdgeOnlyPath(response.url())) {
       failedResponses.push(`${response.status()} ${response.url()}`);
     }
   });
@@ -107,8 +134,11 @@ async function measureRoute(browser, route, viewportName, viewport) {
 
   const metrics = await page.evaluate(() => {
     const resources = performance.getEntriesByType('resource');
+    // Match on the URL rather than initiatorType: Vite emits vendor chunks as
+    // `<link rel="modulepreload">`, which reports initiatorType 'link', so a
+    // script-only filter counted the entry chunk and missed every vendor chunk.
     const jsBytes = resources
-      .filter((resource) => resource.initiatorType === 'script')
+      .filter((resource) => /\.js($|\?)/.test(resource.name))
       .reduce((sum, resource) => sum + (resource.transferSize || 0), 0);
     const cssBytes = resources
       .filter((resource) => resource.initiatorType === 'link' && /\.css($|\?)/.test(resource.name))
@@ -124,7 +154,10 @@ async function measureRoute(browser, route, viewportName, viewport) {
       jsKb: Math.round(jsBytes / 1024),
       lcp: Math.round(window.__mccPerfBudget.lcp),
       cssKb: Math.round(cssBytes / 1024),
-      overflowX: Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth),
+      overflowX: Math.max(
+        0,
+        document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      ),
       resources: resources.length,
       title: document.title,
     };

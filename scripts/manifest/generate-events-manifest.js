@@ -8,6 +8,7 @@ const { detectDateFromFilename } = require('../utils/shared-date-parsing.js');
 const { resolveDateOverride } = require('../utils/date-overrides.js');
 const { notify } = require('../utils/manifest-webhook');
 const { IMAGE_EXTENSION_RE, dedupeImageEntries } = require('../utils/image-manifest-dedupe.js');
+const { writeManifestIfChanged } = require('./write-manifest.js');
 
 // NOTE: Adjusted to include leading 'src/' so default matches repo structure
 const DEFAULT_ROOT = 'src/images/Portfolios/Events';
@@ -394,14 +395,15 @@ async function main() {
   };
 
   const outFile = path.join(absRoot, OUTPUT_FILE);
-  const tmpFile = outFile + '.tmp';
-  const content = JSON.stringify(manifest, null, 2) + '\n';
 
-  // Atomic write: write to temp file then rename
-  await fsp.writeFile(tmpFile, content, 'utf8');
-  await fsp.rename(tmpFile, outFile);
+  const written = await writeManifestIfChanged(outFile, manifest, {
+    serialize: (value) => JSON.stringify(value, null, 2) + '\n',
+    atomic: true,
+  });
   console.log(
-    '[OK] Wrote manifest (v' + manifestVersion + '): - generate-events-manifest.js:225',
+    written
+      ? '[OK] Wrote manifest (v' + manifestVersion + '): - generate-events-manifest.js:225'
+      : '[OK] Manifest unchanged, left alone (v' + manifestVersion + '):',
     path.relative(process.cwd(), outFile),
   );
   const canonicalRoot = path.resolve(DEFAULT_ROOT);

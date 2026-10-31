@@ -10,6 +10,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const { notify } = require('../utils/manifest-webhook');
 const { IMAGE_EXTENSION_RE, dedupeImageEntries } = require('../utils/image-manifest-dedupe.js');
+const { writeManifestIfChanged } = require('./write-manifest.js');
 const BASE_NATURE = path.join(process.cwd(), 'src', 'images', 'Portfolios', 'Nature');
 const WILDLIFE_BASE = path.join(BASE_NATURE, 'Wildlife');
 const LANDSCAPES_BASE = path.join(BASE_NATURE, 'Landscapes');
@@ -187,10 +188,10 @@ async function scanAndGenerateManifests() {
     totalCollections: collections.length,
     collections: collections.map(({ collectionName, folderPath, totalImages, images, tags }) => ({ collectionName, folderPath, totalImages, images, tags }))
   };
-  await fs.writeFile(MANIFEST_OUTPUT, JSON.stringify(natureManifest, null, 2), 'utf8');
+  const written = await writeManifestIfChanged(MANIFEST_OUTPUT, natureManifest);
   console.log(`✅ Nature manifest generated: ${MANIFEST_OUTPUT}`);
   try {
-    await notify('nature', { path: MANIFEST_OUTPUT, written: true });
+    await notify('nature', { path: MANIFEST_OUTPUT, written });
   } catch (err) {
     console.warn('Failed to notify manifest webhook (nature):', err && err.message);
   }

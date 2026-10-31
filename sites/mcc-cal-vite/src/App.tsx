@@ -1,14 +1,17 @@
 import { Suspense, lazy } from 'react';
 import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import PreviewBanner from './components/PreviewBanner';
+import RouteAnalytics from './components/RouteAnalytics';
 import ErrorBoundary from './components/ErrorBoundary';
 import RouteAwareSpeedInsights from './components/RouteAwareSpeedInsights';
-import { STATIC_PAGE_ROUTES } from './config/public-routes.js';
+import { LEGACY_ROUTE_REDIRECTS, STATIC_PAGE_ROUTES } from './config/public-routes.js';
+// HomePage stays eager: it is the LCP route, so a second round trip for its chunk
+// would delay the hero. Every other route is split.
 import HomePage from './pages/index';
-import PodcastPage from './pages/podcast';
 
 // Lazy load pages for code splitting
 const AboutPage = lazy(() => import('./pages/about'));
+const PodcastPage = lazy(() => import('./pages/podcast'));
 const AuthorsPage = lazy(() => import('./pages/authors'));
 const BlogPage = lazy(() => import('./pages/blog'));
 const ConcertsPage = lazy(() => import('./pages/concerts'));
@@ -18,18 +21,20 @@ const JournalismPage = lazy(() => import('./pages/journalism'));
 const NaturePage = lazy(() => import('./pages/nature'));
 const PortraitsPage = lazy(() => import('./pages/portraits'));
 const ProjectsPage = lazy(() => import('./pages/projects'));
-const RoadmapPage = lazy(() => import('./pages/roadmap'));
 const ChangelogPage = lazy(() => import('./pages/changelog'));
-const ShowcasePage = lazy(() => import('./pages/showcase'));
-const ApiTestPage = lazy(() => import('./pages/api-test'));
+const SentryExamplePage = lazy(() => import('./pages/sentry-example-page'));
 const ContactUsPage = lazy(() => import('./pages/contact-us'));
 const RequestAQuotePage = lazy(() => import('./pages/request-a-quote'));
 const GrabCoffeePage = lazy(() => import('./pages/grab-a-coffee'));
 const BookPodcastPage = lazy(() => import('./pages/book-a-podcast'));
 const PoliciesLegalPage = lazy(() => import('./pages/policies-legal'));
+const LicensingPage = lazy(() => import('./pages/licensing'));
+const PrivacyPage = lazy(() => import('./pages/privacy'));
+const TermsPage = lazy(() => import('./pages/terms'));
 const FAQPage = lazy(() => import('./pages/faq'));
+const LinksPage = lazy(() => import('./pages/links'));
+const ManageBookingPage = lazy(() => import('./pages/manage-booking'));
 const AccessibilityPage = lazy(() => import('./pages/accessibility'));
-const TerranovaPage = lazy(() => import('./pages/terranova'));
 const OneNationDividedPage = lazy(() => import('./pages/one-nation-divided'));
 const WorkSamplesPage = lazy(() => import('./pages/work-samples'));
 const NotFoundPage = lazy(() => import('./pages/not-found'));
@@ -53,9 +58,11 @@ const staticRouteComponents = {
   grabCoffee: GrabCoffeePage,
   faq: FAQPage,
   projects: ProjectsPage,
-  terranova: TerranovaPage,
   accessibility: AccessibilityPage,
   policiesLegal: PoliciesLegalPage,
+  licensing: LicensingPage,
+  privacy: PrivacyPage,
+  terms: TermsPage,
 } as const;
 
 // Simple fallback for page loading state
@@ -101,6 +108,7 @@ function AppShell() {
   return (
     <>
       <PreviewBanner />
+      <RouteAnalytics />
       <RouteAwareSpeedInsights />
       <ErrorBoundary>
         <Suspense fallback={<PageLoader />}>
@@ -110,6 +118,13 @@ function AppShell() {
     </>
   );
 }
+
+// Plain createBrowserRouter, not Sentry's wrapCreateBrowserRouterV6. The wrapper
+// has to run at module scope to build the router, which pulls the whole SDK into
+// the entry chunk and blocks first paint. Route-pattern transaction names, the
+// main thing the wrapper bought us, are set from RouteAnalytics instead.
+const enableSentryExamplePage =
+  import.meta.env.DEV || import.meta.env.VITE_ENABLE_SENTRY_TEST_PAGE === 'true';
 
 const router = createBrowserRouter([
   {
@@ -122,20 +137,29 @@ const router = createBrowserRouter([
           element: <RouteComponent />,
         };
       }),
-      { path: '/contact', element: <Navigate to="/contact-us" replace /> },
-      { path: '/schedule', element: <Navigate to="/grab-a-coffee" replace /> },
-      { path: '/one-nation-divided', element: <Navigate to="/letting-me-go" replace /> },
+      ...LEGACY_ROUTE_REDIRECTS.map((route) => ({
+        path: route.from,
+        element: <Navigate to={route.to} replace />,
+      })),
       { path: '/authors/:authorId', element: <AuthorsPage /> },
       { path: '/blog/:slug', element: <BlogPage /> },
-      { path: '/roadmap', element: <RoadmapPage /> },
+      // Hidden tap-card page: intentionally not in STATIC_PAGE_ROUTES/nav/sitemap,
+      // reachable only by whoever has the direct URL (the NFC card).
+      { path: '/links', element: <LinksPage /> },
+      // Reached only from the token link in a confirmation email: kept out of
+      // STATIC_PAGE_ROUTES (so out of nav and the sitemap) but pre-rendered via
+      // HIDDEN_ROUTES in generate-route-meta.js, since a path with no matching
+      // file 404s before the SPA rewrite is consulted.
+      { path: '/manage-booking', element: <ManageBookingPage /> },
       // Unlisted: shared by link for applications. Not in navigation or the sitemap.
       { path: '/work-samples', element: <WorkSamplesPage /> },
       ...(import.meta.env.DEV
         ? [
-            { path: '/showcase', element: <ShowcasePage /> },
-            { path: '/api-test', element: <ApiTestPage /> },
             { path: '/changelog', element: <ChangelogPage /> },
           ]
+        : []),
+      ...(enableSentryExamplePage
+        ? [{ path: '/sentry-example-page', element: <SentryExamplePage /> }]
         : []),
       { path: '*', element: <NotFoundPage /> },
     ],

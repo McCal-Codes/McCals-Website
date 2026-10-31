@@ -30,12 +30,19 @@ permissions:
 jobs:
   check:
     name: Ensure instructions updated
+    # Dependency bumps touch package.json / lockfiles under the paths filter above
+    # but never change repo behavior that instruction docs describe, so this guard
+    # only ever blocks Dependabot's auto-merge queue. Human PRs are still enforced.
+    if: github.event.pull_request.user.login != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: false
+          # Needs full history: the diff below is base.sha...head.sha, and a shallow
+          # clone does not contain the base commit. With fetch-depth 2 this failed
+          # with "fatal: bad object <base sha>" on every pull request.
           fetch-depth: 0
 
       - name: Detect changed files
@@ -108,7 +115,15 @@ jobs:
           script: |
             const changed = `${{ steps.changed.outputs.changed_files }}`.split(' ').filter(Boolean);
             const instructionDocsChanged = changed.some(f => /\.github\/.*instructions.*\.md$/.test(f));
-            const changelogChanged = changed.includes('CHANGELOG.md') || changed.includes('docs/CHANGELOG.md');
+            // A fragment under changelog.d/ counts, the same way it does in
+            // changelog-validator.yml. Entries stopped going straight into
+            // CHANGELOG.md because every pull request editing the top of one
+            // file made any two of them conflict. README.md there documents the
+            // convention and is not itself an entry.
+            const changelogChanged =
+              changed.includes('CHANGELOG.md') ||
+              changed.includes('docs/CHANGELOG.md') ||
+              changed.some(f => f.startsWith('changelog.d/') && f.endsWith('.md') && f !== 'changelog.d/README.md');
             if (instructionDocsChanged && !changelogChanged) {
               const { data: labels } = await github.rest.issues.listLabelsOnIssue({
                 owner: context.repo.owner,
@@ -120,7 +135,7 @@ jobs:
               const note = [
                 'This PR updates instruction docs under `.github/` (e.g., copilot/canvas/codex) but no CHANGELOG entry was found.',
                 '',
-                'Please add an entry to `CHANGELOG.md` describing the update to the Copilot instructions (e.g., under a Docs/Meta section).',
+                'Add a fragment at `changelog.d/<your-branch>.md` describing the update to the instructions. See `changelog.d/README.md`. Editing `CHANGELOG.md` directly still counts.',
                 'You can bypass with label `docs-acknowledged` if intentional.'
               ].join('\n');
               const { data: comments } = await github.rest.issues.listComments({
@@ -141,4 +156,3 @@ jobs:
                 core.setFailed('Copilot instructions changed without CHANGELOG update.');
               }
             }
-

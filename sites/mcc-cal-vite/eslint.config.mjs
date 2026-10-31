@@ -22,11 +22,11 @@ export default tseslint.config(
       ...tseslint.configs.recommended,
     ],
     languageOptions: {
-      ecmaVersion: 2024,
+      ecmaVersion: 2025,
       globals: globals.browser,
       parser: tseslint.parser,
       parserOptions: {
-        ecmaVersion: 2024,
+        ecmaVersion: 2025,
         sourceType: 'module',
       },
     },
@@ -76,9 +76,17 @@ export default tseslint.config(
   },
   {
     files: ['**/*.{js,jsx}'],
+    // Server code is excluded here so it does not inherit browser globals on
+    // top of the node ones below. Flat config merges `globals` from every
+    // matching block rather than replacing it, so without this an api handler
+    // could reference `location`, `document` or `window`, no-undef would stay
+    // silent, and it would throw a ReferenceError only at runtime. That is
+    // exactly how a free `location` reached production and silently broke every
+    // booking confirmation email.
+    ignores: ['api/**', 'scripts/**', 'api-server.cjs', 'src/content/**/*.js'],
     extends: [js.configs.recommended],
     languageOptions: {
-      ecmaVersion: 2024,
+      ecmaVersion: 2025,
       globals: globals.browser,
     },
     plugins: {
@@ -126,7 +134,7 @@ export default tseslint.config(
   {
     files: ['*.config.{js,mjs,cjs}'],
     languageOptions: {
-      ecmaVersion: 2024,
+      ecmaVersion: 2025,
       globals: globals.node,
     },
     rules: {
@@ -141,13 +149,26 @@ export default tseslint.config(
       'scripts/**/*.{js,ts}',
       'src/content/**/*.js',
     ],
+    // Carries the recommended rules itself, because the block above no longer
+    // matches these paths. Without this, no-undef is not enabled for server
+    // code at all.
+    extends: [js.configs.recommended],
     languageOptions: {
-      ecmaVersion: 2024,
+      ecmaVersion: 2025,
       globals: globals.node,
     },
     rules: {
       'no-console': 'off',
       'no-unmodified-loop-condition': 'off',
+    },
+  },
+  {
+    // Playwright driver. Its page.evaluate and page.addInitScript callbacks are
+    // serialised and run inside the browser, so window and document really are
+    // in scope there even though the file itself runs under node.
+    files: ['scripts/check-performance-budget.js'],
+    languageOptions: {
+      globals: { ...globals.node, ...globals.browser },
     },
   }
 );

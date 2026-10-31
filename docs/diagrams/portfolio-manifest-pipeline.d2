@@ -1,0 +1,66 @@
+direction: right
+
+source: {
+  label: "Portfolio sources\nImages\nTags\nCaptions\nDate metadata"
+  shape: cylinder
+  style.fill: "#f8fafc"
+  style.stroke: "#334155"
+}
+
+generators: {
+  label: "Per-portfolio generators\nconcert, events, journalism,\nnature, portrait"
+  shape: rectangle
+  style.fill: "#eff6ff"
+  style.stroke: "#2563eb"
+}
+
+aggregates: {
+  label: "Aggregate manifests\nfeatured-manifest.json\nportfolio-manifest.json"
+  shape: rectangle
+  style.fill: "#fef9c3"
+  style.stroke: "#ca8a04"
+}
+
+sync: {
+  label: "Vite sync\nscripts/sync-manifests.js"
+  shape: rectangle
+  style.fill: "#f0fdf4"
+  style.stroke: "#16a34a"
+}
+
+runtime: {
+  label: "Public app assets\npublic-vite/manifests\napi/manifests/data\nblog-static + sitemap"
+  shape: rectangle
+  style.fill: "#faf5ff"
+  style.stroke: "#9333ea"
+}
+
+ci: {
+  label: "CI publish flows\nregenerate artifacts\nmanifests-cdn branch\ntagged jsDelivr URLs"
+  shape: rectangle
+  style.fill: "#fff7ed"
+  style.stroke: "#ea580c"
+}
+
+edge: {
+  label: "Webhook + cache refresh\nnotify API\npurge and warm edge cache"
+  shape: cloud
+  style.fill: "#ecfeff"
+  style.stroke: "#0891b2"
+}
+
+site: {
+  label: "Website surfaces\nportfolio pages\nfeatured work\nSEO metadata"
+  shape: rectangle
+  style.fill: "#f8fafc"
+  style.stroke: "#475569"
+}
+
+source -> generators: "npm run manifest:*"
+generators -> aggregates: "universal + featured"
+aggregates -> sync: "predev / prebuild"
+sync -> runtime: "copy + generate"
+runtime -> site: "Vite build/runtime"
+aggregates -> ci: "GitHub Actions"
+ci -> edge: "optional secrets"
+edge -> site: "fresh CDN/API cache"

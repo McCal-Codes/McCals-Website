@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useMemo } from 'react';
+import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout } from '@/components';
 import { usePageMeta } from '@/hooks/usePageMeta';
@@ -19,6 +19,13 @@ import { formatTime, formatDateRelative, slugify } from '@/utils/formatters';
 import './podcast.css';
 
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
+
+function stopAudio(audio: HTMLAudioElement | null) {
+  if (!audio) return;
+  audio.pause();
+  audio.removeAttribute('src');
+  audio.load();
+}
 
 export default function PodcastPage() {
   const { data: episodes = [], isLoading, error } = usePodcastFeed();
@@ -119,12 +126,12 @@ export default function PodcastPage() {
 
   const handlePlay = useCallback((guid: string) => {
     const ep = episodes.find(e => e.guid === guid || slugify(e.guid) === guid);
-    if (!ep?.audioUrl) return;
-
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.src = '';
+    if (!ep?.audioUrl) {
+      showToast('No audio available for this episode');
+      return;
     }
+
+    stopAudio(audioRef.current);
 
     const audio = new Audio(ep.audioUrl);
     audio.crossOrigin = 'anonymous';
@@ -134,26 +141,43 @@ export default function PodcastPage() {
     setPlayerState({ playing: false, loading: true, currentTime: 0, duration: 0 });
     setNpHidden(false);
 
+    const updatePlayer = (updater: (state: PlayerState) => PlayerState) => {
+      if (audioRef.current === audio) setPlayerState(updater);
+    };
+
     audio.addEventListener('loadedmetadata', () => {
-      setPlayerState(s => ({ ...s, duration: audio.duration }));
+      updatePlayer(s => ({ ...s, duration: audio.duration }));
     });
     audio.addEventListener('play', () => {
-      setPlayerState(s => ({ ...s, playing: true, loading: false }));
+      updatePlayer(s => ({ ...s, playing: true, loading: false }));
     });
     audio.addEventListener('pause', () => {
-      setPlayerState(s => ({ ...s, playing: false }));
+      updatePlayer(s => ({ ...s, playing: false }));
     });
     audio.addEventListener('timeupdate', () => {
-      setPlayerState(s => ({ ...s, currentTime: audio.currentTime, duration: audio.duration }));
+      updatePlayer(s => ({ ...s, currentTime: audio.currentTime, duration: audio.duration }));
     });
     audio.addEventListener('ended', () => {
-      setPlayerState(s => ({ ...s, playing: false }));
+      updatePlayer(s => ({ ...s, playing: false, currentTime: audio.duration || s.currentTime }));
+    });
+    audio.addEventListener('error', () => {
+      updatePlayer(s => ({ ...s, playing: false, loading: false }));
+      showToast('Could not play this episode');
     });
 
     audio.play()
-      .then(() => setPlayerState(s => ({ ...s, playing: true, loading: false })))
-      .catch(() => setPlayerState(s => ({ ...s, loading: false })));
-  }, [episodes]);
+      .then(() => updatePlayer(s => ({ ...s, playing: true, loading: false })))
+      .catch(() => {
+        updatePlayer(s => ({ ...s, loading: false }));
+        showToast('Could not play this episode');
+      });
+  }, [episodes, showToast]);
+
+  useEffect(() => () => {
+    stopAudio(audioRef.current);
+    audioRef.current = null;
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+  }, []);
 
   function toggleNpPlay() {
     if (!audioRef.current || !currentGuid) return;

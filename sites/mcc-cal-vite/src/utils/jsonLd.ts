@@ -8,6 +8,43 @@
 import type { PortfolioGroup, PortfolioImage } from '../components/portfolio/types';
 
 const SITE_ROOT = 'https://mcc-cal.com';
+
+/**
+ * Rights values for image structured data.
+ *
+ * Google reads five fields to attribute and license an image. `license` is the one
+ * that gates the "Licensable" badge, without it the others display attribution but
+ * the badge never appears, which is a silent failure.
+ *
+ * These must match what scripts/metadata/embed-image-rights.js writes into the files
+ * themselves, or the page and the photograph will claim different rights. Enforced by
+ * image-rights-parity.test.ts.
+ */
+export const IMAGE_RIGHTS = {
+  creator: 'Caleb McCartney',
+  creditText: 'Caleb McCartney/McCal Media',
+  copyrightNotice: 'Copyright Caleb McCartney / McCal Media. All rights reserved.',
+  license: `${SITE_ROOT}/licensing`,
+  acquireLicensePage: `${SITE_ROOT}/request-a-quote`,
+} as const;
+
+/** The rights block every ImageObject we emit should carry. */
+export function imageRightsProperties() {
+  return {
+    creator: {
+      '@type': 'Person',
+      name: IMAGE_RIGHTS.creator,
+      url: `${SITE_ROOT}/about`,
+    },
+    creditText: IMAGE_RIGHTS.creditText,
+    copyrightNotice: IMAGE_RIGHTS.copyrightNotice,
+    license: IMAGE_RIGHTS.license,
+    acquireLicensePage: IMAGE_RIGHTS.acquireLicensePage,
+  };
+}
+const GOOGLE_BUSINESS_PROFILE_URL = 'https://www.google.com/search?kgmid=/g/11krrndw6s&q=McCal+Media';
+const MC_CAL_LOGO = `${SITE_ROOT}/brand/logo-mark.svg`;
+const MC_CAL_EMAIL = 'contact@mcc-cal.com';
 const PITTSBURGH_AREA_SERVED = {
   '@type': 'City',
   name: 'Pittsburgh',
@@ -15,6 +52,12 @@ const PITTSBURGH_AREA_SERVED = {
     '@type': 'State',
     name: 'Pennsylvania',
   },
+};
+const PITTSBURGH_POSTAL_ADDRESS = {
+  '@type': 'PostalAddress',
+  addressLocality: 'Pittsburgh',
+  addressRegion: 'PA',
+  addressCountry: 'US',
 };
 
 const MC_CAL_PERSON = {
@@ -25,10 +68,20 @@ const MC_CAL_PERSON = {
 };
 
 const MC_CAL_ORGANIZATION = {
-  '@type': 'Organization',
+  '@type': 'LocalBusiness',
   '@id': `${SITE_ROOT}#organization`,
   name: 'McCal Media',
   url: SITE_ROOT,
+  logo: MC_CAL_LOGO,
+  email: MC_CAL_EMAIL,
+  address: PITTSBURGH_POSTAL_ADDRESS,
+  areaServed: PITTSBURGH_AREA_SERVED,
+  hasMap: GOOGLE_BUSINESS_PROFILE_URL,
+  sameAs: [
+    GOOGLE_BUSINESS_PROFILE_URL,
+    'https://www.instagram.com/mcc_cal',
+    'https://www.linkedin.com/in/calebmccartney',
+  ],
 };
 
 // ============================================================================
@@ -85,16 +138,27 @@ export function generatePersonSchema(): object {
 export function generatePhotographyProviderSchema(description?: string): object {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
+    '@type': 'LocalBusiness',
     '@id': `${SITE_ROOT}#organization`,
     name: 'McCal Media',
     url: SITE_ROOT,
+    logo: MC_CAL_LOGO,
+    email: MC_CAL_EMAIL,
     description:
       description ||
       'Pittsburgh photography business led by Caleb McCartney for events, concerts, headshots, and commercial storytelling.',
+    address: PITTSBURGH_POSTAL_ADDRESS,
     areaServed: PITTSBURGH_AREA_SERVED,
     founder: MC_CAL_PERSON,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: MC_CAL_EMAIL,
+      url: `mailto:${MC_CAL_EMAIL}`,
+    },
+    hasMap: GOOGLE_BUSINESS_PROFILE_URL,
     sameAs: [
+      GOOGLE_BUSINESS_PROFILE_URL,
       'https://www.instagram.com/mcc_cal',
       'https://www.linkedin.com/in/calebmccartney',
     ],
@@ -183,8 +247,9 @@ export function generateImageObjectSchema(
     description: image.caption || image.description,
     author: {
       '@type': 'Person',
-      name: 'Caleb McCartney',
+      name: IMAGE_RIGHTS.creator,
     },
+    ...imageRightsProperties(),
     url,
   };
 }

@@ -25,6 +25,7 @@ const path = require('path');
 const readline = require('readline');
 const { notify } = require('../utils/manifest-webhook');
 const { dedupeImageEntries } = require('../utils/image-manifest-dedupe.js');
+const { writeManifestIfChanged } = require('./write-manifest.js');
 
 // Configuration
 const JOURNALISM_DIR = path.resolve(__dirname, '../../src/images/Portfolios/Journalism');
@@ -431,9 +432,9 @@ async function generateManifest() {
     };
     
     // Write manifest
-    await fs.writeFile(MASTER_MANIFEST, JSON.stringify(manifest, null, 2), 'utf-8');
+    const written = await writeManifestIfChanged(MASTER_MANIFEST, manifest);
     try {
-      await notify('journalism', { path: MASTER_MANIFEST, written: true });
+      await notify('journalism', { path: MASTER_MANIFEST, written });
     } catch (err) {
       console.warn('Failed to notify manifest webhook (journalism): - generate-journalism-manifest-v2.js:398', err && err.message);
     }

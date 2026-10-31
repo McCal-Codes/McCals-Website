@@ -1,4 +1,4 @@
-/* McCal Hero Carousel — ported from widget v1.3.14 */
+/* McCal Hero Carousel, ported from widget v1.3.14 */
 
 .heroWidget,
 .heroCarousel,
@@ -16,7 +16,14 @@
   transform: translateX(-50%);
   margin: 0 !important;
   color: #f5f5f5;
-  font-family: Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    Inter,
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
 }
 
 .heroCarousel {
@@ -30,7 +37,14 @@
   margin: 0 !important;
   overflow: hidden;
   color: #f5f5f5;
-  font-family: Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    Inter,
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
   background: #050506;
   transform: translateX(-50%);
 }
@@ -103,7 +117,7 @@
 
 .heroImage {
   opacity: 0;
-  transition: opacity 0.32s cubic-bezier(0.16,1,0.3,1);
+  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .loaded {
@@ -115,10 +129,19 @@
   inset: 0;
   z-index: 0;
   background:
-    linear-gradient(110deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)),
+    linear-gradient(
+      110deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0)
+    ),
     #151515;
   background-size: 220% 100%;
-  animation: heroSkeleton 1.4s ease-in-out infinite;
+  /* Start invisible; fade in after 200ms so cached/fast images never flash the shimmer */
+  opacity: 0;
+  animation:
+    heroSkeletonReveal 150ms ease-out 200ms forwards,
+    heroSkeleton 1.4s ease-in-out 350ms infinite;
 }
 
 .imageError {
@@ -261,7 +284,10 @@
   cursor: pointer;
   position: relative;
   z-index: 10;
-  transition: background 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.3s cubic-bezier(0.16,1,0.3,1);
+  transition:
+    background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .heroCta:hover,
@@ -293,7 +319,10 @@
   padding: 0;
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  transition: opacity 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s cubic-bezier(0.16,1,0.3,1);
+  transition:
+    opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .heroArrow svg {
@@ -316,12 +345,12 @@
 
 .heroArrowPrev,
 .prev {
-  left: 3vw;
+  left: clamp(12px, 3vw, 80px);
 }
 
 .heroArrowNext,
 .next {
-  right: 3vw;
+  right: clamp(12px, 3vw, 80px);
 }
 
 .heroDots {
@@ -337,7 +366,7 @@
 
 .heroDot {
   position: relative;
-  width: 20px;
+  width: 24px;
   height: 24px;
   border: 0;
   padding: 0;
@@ -366,6 +395,33 @@
   background: rgba(255, 255, 255, 0.95);
 }
 
+/* Wide screens, wider content well, cap hero at 100svh */
+@media (min-width: 1440px) {
+  .heroContent,
+  .heroCaption {
+    width: min(100%, 900px);
+  }
+}
+
+@media (min-width: 2560px) {
+  .heroCarousel,
+  .heroShell,
+  .hero,
+  .heroViewport,
+  .heroTrack,
+  .heroSlide {
+    max-height: 100svh;
+    height: 100svh;
+    min-height: 100svh;
+  }
+
+  .heroContent,
+  .heroCaption {
+    width: min(100%, 1100px);
+  }
+}
+
+/* Tablet / mobile */
 @media (max-width: 768px) {
   .heroWidget,
   .heroCarousel {
@@ -385,16 +441,40 @@
 
   .heroArrowPrev,
   .prev {
-    left: 10px;
+    left: clamp(8px, 2.5vw, 16px);
   }
 
   .heroArrowNext,
   .next {
-    right: 10px;
+    right: clamp(8px, 2.5vw, 16px);
   }
 
   .heroDots {
     bottom: 6px;
+  }
+}
+
+/* Very small phones (iPhone SE, 375px and below) */
+@media (max-width: 390px) {
+  .heroArrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .heroArrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .heroCta,
+  .heroButton {
+    font-size: 0.68rem;
+    padding: 0.5rem 1.1rem;
+  }
+
+  .heroDots {
+    gap: 5px;
+    bottom: 14px;
   }
 }
 
@@ -404,6 +484,12 @@
   .imageSkeleton {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+@keyframes heroSkeletonReveal {
+  to {
+    opacity: 1;
   }
 }
 

@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import { SITEMAP_STATIC_PATHS } from './config/public-routes.js';
+import { LEGACY_ROUTE_REDIRECTS, SITEMAP_STATIC_PATHS } from './config/public-routes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -62,10 +62,13 @@ describe('critical public routes', () => {
     const appPath = resolve(__dirname, 'App.tsx');
     const appSource = readFileSync(appPath, 'utf8');
 
-    expect(appSource).toContain("path: '/schedule'");
-    expect(appSource).toContain('to="/grab-a-coffee"');
-    expect(appSource).toContain("path: '/contact'");
-    expect(appSource).toContain('to="/contact-us"');
+    expect(appSource).toContain('LEGACY_ROUTE_REDIRECTS.map');
+    expect(LEGACY_ROUTE_REDIRECTS).toEqual(
+      expect.arrayContaining([
+        { from: '/schedule', to: '/grab-a-coffee' },
+        { from: '/contact', to: '/contact-us' },
+      ]),
+    );
   });
 
   it('keeps primary public pages semantically headed', () => {
@@ -74,9 +77,14 @@ describe('critical public routes', () => {
       resolve(__dirname, 'components', 'portfolios', 'FeaturedPortfolio.tsx'),
       'utf8',
     );
+    const journalismSource = readFileSync(
+      resolve(__dirname, 'components', 'portfolios', 'JournalismPortfolio.tsx'),
+      'utf8',
+    );
 
     expect(homeSource).toMatch(/<h1\b/);
     expect(featuredSource).toMatch(/<h1\b/);
+    expect(journalismSource).toMatch(/<h1\b/);
   });
 
   it('keeps stale indexed portfolio URLs redirected in both Vercel configs', () => {
@@ -93,6 +101,10 @@ describe('critical public routes', () => {
     const indexSource = readFileSync(resolve(__dirname, '..', 'index.html'), 'utf8');
 
     expect(indexSource).toContain('contact@mcc-cal.com');
+    expect(indexSource).toContain('"@type": "LocalBusiness"');
+    expect(indexSource).toContain('kgmid=/g/11krrndw6s');
     expect(indexSource).not.toContain('+1-412-XXX-XXXX');
+    expect(indexSource).not.toContain('"telephone"');
+    expect(indexSource).not.toContain('openingHoursSpecification');
   });
 });

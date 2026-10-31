@@ -1,0 +1,11 @@
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  max-width: var(--measure);
+}
+
+.prose p {
+  color: var(--muted);
+  text-wrap: pretty;
+}

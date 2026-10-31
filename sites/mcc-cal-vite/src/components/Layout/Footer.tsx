@@ -1,32 +1,18 @@
 import React, { useMemo } from 'react';
 import { FOOTER_NAV_SECTIONS } from '@/config/site-navigation';
+import { generatePhotographyProviderSchema } from '@/utils/jsonLd';
 
 const NEWSLETTER_ENDPOINT =
   import.meta.env.VITE_NEWSLETTER_ENDPOINT ||
   'https://mcc-cal.us14.list-manage.com/subscribe/post?u=da029ed85760894c33e8b119d&id=fb992a38c8&f_id=00cf8ae0f0';
-const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://mcc-cal.com').replace(/\/$/, '');
-const LOGO_PATH = '/brand/logo-mark.svg';
 
 const Footer: React.FC = () => {
   const year = useMemo(() => new Date().getFullYear(), []);
   const organizationSchema = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      '@id': `${SITE_URL}#organization`,
-      name: 'Caleb McCartney',
-      url: SITE_URL,
-      logo: `${SITE_URL}${LOGO_PATH}`,
-      sameAs: ['https://www.instagram.com/mcc_cal', 'https://www.facebook.com/mccalphotography'],
-      contactPoint: [
-        {
-          '@type': 'ContactPoint',
-          contactType: 'customer support',
-          email: 'contact@mcc-cal.com',
-          url: `mailto:contact@mcc-cal.com`,
-        },
-      ],
-    }),
+    () =>
+      generatePhotographyProviderSchema(
+        'Pittsburgh photography business led by Caleb McCartney for events, concerts, headshots, and commercial storytelling.',
+      ),
     [],
   );
 
@@ -47,7 +33,7 @@ const Footer: React.FC = () => {
                   aria-labelledby={headingId}
                   key={section.title}
                 >
-                  <h4 id={headingId}>{section.title}</h4>
+                  <h2 id={headingId}>{section.title}</h2>
                   <ul className="mcc-footer__list">
                     {section.links.map((link) => (
                       <li key={link.to}>
@@ -59,7 +45,7 @@ const Footer: React.FC = () => {
               );
             })}
             <section className="mcc-footer__section" aria-labelledby="footer-follow">
-              <h4 id="footer-follow">Follow</h4>
+              <h2 id="footer-follow">Follow</h2>
               <div className="mcc-footer__social">
                 <a
                   href="https://www.facebook.com/mccalphotography"

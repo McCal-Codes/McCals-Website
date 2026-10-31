@@ -1,6 +1,7 @@
 import { useCallback, useId, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import styles from './forms.module.css';
+import { trackFormError, trackLead } from '@/utils/funnel';
 
 const MIN_SUBMIT_DELAY_MS = 2500;
 const SUBJECT_OPTIONS = [
@@ -46,7 +47,7 @@ export function ContactForm() {
       setBanner(null);
 
       if (!consent) {
-        setBanner({ type: 'error', text: 'Please accept the privacy policy to continue.' });
+        setBanner({ type: 'error', text: 'Please accept the policies & legal information to continue.' });
         return;
       }
 
@@ -74,6 +75,7 @@ export function ContactForm() {
         const data = (await res.json().catch(() => ({}))) as { error?: string };
 
         if (!res.ok) {
+          trackFormError('contact', String(res.status));
           setBanner({
             type: 'error',
             text: data.error || 'Something went wrong. Please try again.',
@@ -81,12 +83,14 @@ export function ContactForm() {
           return;
         }
 
+        trackLead('contact', { subject: subject.trim().slice(0, 60) });
         setBanner({
           type: 'success',
           text: "Thanks, your message is on its way. We'll get back to you soon.",
         });
         reset();
       } catch {
+        trackFormError('contact', 'network');
         setBanner({
           type: 'error',
           text: 'Network error. Try again or email contact@mcc-cal.com.',
@@ -226,10 +230,14 @@ export function ContactForm() {
             />
             <span>
               I agree to the{' '}
-              <Link to="/policies-legal" className={styles.privacyLink}>
-                policies &amp; legal information
+              <Link to="/privacy" className={styles.privacyLink}>
+                privacy policy
               </Link>{' '}
-              and consent to being contacted about this inquiry.{' '}
+              and{' '}
+              <Link to="/terms" className={styles.privacyLink}>
+                terms
+              </Link>
+              , and consent to being contacted about this inquiry.{' '}
               <span className={styles.required}>*</span>
             </span>
           </label>

@@ -13,25 +13,12 @@ const PROJECTS = [
     title: 'Letting Me Go',
     desc: 'BFA thesis work on campaign-trail photography, political anxiety, shadow, and polarization.',
   },
-  {
-    to: '/terranova',
-    label: 'Tooling',
-    title: 'TerraNova',
-    desc: 'A terrain generation studio for Hytale, focused on procedural systems and creator tooling.',
-  },
-  {
-    to: '/roadmap',
-    label: 'Notes',
-    title: 'Roadmap',
-    desc: 'A public view of what is being built, refined, and considered next for the site and studio.',
-  },
 ];
 
 const ProjectsPage = () => {
   usePageMeta({
     title: 'Projects | Caleb McCartney',
-    description:
-      'Artwork, tools, apps, and design work by Caleb McCartney, including Letting Me Go, TerraNova, and the site roadmap.',
+    description: 'Artwork, tools, apps, and design work by Caleb McCartney, including Letting Me Go.',
     canonical: `${SITE_URL}/projects`,
     og: {
       type: 'website',
@@ -66,8 +53,7 @@ const ProjectsPage = () => {
           <p className={styles.eyebrow}>Projects</p>
           <h1>Artwork, tools, and experiments.</h1>
           <p>
-            A small index of public work outside the main photography galleries, including thesis
-            projects, creator tooling, and notes on what is being built next.
+            A small index of public work outside the main photography galleries.
           </p>
         </header>
 

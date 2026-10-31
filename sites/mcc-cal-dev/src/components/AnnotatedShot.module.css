@@ -1,0 +1,58 @@
+.figure {
+  margin: 2rem 0 0;
+}
+
+.stage {
+  position: relative;
+}
+
+.marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.6rem;
+  height: 1.6rem;
+  padding: 0 0.35rem;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-family: var(--font-mono);
+  font-size: var(--step-meta);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.caption {
+  margin-top: 1.25rem;
+}
+
+.captionText {
+  max-width: var(--measure);
+  font-size: var(--step-small);
+  color: var(--muted);
+}
+
+.callouts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0.5rem 1.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: var(--rule);
+}
+
+.callout {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.calloutIndex {
+  color: var(--accent);
+}
+
+.calloutLabel {
+  font-size: var(--step-small);
+  color: var(--text);
+}
