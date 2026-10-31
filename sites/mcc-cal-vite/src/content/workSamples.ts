@@ -291,9 +291,9 @@ export const workSampleSections: WorkSampleSection[] = [
     "items": [
       {
         "src": "/images/work-samples/sports-01.jpg",
-        "width": 1800,
-        "height": 1200,
-        "caption": "Point Park University and Fisher players fight for a loose ball during a men's basketball game on Nov. 3, 2023.",
+        "width": 1201,
+        "height": 1800,
+        "caption": "A Point Park University player dunks during a men's basketball game against Fisher on Nov. 3, 2023.",
         "credit": "Photo by Caleb McCartney"
       },
       {
