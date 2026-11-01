@@ -2,402 +2,255 @@ import { lazy, Suspense, useCallback, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import OptimizedImage from '@/components/OptimizedImage';
 import { useManifest, imageUrl } from '../portfolio/useManifest';
-import { generateId } from '@/utils/portfolio-ids';
+import { trackImageView } from '@/utils/funnel';
 import type { PortfolioGroup } from '../portfolio/types';
-import PortfolioGrid from '../portfolio/PortfolioGrid';
-import PortfolioFilters from '../portfolio/PortfolioFilters';
 import { portfolioStyles } from '../portfolio';
 import ProtectedPortfolioImage from '../portfolio/ProtectedPortfolioImage';
+// Shared with scripts/generate-route-meta.js, which emits a preload for the lead
+// frame. A preload built from different widths or sizes than the img uses makes
+// the browser fetch a second image it never displays.
+import {
+  WIDE_SRCSET_WIDTHS,
+  PAIR_SRCSET_WIDTHS,
+  WIDE_SIZES,
+  PAIR_SIZES,
+  LEAD_OPTIMIZED_WIDTH,
+  WIDE_MIN_SOURCE_WIDTH,
+} from '@/config/selected-work-image';
 
 const PortfolioLightbox = lazy(() => import('../portfolio/PortfolioLightbox'));
 
-interface FeaturedImage {
-  filename?: string;
-  caption?: string;
-  description?: string;
-  path?: string;
-  tags?: string[];
-}
+/**
+ * /featured-work is a selected-work page: one hand-picked photograph per entry,
+ * in the order scripts/manifest/featured-curation.json lists them. It used to
+ * show twelve albums, which read as a catalogue of assignments rather than an
+ * edit. The galleries are still the albums; this page is the singles.
+ *
+ * Every frame arrives from the manifest already resolved: one canonical path,
+ * an authored caption, and intrinsic width and height. So there is no path
+ * sniffing here and no date reformatting, both of which the previous version
+ * did and both of which it got wrong.
+ */
 
-interface FeaturedMetadata {
-  caption?: string;
-  description?: string;
-  date?: string;
-}
-
-interface FeaturedDate {
-  iso?: string;
-}
-
-interface FeaturedItem {
+interface FeaturedFrame {
+  path: string;
   title?: string;
-  name?: string;
-  bandName?: string;
-  eventName?: string;
-  category: string;
-  type?: string;
-  folderPath?: string;
-  relativeFolderPath?: string;
+  caption?: string;
+  alt?: string;
+  date: string;
   dateDisplay?: string;
-  dateISO?: string;
-  concertDate?: FeaturedDate;
-  eventDate?: FeaturedDate;
-  date?: FeaturedDate;
-  metadata?: FeaturedMetadata;
-  coverImage?: string | FeaturedImage;
-  featuredRank?: number;
-  featuredDescription?: string;
-  featuredCover?: string;
-  sourcePath?: string;
-  published?: boolean;
-  tags?: string[];
-  images: (string | FeaturedImage)[];
+  category?: string;
+  album?: string;
+  width: number;
+  height: number;
 }
 
 interface FeaturedManifest {
-  items: FeaturedItem[];
-  categories?: string[];
+  frames: FeaturedFrame[];
+  total?: number;
 }
 
-function formatDisplayDate(dateISO?: string): string | undefined {
-  if (!dateISO) return undefined;
+/** A row is one full-width frame, or two side by side. */
+type Row =
+  { variant: 'wide'; frames: PreparedFrame[] } | { variant: 'pair'; frames: PreparedFrame[] };
 
-  const parts = dateISO.split('-');
-  if (parts.length === 3) {
-    const [year, month, day] = parts.map(Number);
-    return new Intl.DateTimeFormat('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-      timeZone: 'UTC',
-    }).format(new Date(Date.UTC(year, month - 1, day)));
-  }
-
-  if (parts.length === 2) {
-    const [year, month] = parts.map(Number);
-    return new Intl.DateTimeFormat('en-US', {
-      month: 'long',
-      year: 'numeric',
-      timeZone: 'UTC',
-    }).format(new Date(Date.UTC(year, month - 1, 1)));
-  }
-
-  return dateISO;
+interface PreparedFrame extends FeaturedFrame {
+  id: string;
+  url: string;
+  group: PortfolioGroup;
 }
 
-function resolveTitle(item: FeaturedItem): string {
-  return (
-    item.title ??
-    item.bandName ??
-    item.eventName ??
-    item.name ??
-    item.relativeFolderPath?.split('/').pop() ??
-    item.folderPath?.split('/').pop() ??
-    'Untitled'
-  );
+function frameId(path: string): string {
+  // The path is already unique per frame, and stable across rebuilds, so it is
+  // a better id than a title slug: two frames can share a title, as the three
+  // Cynthiana frames do.
+  return path
+    .replace(/[^a-zA-Z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .toLowerCase();
 }
 
-function resolveDateISO(item: FeaturedItem): string | undefined {
-  return item.dateISO ?? item.concertDate?.iso ?? item.eventDate?.iso ?? item.date?.iso ?? item.metadata?.date;
+function frameUrl(path: string): string {
+  const lastSlash = path.lastIndexOf('/');
+  const folder = lastSlash === -1 ? '' : path.slice(0, lastSlash);
+  const filename = lastSlash === -1 ? path : path.slice(lastSlash + 1);
+  return imageUrl.featured(folder, filename);
 }
 
-function resolveDateDisplay(item: FeaturedItem, dateISO?: string): string | undefined {
-  if (item.dateDisplay && !/undefined/i.test(item.dateDisplay)) {
-    return item.dateDisplay;
-  }
-
-  return formatDisplayDate(dateISO);
+function albumLabel(album: string): string {
+  if (album === '/journalism') return 'Photojournalism';
+  if (album === '/concerts') return 'Concerts';
+  if (album === '/events') return 'Events';
+  if (album === '/portraits') return 'Portraits';
+  if (album === '/nature') return 'Nature';
+  return 'Portfolio';
 }
 
-function resolveFilename(image: string | FeaturedImage): string {
-  if (typeof image === 'string') return image;
-  return image.filename ?? image.path?.split('/').pop() ?? '';
-}
-
-function resolveImageUrl(item: FeaturedItem, image: string | FeaturedImage, filename: string): string {
-  if (typeof image === 'object' && image.path?.startsWith('src/images/')) {
-    return imageUrl.event(image.path);
-  }
-
-  const itemType = item.type ?? '';
-  if (itemType === 'Journalism' || item.category === 'Journalism Photography') {
-    return imageUrl.journalism(item.folderPath ?? '', filename);
-  }
-
-  if (itemType === 'Concert' || item.category === 'Concert Photography') {
-    return imageUrl.concert(item.relativeFolderPath ?? `Concert/${item.folderPath ?? ''}`, filename);
-  }
-
-  return imageUrl.featured(item.relativeFolderPath ?? item.folderPath ?? '', filename);
-}
-
-function normaliseImage(
-  item: FeaturedItem,
-  image: string | FeaturedImage,
-  title: string,
-  fallback?: FeaturedMetadata,
-) {
-  const filename = resolveFilename(image);
-  const metadata = typeof image === 'object' ? image : undefined;
-  const caption = metadata?.caption ?? fallback?.caption;
-  const description = metadata?.description ?? fallback?.description;
-
-  return {
-    url: resolveImageUrl(item, image, filename),
-    filename,
-    caption,
-    description,
-    alt: caption ?? description ?? `${title} - ${filename}`,
-  };
-}
-
-function normalise(items: FeaturedItem[]): PortfolioGroup[] {
-  return items.map((item) => {
-    const title = resolveTitle(item);
-    const dateISO = resolveDateISO(item);
-    const images = item.images.map((image) => normaliseImage(item, image, title));
-    const coverSource = item.coverImage ?? item.images[0];
-    const coverImage = coverSource
-      ? normaliseImage(item, coverSource, title, item.metadata)
-      : images[0];
+function prepare(frames: FeaturedFrame[]): PreparedFrame[] {
+  return frames.map((frame) => {
+    const id = frameId(frame.path);
+    const url = frameUrl(frame.path);
+    const title = frame.title || 'Selected work';
+    const image = {
+      url,
+      filename: frame.path.split('/').pop() ?? frame.path,
+      caption: frame.caption || undefined,
+      // The lightbox renders alt on its own img. An empty alt there would strand
+      // a screen reader with no description at all, because the lightbox has no
+      // figcaption beside the image the way this page does.
+      alt: frame.alt || frame.caption || title,
+    };
 
     return {
-      id: generateId(title, dateISO),
-      title,
-      dateDisplay: resolveDateDisplay(item, dateISO),
-      dateISO,
-      category: item.category,
-      tags: item.tags,
-      featuredRank: item.featuredRank,
-      featuredDescription: item.featuredDescription,
-      featuredCover: item.featuredCover,
-      sourcePath: item.sourcePath ?? item.relativeFolderPath ?? item.folderPath,
-      published: item.published ?? false,
-      images,
-      coverImage,
+      ...frame,
+      id,
+      url,
+      group: {
+        id,
+        title,
+        dateDisplay: frame.dateDisplay,
+        dateISO: frame.date,
+        category: frame.category,
+        images: [image],
+        coverImage: image,
+      },
     };
   });
 }
 
-const ALL = 'All';
+/**
+ * One wide frame, then two paired, repeating, in the curated order. An odd frame
+ * left at the end becomes a wide row rather than a lonely half-width one.
+ *
+ * A frame is only given a wide row if it has the pixels for one. When the frame
+ * due a wide row is narrower than WIDE_MIN_SOURCE_WIDTH it is paired with the next
+ * frame instead, and the wide row passes to the frame after that. The sequence is
+ * never reordered: which photograph follows which is the curator's decision, and
+ * the layout adapts around it.
+ */
+function toRows(frames: PreparedFrame[]): Row[] {
+  const rows: Row[] = [];
+  let index = 0;
+  let wide = true;
 
-interface ActiveLightbox {
-  group: PortfolioGroup;
-  initialIndex: number;
-}
-const FILTER_ORDER = ['Concert', 'Events', 'Journalism'];
-
-function shortCategory(cat: string) {
-  return cat.replace(' Photography', '');
-}
-
-function compareFeaturedGroups(a: PortfolioGroup, b: PortfolioGroup) {
-  const dateDelta = getFeaturedTimestamp(b) - getFeaturedTimestamp(a);
-  if (dateDelta !== 0) {
-    return dateDelta;
-  }
-
-  const aRank = a.featuredRank ?? Number.POSITIVE_INFINITY;
-  const bRank = b.featuredRank ?? Number.POSITIVE_INFINITY;
-
-  if (aRank !== bRank) {
-    return aRank - bRank;
-  }
-
-  return a.title.localeCompare(b.title);
-}
-
-function getFeaturedTimestamp(group: PortfolioGroup): number {
-  const timestamp = Date.parse(group.dateISO ?? '');
-  if (!Number.isNaN(timestamp)) {
-    return timestamp;
-  }
-
-  return 0;
-}
-
-function getFeaturedStories(groups: PortfolioGroup[], activeFilter: string): PortfolioGroup[] {
-  if (activeFilter !== ALL) {
-    return groups.slice(0, 3);
-  }
-
-  const [lead] = groups;
-  if (!lead) {
-    return [];
-  }
-
-  const selected = [lead];
-  const selectedIds = new Set([lead.id]);
-  const leadCategory = shortCategory(lead.category ?? '');
-
-  for (const category of FILTER_ORDER) {
-    if (category === leadCategory) continue;
-
-    const story = groups.find(
-      (group) => !selectedIds.has(group.id) && shortCategory(group.category ?? '') === category,
-    );
-
-    if (story) {
-      selected.push(story);
-      selectedIds.add(story.id);
+  while (index < frames.length) {
+    const hasPartner = index + 1 < frames.length;
+    if (wide && frames[index].width < WIDE_MIN_SOURCE_WIDTH && hasPartner) {
+      rows.push({ variant: 'pair', frames: [frames[index], frames[index + 1]] });
+      index += 2;
+      // The pair took this turn, so the next row is wide.
+      continue;
     }
-
-    if (selected.length === 3) {
-      return selected;
+    if (wide) {
+      rows.push({ variant: 'wide', frames: [frames[index]] });
+      index += 1;
+    } else {
+      const pair = frames.slice(index, index + 2);
+      rows.push(
+        pair.length === 1 ? { variant: 'wide', frames: pair } : { variant: 'pair', frames: pair },
+      );
+      index += pair.length;
     }
+    wide = !wide;
   }
 
-  for (const group of groups) {
-    if (!selectedIds.has(group.id)) {
-      selected.push(group);
-      selectedIds.add(group.id);
-    }
-
-    if (selected.length === 3) {
-      break;
-    }
-  }
-
-  return selected;
+  return rows;
 }
 
-function categoryRoute(category?: string) {
-  const short = shortCategory(category ?? '');
-
-  if (short === 'Concert') return '/concerts';
-  if (short === 'Events') return '/events';
-  if (short === 'Journalism') return '/journalism';
-
-  return '/featured-work';
+interface SelectedFigureProps {
+  frame: PreparedFrame;
+  variant: 'wide' | 'pair';
+  priority: boolean;
+  onOpen: (frame: PreparedFrame) => void;
 }
 
-function categoryLabel(category?: string) {
-  const label = shortCategory(category ?? 'Portfolio');
-  return label === 'Journalism' ? 'Photojournalism' : label;
-}
-
-function filterDisplayLabel(filter: string) {
-  return filter === 'Journalism' ? 'photojournalism' : filter.toLowerCase();
-}
-
-interface FeaturedStoryCardProps {
-  group: PortfolioGroup;
-  variant: 'lead' | 'support';
-  onOpen: (group: PortfolioGroup) => void;
-  loading?: 'eager' | 'lazy';
-}
-
-function FeaturedStoryCard({
-  group,
-  variant,
-  onOpen,
-  loading = 'lazy',
-}: FeaturedStoryCardProps) {
-  const label = categoryLabel(group.category);
-  const description = group.featuredDescription ?? group.coverImage.caption;
+function SelectedFigure({ frame, variant, priority, onOpen }: SelectedFigureProps) {
+  const captionId = `${frame.id}-caption`;
+  // Keeps a portrait frame from being crushed when it sits beside a landscape one.
+  const portrait = frame.height > frame.width;
 
   return (
-    <article className={`${portfolioStyles.pfFeaturedStory} ${variant === 'lead' ? portfolioStyles.pfFeaturedStoryLead : portfolioStyles.pfFeaturedStorySupport}`}>
+    <figure
+      className={[
+        portfolioStyles.pfSelectedFigure,
+        variant === 'wide'
+          ? portfolioStyles.pfSelectedFigureWide
+          : portfolioStyles.pfSelectedFigurePair,
+        portrait ? portfolioStyles.pfSelectedFigurePortrait : '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
+      role="group"
+      aria-labelledby={captionId}
+    >
       <button
         type="button"
-        className={portfolioStyles.pfFeaturedStoryImageButton}
-        aria-label={`Open ${group.title} gallery`}
-        onClick={() => onOpen(group)}
+        className={portfolioStyles.pfSelectedImageButton}
+        // Never wider than the photograph itself, so a frame that ends up in a row
+        // wider than its pixels is shown at its own size rather than enlarged.
+        style={{ maxWidth: `${frame.width}px` }}
+        aria-label={`Open ${frame.title || 'this photograph'} larger`}
+        onClick={() => onOpen(frame)}
       >
-        <ProtectedPortfolioImage className={portfolioStyles.pfFeaturedStoryProtectedImage}>
+        <ProtectedPortfolioImage className={portfolioStyles.pfSelectedProtectedImage}>
           <OptimizedImage
-            src={group.coverImage.url}
-            alt={group.coverImage.alt ?? group.title}
-            frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfFeaturedStoryImageFrame}`}
-            imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfFeaturedStoryImage}`}
-            loading={loading}
-            decoding="async"
-            optimizedWidth={variant === 'lead' ? 1280 : 720}
-            srcSetWidths={variant === 'lead' ? [640, 960, 1280, 1600] : [360, 540, 720, 960]}
-            sizes={variant === 'lead' ? '(max-width: 980px) calc(100vw - 40px), 58vw' : '(max-width: 980px) calc(100vw - 40px), 28vw'}
-            width={variant === 'lead' ? 980 : 460}
-            height={variant === 'lead' ? 620 : 310}
+            src={frame.url}
+            // Empty by default. The caption is right below the photograph, and the
+            // W3C alt decision tree says to use an empty alt when the image would
+            // only repeat text already beside it. A per-frame alt in the curation
+            // file overrides this when the picture needs describing further.
+            alt={frame.alt ?? ''}
+            frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfSelectedImageFrame}`}
+            imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfSelectedImage}`}
+            loading={priority ? 'eager' : 'lazy'}
+            fetchPriority={priority ? 'high' : undefined}
+            decoding={priority ? 'sync' : 'async'}
+            optimizedWidth={variant === 'wide' ? LEAD_OPTIMIZED_WIDTH : 960}
+            srcSetWidths={[...(variant === 'wide' ? WIDE_SRCSET_WIDTHS : PAIR_SRCSET_WIDTHS)]}
+            sizes={variant === 'wide' ? WIDE_SIZES : PAIR_SIZES}
+            width={frame.width}
+            height={frame.height}
             draggable={false}
           />
         </ProtectedPortfolioImage>
       </button>
 
-      <div className={portfolioStyles.pfFeaturedStoryCopy}>
-        <p className={portfolioStyles.pfFeaturedStoryMeta}>
-          <span>{label}</span>
-          {group.dateDisplay && <span>{group.dateDisplay}</span>}
+      <figcaption className={portfolioStyles.pfSelectedCaption} id={captionId}>
+        {frame.caption && <p className={portfolioStyles.pfSelectedCaptionText}>{frame.caption}</p>}
+        <p className={portfolioStyles.pfSelectedCaptionMeta}>
+          {frame.dateDisplay && <span>{frame.dateDisplay}</span>}
+          {frame.album && (
+            <Link className={portfolioStyles.pfSelectedCaptionLink} to={frame.album}>
+              {albumLabel(frame.album)}
+            </Link>
+          )}
         </p>
-        <h3 className={portfolioStyles.pfFeaturedStoryTitle}>{group.title}</h3>
-        {description && (
-          <p className={portfolioStyles.pfFeaturedStoryDescription}>{description}</p>
-        )}
-        <div className={portfolioStyles.pfFeaturedStoryActions}>
-          <button
-            type="button"
-            className={portfolioStyles.pfFeaturedStoryButton}
-            onClick={() => onOpen(group)}
-          >
-            Open Gallery
-          </button>
-          <Link className={portfolioStyles.pfFeaturedStoryLink} to={categoryRoute(group.category)}>
-            View {label}
-          </Link>
-        </div>
-      </div>
-    </article>
+      </figcaption>
+    </figure>
   );
 }
 
 export default function FeaturedPortfolio() {
   const { data, status, error } = useManifest<FeaturedManifest>('featured');
-  const [activeFilter, setActiveFilter] = useState(ALL);
-  const [activeLightbox, setActiveLightbox] = useState<ActiveLightbox | null>(null);
+  const [activeLightbox, setActiveLightbox] = useState<{
+    group: PortfolioGroup;
+    initialIndex: number;
+  } | null>(null);
   const openerRef = useRef<HTMLElement | null>(null);
 
-  const groups = useMemo(() => {
-    if (!data?.items) return [];
-    return normalise(data.items).sort(compareFeaturedGroups);
-  }, [data]);
+  // A manifest that loaded but has no frames[] is not an empty selection. It is a
+  // document in another shape, such as the albums-shaped manifest this page used
+  // to read, and saying "no photographs are selected" about it would be false.
+  const unreadable = status === 'success' && !Array.isArray(data?.frames);
+  const frames = useMemo(() => (Array.isArray(data?.frames) ? prepare(data.frames) : []), [data]);
+  const rows = useMemo(() => toRows(frames), [frames]);
+  const groups = useMemo(() => frames.map((frame) => frame.group), [frames]);
 
-  const filters = useMemo(() => {
-    if (!groups.length) return [];
-    const cats = new Set(groups.map((g) => shortCategory(g.category ?? '')).filter(Boolean));
-    const ordered = FILTER_ORDER.filter((category) => cats.has(category));
-    const remaining = Array.from(cats)
-      .filter((category) => !FILTER_ORDER.includes(category))
-      .sort();
-
-    return [ALL, ...ordered, ...remaining];
-  }, [groups]);
-
-  const filtered = useMemo(() => {
-    if (activeFilter === ALL) return groups;
-    return groups.filter((g) => shortCategory(g.category ?? '') === activeFilter);
-  }, [groups, activeFilter]);
-
-  const featuredStories = getFeaturedStories(filtered, activeFilter);
-  const featuredStoryIds = new Set(featuredStories.map((group) => group.id));
-  const gridGroups = filtered.filter((group) => !featuredStoryIds.has(group.id));
-
-  const categorySummaries = useMemo(() => {
-    const categories = ['Concert', 'Events', 'Journalism'];
-
-    return categories.map((category) => {
-      const categoryGroups = groups.filter((group) => shortCategory(group.category ?? '') === category);
-      const photoCount = categoryGroups.reduce((sum, group) => sum + group.images.length, 0);
-
-      return {
-        category,
-        groups: categoryGroups.length,
-        photos: photoCount,
-        href: categoryRoute(`${category} Photography`),
-      };
-    });
-  }, [groups]);
-
-  const handleOpen = useCallback((group: PortfolioGroup) => {
-    openerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    setActiveLightbox({ group, initialIndex: 0 });
+  const handleOpen = useCallback((frame: PreparedFrame) => {
+    openerRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    trackImageView('featured-work', frame.id);
+    setActiveLightbox({ group: frame.group, initialIndex: 0 });
   }, []);
 
   const handleClose = useCallback(() => {
@@ -410,95 +263,78 @@ export default function FeaturedPortfolio() {
   }, []);
 
   return (
-    <div className={`${portfolioStyles.pfRoot} ${portfolioStyles.pfFeaturedRoot}`}>
-      <header className={portfolioStyles.pfFeaturedHeader}>
-        <div className={portfolioStyles.pfFeaturedHeaderCopy}>
-          <p className={portfolioStyles.pfFeaturedDeck}>Latest Curated Edit</p>
-          <h1 className={portfolioStyles.pfHeading}>Featured Work</h1>
-          <p className={portfolioStyles.pfSubheading}>
-            Recent concert, event, and photojournalism work, edited for range, pace, and the moments that hold up.
-          </p>
-        </div>
-
-        {groups.length > 0 && (
-          <div className={portfolioStyles.pfFeaturedStats} aria-label="Featured portfolio summary">
-            {categorySummaries.map((summary) => (
-              <Link key={summary.category} className={portfolioStyles.pfFeaturedStat} to={summary.href}>
-                <span className={portfolioStyles.pfFeaturedStatValue}>{summary.groups}</span>
-                <span className={portfolioStyles.pfFeaturedStatLabel}>{summary.category}</span>
-                <span className={portfolioStyles.pfFeaturedStatMeta}>{summary.photos} photos</span>
-              </Link>
-            ))}
-          </div>
-        )}
+    <div className={`${portfolioStyles.pfRoot} ${portfolioStyles.pfSelectedRoot}`}>
+      <header className={portfolioStyles.pfSelectedHeader}>
+        <h1 className={portfolioStyles.pfHeading}>Selected Work</h1>
+        <p className={portfolioStyles.pfSubheading}>
+          Individual photographs, chosen one at a time. Each one links back to the gallery it came
+          from.
+        </p>
       </header>
 
       {status === 'loading' && (
         <div className={portfolioStyles.pfLoading}>
           <span className={portfolioStyles.pfSpinner} />
-          Loading featured work…
+          Loading selected work…
         </div>
       )}
 
-      {status === 'error' && (
-        <div className={portfolioStyles.pfError}>
-          <span>Failed to load portfolio.</span>
-          <span style={{ fontSize: '0.82rem', opacity: 0.7 }}>{error}</span>
+      {(status === 'error' || unreadable) && (
+        <div className={portfolioStyles.pfSelectedError} role="alert">
+          <p className={portfolioStyles.pfSelectedErrorTitle}>
+            The selected work could not be loaded.
+          </p>
+          <p className={portfolioStyles.pfSelectedErrorBody}>
+            {unreadable
+              ? 'This page was updated since your browser last loaded it. Try again to load the current selection.'
+              : (error ?? 'The manifest did not load.')}
+          </p>
+          <div className={portfolioStyles.pfSelectedErrorActions}>
+            <button
+              type="button"
+              className={portfolioStyles.pfSelectedErrorButton}
+              onClick={() => window.location.reload()}
+            >
+              Try again
+            </button>
+            <Link className={portfolioStyles.pfSelectedCaptionLink} to="/journalism">
+              Browse photojournalism
+            </Link>
+          </div>
         </div>
       )}
 
-      {status === 'success' && (
-        <>
-          {featuredStories.length > 0 && (
-            <section className={portfolioStyles.pfFeaturedEditorial} aria-label="Featured portfolio highlights">
-              <FeaturedStoryCard
-                group={featuredStories[0]}
-                variant="lead"
-                loading="eager"
-                onOpen={handleOpen}
-              />
-              {featuredStories.length > 1 && (
-                <div className={portfolioStyles.pfFeaturedSupportStack}>
-                  {featuredStories.slice(1).map((group) => (
-                    <FeaturedStoryCard
-                      key={group.id}
-                      group={group}
-                      variant="support"
-                      loading="eager"
-                      onOpen={handleOpen}
-                    />
-                  ))}
-                </div>
-              )}
-            </section>
-          )}
-
-          <PortfolioFilters
-            filters={filters}
-            active={activeFilter}
-            onChange={setActiveFilter}
-          />
-          {gridGroups.length > 0 && (
-            <PortfolioGrid
-              groups={gridGroups}
-              initialCount={9}
-              batchSize={6}
-              wideInitialCount={12}
-              gridClassName={portfolioStyles.pfFeaturedGrid}
-              cardImageSizes="(max-width: 600px) calc(100vw - 40px), (max-width: 980px) 50vw, 31vw"
-              eagerCount={3}
-            />
-          )}
-
-          {activeFilter !== ALL && gridGroups.length === 0 && (
-            <div className={portfolioStyles.pfFeaturedCategoryNote}>
-              <p>That is the full curated {filterDisplayLabel(activeFilter)} edit.</p>
-              <Link to={categoryRoute(`${activeFilter} Photography`)}>
-                View the full {filterDisplayLabel(activeFilter)} portfolio
-              </Link>
+      {status === 'success' && frames.length > 0 && (
+        <div className={portfolioStyles.pfSelectedSequence}>
+          {rows.map((row, rowIndex) => (
+            <div
+              key={row.frames[0].id}
+              className={
+                row.variant === 'wide'
+                  ? portfolioStyles.pfSelectedRowWide
+                  : portfolioStyles.pfSelectedRowPair
+              }
+            >
+              {row.frames.map((frame) => (
+                <SelectedFigure
+                  key={frame.id}
+                  frame={frame}
+                  variant={row.variant}
+                  // Only the first photograph. Everything below the fold stays lazy,
+                  // so the LCP image is the one the browser fetches first.
+                  priority={rowIndex === 0}
+                  onOpen={handleOpen}
+                />
+              ))}
             </div>
-          )}
-        </>
+          ))}
+        </div>
+      )}
+
+      {status === 'success' && !unreadable && frames.length === 0 && (
+        <p className={portfolioStyles.pfSelectedEmpty}>
+          No photographs are selected yet. Add frames to scripts/manifest/featured-curation.json.
+        </p>
       )}
 
       {activeLightbox && (
@@ -506,7 +342,7 @@ export default function FeaturedPortfolio() {
           <PortfolioLightbox
             key={`${activeLightbox.group.id}-${activeLightbox.initialIndex}`}
             group={activeLightbox.group}
-            collection={filtered}
+            collection={groups}
             initialIndex={activeLightbox.initialIndex}
             onChangeGroup={handleLightboxGroupChange}
             onClose={handleClose}

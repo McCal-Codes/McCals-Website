@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import type { UseManifestResult } from './types';
+import { repoCdnBase } from '@/config/repo-cdn';
 import { fetchSupabaseJournalismEvents, mergeJournalismEvents } from './journalismSupabaseSource';
 import { fetchSupabaseNatureCollections, mergeNatureCollections } from './natureSupabaseSource';
 
-const REPO_CDN_BASE = 'https://cdn.jsdelivr.net/gh/McCal-Codes/McCals-Website@main';
+// `main` in production, the deployment's own commit in a preview. See repo-cdn.js.
+const REPO_CDN_BASE = repoCdnBase(import.meta.env);
 const PORTFOLIOS_BASE = 'src/images/Portfolios';
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes, matching widget behaviour
 const MANIFEST_FILE_MAP: Record<string, string> = {
@@ -18,6 +20,28 @@ const MANIFEST_FILE_MAP: Record<string, string> = {
   portraits: 'portrait-manifest.json',
   featured: 'featured-manifest.json',
   universal: 'portfolio-manifest.json',
+};
+
+/**
+ * Bumped when a manifest's shape changes incompatibly, so a returning visitor's
+ * browser cannot hand new code a document in the old shape.
+ *
+ * vercel.json serves /manifests/* with max-age=300 and stale-while-revalidate
+ * of a day, so for up to a day after a deploy a browser that loaded a page
+ * earlier answers the new bundle with its cached copy. The query string is part
+ * of the cache key, so a new version is a new url that nothing stale can match,
+ * while bundles still in the wild keep requesting the url they expect. The
+ * static file server ignores the parameter.
+ *
+ * Keep each number equal to the major `version` its generator writes; a test
+ * reads the committed manifest and fails when they differ.
+ *
+ * featured 3: /featured-work moved from items[] of albums to frames[] of single
+ * photographs, and the new page read a cached items[] document as an empty
+ * selection.
+ */
+const MANIFEST_SCHEMA_VERSION: Record<string, number> = {
+  featured: 3,
 };
 
 interface CacheEntry<T> {
@@ -52,6 +76,15 @@ function getManifestFile(type: string): string | undefined {
   return MANIFEST_FILE_MAP[type.toLowerCase()];
 }
 
+/** The static url for a manifest type, versioned where its schema is. */
+export function getStaticManifestUrl(type: string): string | undefined {
+  const file = getManifestFile(type);
+  if (!file) return undefined;
+
+  const version = MANIFEST_SCHEMA_VERSION[type.toLowerCase()];
+  return version ? `/manifests/${file}?v=${version}` : `/manifests/${file}`;
+}
+
 async function parseJsonResponse<T>(response: Response, source: string): Promise<T> {
   const text = await response.text();
 
@@ -67,11 +100,10 @@ async function parseJsonResponse<T>(response: Response, source: string): Promise
 }
 
 async function fetchStaticManifestJson<T>(
-  staticFile: string,
+  staticUrl: string,
   signal: AbortSignal,
   apiError?: unknown,
 ): Promise<T> {
-  const staticUrl = `/manifests/${staticFile}`;
   const response = await fetch(staticUrl, {
     signal,
     headers: {
@@ -172,10 +204,7 @@ async function applySupabaseMerge<T, Row>(
  * A gallery absent from this table simply renders its static manifest, which is
  * what makes adding one a contained change.
  */
-const SUPABASE_MERGES: Record<
-  string,
-  <T>(staticData: T, signal: AbortSignal) => Promise<T>
-> = {
+const SUPABASE_MERGES: Record<string, <T>(staticData: T, signal: AbortSignal) => Promise<T>> = {
   journalism: (staticData, signal) =>
     applySupabaseMerge(
       {
@@ -236,10 +265,10 @@ async function enhanceManifest<T>(
 
 async function fetchManifestJson<T>(type: string, signal: AbortSignal): Promise<T> {
   const apiUrl = `/api/manifests/${type}`;
-  const staticFile = getManifestFile(type);
+  const staticUrl = getStaticManifestUrl(type);
 
-  if (staticFile) {
-    return fetchStaticManifestJson<T>(staticFile, signal);
+  if (staticUrl) {
+    return fetchStaticManifestJson<T>(staticUrl, signal);
   }
 
   let apiError: unknown;
@@ -261,11 +290,11 @@ async function fetchManifestJson<T>(type: string, signal: AbortSignal): Promise<
     apiError = error;
   }
 
-  if (!staticFile) {
+  if (!staticUrl) {
     throw apiError instanceof Error ? apiError : new Error('Unknown manifest error');
   }
 
-  return fetchStaticManifestJson<T>(staticFile, signal, apiError);
+  return fetchStaticManifestJson<T>(staticUrl, signal, apiError);
 }
 
 /**
