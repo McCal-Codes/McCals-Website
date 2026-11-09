@@ -189,6 +189,17 @@ const HIDDEN_ROUTES = [
     imagePath: '/images/work-samples/news-11.jpg',
     imageAlt: 'Former President Barack Obama reaches toward supporters at a rally in Pittsburgh.',
   },
+  {
+    // Shared by link for applications. A shorter edit of /work-samples.
+    route: '/selected-work',
+    title: 'Selected Photojournalism | Caleb McCartney',
+    description: 'Seventeen selected photographs by Caleb McCartney, 2024 to 2026.',
+    robots: 'noindex, nofollow',
+    ogTitle: 'Selected Photojournalism',
+    ogDescription: 'Seventeen selected photographs by Caleb McCartney, 2024 to 2026.',
+    imagePath: '/images/work-samples/news-11.jpg',
+    imageAlt: 'Former President Barack Obama reaches toward supporters at a rally in Pittsburgh.',
+  },
 ];
 
 /**
