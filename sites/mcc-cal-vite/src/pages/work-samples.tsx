@@ -24,7 +24,7 @@ const WorkSamplesPage = () => {
   usePageMeta({
     title: 'Photojournalism Work Samples | Caleb McCartney',
     description:
-      'Selected photojournalism by Caleb McCartney, 2024 to 2026: news, features, civic life and sports in western Pennsylvania.',
+      'Selected photojournalism by Caleb McCartney, 2023 to 2026: news, features, civic life and sports in western Pennsylvania.',
     canonical: `${SITE_URL}/work-samples`,
     robots: 'noindex, nofollow',
   });
@@ -40,7 +40,7 @@ const WorkSamplesPage = () => {
       <div className={styles.page}>
         <header className={styles.hero}>
           <p className={styles.eyebrow}>Work samples</p>
-          <h1>Photojournalism, 2024 to 2026.</h1>
+          <h1>Photojournalism, 2023 to 2026.</h1>
           <p>
             I&apos;m a photojournalist in Pittsburgh. I cover politics, public affairs, community news
             and sports. My photographs have run in TribLive, the New York Post and Pittsburgh
