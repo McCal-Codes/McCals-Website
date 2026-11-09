@@ -37,6 +37,7 @@ const ManageBookingPage = lazy(() => import('./pages/manage-booking'));
 const AccessibilityPage = lazy(() => import('./pages/accessibility'));
 const OneNationDividedPage = lazy(() => import('./pages/one-nation-divided'));
 const WorkSamplesPage = lazy(() => import('./pages/work-samples'));
+const SelectedWorkPage = lazy(() => import('./pages/selected-work'));
 const NotFoundPage = lazy(() => import('./pages/not-found'));
 
 const staticRouteComponents = {
@@ -153,6 +154,7 @@ const router = createBrowserRouter([
       { path: '/manage-booking', element: <ManageBookingPage /> },
       // Unlisted: shared by link for applications. Not in navigation or the sitemap.
       { path: '/work-samples', element: <WorkSamplesPage /> },
+      { path: '/selected-work', element: <SelectedWorkPage /> },
       ...(import.meta.env.DEV
         ? [
             { path: '/changelog', element: <ChangelogPage /> },

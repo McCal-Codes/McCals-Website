@@ -148,22 +148,8 @@ export const workSampleSections: WorkSampleSection[] = [
     "short": "Features",
     "blurb": "Faith, school, culture and community, 2025 to 2026.",
     "layout": "grid",
-    "cover": 1,
+    "cover": 4,
     "items": [
-      {
-        "src": "/images/work-samples/people-01.jpg",
-        "width": 1800,
-        "height": 1198,
-        "caption": "Maria Paula de Araújo Guedes (6) hugging Stitch plush alongside her family at the Sewickley United Methodist Church on March 27, 2026.",
-        "credit": "Photo by Caleb McCartney for TribLive"
-      },
-      {
-        "src": "/images/work-samples/people-02.jpg",
-        "width": 1800,
-        "height": 1198,
-        "caption": "Hannah Loughman, pastor, embraces Maria’s mother with a hug at the Sewickley United Methodist Church on March 27, 2026.",
-        "credit": "Photo by Caleb McCartney for TribLive"
-      },
       {
         "src": "/images/work-samples/people-03.jpg",
         "width": 1198,
