@@ -41,7 +41,7 @@ const selected = SEQUENCE.flatMap((name) => {
 const SelectedWorkPage = () => {
   usePageMeta({
     title: 'Selected Photojournalism | Caleb McCartney',
-    description: 'Seventeen selected photographs by Caleb McCartney, 2024 to 2026.',
+    description: 'Seventeen selected photographs by Caleb McCartney, 2023 to 2026.',
     canonical: `${SITE_URL}/selected-work`,
     robots: 'noindex, nofollow',
   });
@@ -51,7 +51,7 @@ const SelectedWorkPage = () => {
       <div className={styles.page}>
         <header className={styles.hero}>
           <p className={styles.eyebrow}>Selected work</p>
-          <h1>Seventeen photographs, 2024 to 2026.</h1>
+          <h1>Seventeen photographs, 2023 to 2026.</h1>
           <p>
             I&apos;m a photojournalist in Pittsburgh. I cover politics, public affairs, community news
             and sports. I freelance for TribLive and the Butler Eagle and Cranberry Eagle.
