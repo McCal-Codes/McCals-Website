@@ -88,7 +88,7 @@ export const workSampleSections: WorkSampleSection[] = [
         "src": "/images/work-samples/spot-03.jpg",
         "width": 1800,
         "height": 1200,
-        "caption": "Avalon firefighters, including Capt. D. Cooper, and a community member identified as TJ, work to clear a downed tree from Spruce Run Road on Sunday, June 14, 2026, near North Birmingham Avenue in Avalon, Pa.",
+        "caption": "Avalon firefighters and a community member work to clear a downed tree from Spruce Run Road on Sunday, June 14, 2026, near North Birmingham Avenue in Avalon, Pa.",
         "credit": "Photo by Caleb McCartney for Front Porch Press"
       }
     ]
@@ -112,7 +112,7 @@ export const workSampleSections: WorkSampleSection[] = [
         "src": "/images/work-samples/people-05.jpg",
         "width": 1800,
         "height": 1198,
-        "caption": "Dolores de Jong, mother of Sewickley Academy student Victoria de Jong, washes the legs of a bay horse in the wash stall at Barberry Farm in Sewickley on Wednesday, Oct. 28, 2026.",
+        "caption": "A woman washes the legs of a bay horse in the wash stall at Barberry Farm in Sewickley on Wednesday, Oct. 28, 2026.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {
@@ -157,7 +157,7 @@ export const workSampleSections: WorkSampleSection[] = [
         "src": "/images/work-samples/civic-06.jpg",
         "width": 1800,
         "height": 1198,
-        "caption": "Leetsdale Councilman Robert Benedict speaks while standing along Washington Street on April 7, 2026, in Leetsdale, Pa.",
+        "caption": "A man stands along Washington Street on April 7, 2026, in Leetsdale, Pa.",
         "credit": "Photo by Caleb McCartney for TribLive"
       },
       {
@@ -233,7 +233,7 @@ export const workSampleSections: WorkSampleSection[] = [
         "src": "/images/work-samples/boyd-04.jpg",
         "width": 1800,
         "height": 1198,
-        "caption": "Aldo Farmer's father tends vegetable seedlings at the family farm in Cynthiana, Ky., on June 10, 2025.",
+        "caption": "A man tends vegetable seedlings at the family farm in Cynthiana, Ky., on June 10, 2025.",
         "credit": "Photo by Caleb McCartney"
       },
       {
