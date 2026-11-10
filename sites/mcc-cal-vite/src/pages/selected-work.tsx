@@ -71,7 +71,7 @@ const SelectedWorkPage = () => {
 
         <section className={styles.section} aria-label="Selected photographs">
           <div className={styles.stack}>
-            {selected.map((image) => (
+            {selected.map((image, index) => (
               <figure className={styles.figure} key={image.src}>
                 <img
                   src={image.src}
@@ -79,6 +79,7 @@ const SelectedWorkPage = () => {
                   height={image.height}
                   alt={image.caption}
                   decoding="async"
+                  loading={index < 2 ? 'eager' : 'lazy'}
                 />
                 <figcaption>
                   {image.caption}

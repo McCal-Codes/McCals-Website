@@ -88,6 +88,7 @@ const WorkSamplesPage = () => {
                     height={image.height}
                     alt={image.caption}
                     decoding="async"
+                    loading="lazy"
                   />
                   <figcaption>
                     {image.caption}
@@ -115,6 +116,7 @@ const WorkSamplesPage = () => {
                     height={image.height}
                     alt={image.caption}
                     decoding="async"
+                    loading="lazy"
                   />
                   <figcaption>
                     {image.caption}
