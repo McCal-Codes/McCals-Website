@@ -62,7 +62,11 @@ export const journalismKeep: Record<string, readonly string[]> = {
     '241104_kamala-pgh-eve_CAL3746.jpg',
     '241104_kamala-pgh-eve_CAL4655.jpg',
   ],
-  'Politics/clinton-pitt-greensburgh': [],
+  'Politics/clinton-pitt-greensburgh': [
+    '241029_clinton-pitt_CAL2943.jpg',
+    '241029_clinton-pitt_CAL2980.jpg',
+    '241029_clinton-pitt_CAL3063.jpg',
+  ],
   'Politics/kamala-speaks-erie': [
     '141024_Kamala Speaks at Erie_CAL3763.jpg',
     '141024_Kamala Speaks at Erie_CAL3831.jpg',
