@@ -36,6 +36,17 @@ const manifestState = vi.hoisted(() => ({
   },
 }));
 
+const keepMock = vi.hoisted(() => ({ value: [] as string[] }));
+
+vi.mock('@/content/journalismCuration', () => ({
+  journalismKeep: {
+    get 'Politics/obama-speaks-pitt'() {
+      return keepMock.value;
+    },
+    'Politics/clinton-pitt-greensburgh': [],
+  },
+}));
+
 vi.mock('../portfolio/useManifest', () => ({
   useManifest: () => manifestState.value,
   imageUrl: {
@@ -45,10 +56,19 @@ vi.mock('../portfolio/useManifest', () => ({
 }));
 
 vi.mock('../portfolio/PortfolioGrid', () => ({
-  default: ({ groups }: { groups: Array<{ id: string; title: string }> }) => (
+  default: ({
+    groups,
+  }: {
+    groups: Array<{ id: string; title: string; images: Array<{ filename: string }> }>;
+  }) => (
     <div data-testid="journalism-grid">
       {groups.map((group) => (
-        <span key={group.id}>{group.title}</span>
+        <span key={group.id}>
+          {group.title}
+          {group.images.map((image) => (
+            <i key={image.filename}>{image.filename}</i>
+          ))}
+        </span>
       ))}
     </div>
   ),
@@ -127,5 +147,51 @@ describe('JournalismPortfolio', () => {
     const grid = screen.getByTestId('journalism-grid');
     expect(grid).toHaveTextContent('Election Night Watch');
     expect(grid).not.toHaveTextContent('Community Feature');
+  });
+
+  it('shows only the curated frames of a listed shoot and hides empty shoots', () => {
+    const base = { category: 'Politics', eventDate: { iso: '2024-10-29' }, tags: ['Politics'] };
+    manifestState.value = {
+      status: 'success',
+      error: null,
+      data: {
+        events: [
+          {
+            ...base,
+            eventName: 'Obama Speaks Pitt',
+            folderPath: 'Politics/obama-speaks-pitt',
+            images: [
+              { filename: 'kept.webp', path: 'kept.webp' },
+              { filename: 'dropped.webp', path: 'dropped.webp' },
+            ],
+          },
+          {
+            ...base,
+            eventName: 'Clinton Pitt Greensburgh',
+            folderPath: 'Politics/clinton-pitt-greensburgh',
+            images: [{ filename: 'any.webp', path: 'any.webp' }],
+          },
+          {
+            ...base,
+            eventName: 'Brand New Shoot',
+            folderPath: 'Politics/brand-new-shoot',
+            images: [{ filename: 'new-a.webp', path: 'new-a.webp' }],
+          },
+        ],
+      },
+    } as unknown as typeof manifestState.value;
+    keepMock.value = ['kept.webp'];
+
+    render(
+      <MemoryRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
+        <JournalismPortfolio />
+      </MemoryRouter>,
+    );
+
+    const grid = screen.getByTestId('journalism-grid');
+    expect(grid).toHaveTextContent('kept.webp');
+    expect(grid).not.toHaveTextContent('dropped.webp');
+    expect(grid).not.toHaveTextContent('Clinton Pitt Greensburgh');
+    expect(grid).toHaveTextContent('new-a.webp');
   });
 });
