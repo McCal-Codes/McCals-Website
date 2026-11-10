@@ -1,6 +1,6 @@
 {
   "generatedBy": "sites/mcc-cal-dev/scripts/sync-github.js",
-  "generatedAt": "2026-11-09T16:37:16.793Z",
+  "generatedAt": "2026-11-10T01:38:24.131Z",
   "repos": [
     {
       "slug": "terranova",
@@ -94,15 +94,15 @@
       "languages": [
         {
           "name": "TypeScript",
-          "percent": 95
+          "percent": 96
         },
         {
           "name": "JavaScript",
-          "percent": 5
+          "percent": 4
         }
       ],
       "createdAt": "2026-01-12",
-      "pushedAt": "2026-11-05",
+      "pushedAt": "2026-11-09",
       "defaultBranch": "master",
       "stars": 1,
       "forks": 0,
