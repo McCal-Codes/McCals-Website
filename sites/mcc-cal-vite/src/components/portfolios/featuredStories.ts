@@ -1,7 +1,7 @@
 import type { PortfolioGroup } from '../portfolio/types';
 
 export const ALL = 'All';
-export const FILTER_ORDER = ['Concert', 'Events', 'Journalism'];
+export const FILTER_ORDER = ['Concert', 'Events', 'Journalism', 'Portraits', 'Nature'];
 
 export function shortCategory(cat: string) {
   return cat.replace(' Photography', '');

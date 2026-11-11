@@ -1,4 +1,4 @@
-import { lazy, Suspense, useCallback, useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { preload } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '@/utils/imageOptimization';
@@ -9,13 +9,13 @@ import { concertKeep } from '@/content/concertCuration';
 import { eventKeep } from '@/content/eventCuration';
 import { journalismKeep } from '@/content/journalismCuration';
 import type { PortfolioGroup } from '../portfolio/types';
-import PortfolioGrid from '../portfolio/PortfolioGrid';
 import PortfolioFilters from '../portfolio/PortfolioFilters';
 import { portfolioStyles } from '../portfolio';
 import { ALL, FILTER_ORDER, getFeaturedStories, shortCategory } from './featuredStories';
+import { featuredPicks } from '@/content/featuredPicks';
+import { adaptPortraits, type PortraitManifest } from '@/pages/portraits-adapter';
+import { adaptNature, type NatureManifest } from '@/pages/nature-adapter';
 import ProtectedPortfolioImage from '../portfolio/ProtectedPortfolioImage';
-
-const PortfolioLightbox = lazy(() => import('../portfolio/PortfolioLightbox'));
 
 interface FeaturedImage {
   filename?: string;
@@ -222,10 +222,11 @@ function normalise(items: FeaturedItem[]): PortfolioGroup[] {
     });
 }
 
-interface ActiveLightbox {
-  group: PortfolioGroup;
-  initialIndex: number;
+function getFeaturedTimestamp(group: PortfolioGroup): number {
+  const timestamp = Date.parse(group.dateISO ?? '');
+  return Number.isNaN(timestamp) ? 0 : timestamp;
 }
+
 function compareFeaturedGroups(a: PortfolioGroup, b: PortfolioGroup) {
   const dateDelta = getFeaturedTimestamp(b) - getFeaturedTimestamp(a);
   if (dateDelta !== 0) {
@@ -242,13 +243,15 @@ function compareFeaturedGroups(a: PortfolioGroup, b: PortfolioGroup) {
   return a.title.localeCompare(b.title);
 }
 
-function getFeaturedTimestamp(group: PortfolioGroup): number {
-  const timestamp = Date.parse(group.dateISO ?? '');
-  if (!Number.isNaN(timestamp)) {
-    return timestamp;
-  }
-
-  return 0;
+// Portraits albums and Nature collections come from their own manifests. Only the names listed
+// in featuredPicks appear, in that order, and each keeps the cover its work page uses.
+function pickExtras(groups: PortfolioGroup[], names: readonly string[], category: string) {
+  return names.flatMap((name) => {
+    const group = groups.find((candidate) => candidate.title === name);
+    return group && group.images.length > 0
+      ? [{ ...group, category, featuredRank: undefined }]
+      : [];
+  });
 }
 
 function categoryRoute(category?: string) {
@@ -257,6 +260,8 @@ function categoryRoute(category?: string) {
   if (short === 'Concert') return '/concerts';
   if (short === 'Events') return '/events';
   if (short === 'Journalism') return '/journalism';
+  if (short === 'Portraits') return '/portraits';
+  if (short === 'Nature') return '/nature';
 
   return '/featured-work';
 }
@@ -270,32 +275,29 @@ function filterDisplayLabel(filter: string) {
   return filter === 'Journalism' ? 'photojournalism' : filter.toLowerCase();
 }
 
-interface FeaturedStoryCardProps {
-  group: PortfolioGroup;
-  variant: 'lead' | 'support';
-  onOpen: (group: PortfolioGroup, initialIndex?: number) => void;
-  loading?: 'eager' | 'lazy';
-}
-
-const LEAD_STRIP_COUNT = 4;
-
 const LEAD_IMAGE_WIDTHS = [640, 960, 1280, 1600];
 const LEAD_IMAGE_SIZES = '(max-width: 980px) calc(100vw - 40px), 58vw';
 
-function FeaturedStoryCard({ group, variant, onOpen, loading = 'lazy' }: FeaturedStoryCardProps) {
+interface FeaturedStoryCardProps {
+  group: PortfolioGroup;
+  variant: 'lead' | 'support';
+  loading?: 'eager' | 'lazy';
+}
+
+// Featured is for browsing: every image leads to its work page, where the full gallery lives.
+function FeaturedStoryCard({ group, variant, loading = 'lazy' }: FeaturedStoryCardProps) {
   const label = categoryLabel(group.category);
+  const route = categoryRoute(group.category);
   const description = group.featuredDescription ?? group.coverImage.caption;
-  const stripImages = variant === 'lead' ? group.images.slice(1, 1 + LEAD_STRIP_COUNT) : [];
 
   return (
     <article
-      className={`${portfolioStyles.pfFeaturedStory} ${variant === 'lead' ? portfolioStyles.pfFeaturedStoryLead : portfolioStyles.pfFeaturedStorySupport}${stripImages.length > 0 ? ` ${portfolioStyles.pfFeaturedStoryWithStrip}` : ''}`}
+      className={`${portfolioStyles.pfFeaturedStory} ${variant === 'lead' ? portfolioStyles.pfFeaturedStoryLead : portfolioStyles.pfFeaturedStorySupport}`}
     >
-      <button
-        type="button"
+      <Link
+        to={route}
         className={portfolioStyles.pfFeaturedStoryImageButton}
-        aria-label={`Open ${group.title} gallery`}
-        onClick={() => onOpen(group)}
+        aria-label={`${group.title}, see more ${label.toLowerCase()}`}
       >
         <ProtectedPortfolioImage className={portfolioStyles.pfFeaturedStoryProtectedImage}>
           <OptimizedImage
@@ -315,40 +317,7 @@ function FeaturedStoryCard({ group, variant, onOpen, loading = 'lazy' }: Feature
             draggable={false}
           />
         </ProtectedPortfolioImage>
-      </button>
-
-      {stripImages.length > 0 && (
-        <ul
-          className={portfolioStyles.pfFeaturedStoryStrip}
-          aria-label={`More from ${group.title}`}
-        >
-          {stripImages.map((image, offset) => (
-            <li key={image.filename}>
-              <button
-                type="button"
-                className={portfolioStyles.pfFeaturedStoryThumb}
-                aria-label={`Open ${group.title}, photo ${offset + 2}`}
-                onClick={() => onOpen(group, offset + 1)}
-              >
-                <OptimizedImage
-                  src={image.url}
-                  alt=""
-                  frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfFeaturedStoryThumbFrame}`}
-                  imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfFeaturedStoryThumbImage}`}
-                  loading="lazy"
-                  decoding="async"
-                  optimizedWidth={320}
-                  srcSetWidths={[160, 320]}
-                  sizes="96px"
-                  width={96}
-                  height={72}
-                  draggable={false}
-                />
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+      </Link>
 
       <div className={portfolioStyles.pfFeaturedStoryCopy}>
         <p className={portfolioStyles.pfFeaturedStoryMeta}>
@@ -358,15 +327,8 @@ function FeaturedStoryCard({ group, variant, onOpen, loading = 'lazy' }: Feature
         <h3 className={portfolioStyles.pfFeaturedStoryTitle}>{group.title}</h3>
         {description && <p className={portfolioStyles.pfFeaturedStoryDescription}>{description}</p>}
         <div className={portfolioStyles.pfFeaturedStoryActions}>
-          <button
-            type="button"
-            className={portfolioStyles.pfFeaturedStoryButton}
-            onClick={() => onOpen(group)}
-          >
-            Open Gallery
-          </button>
-          <Link className={portfolioStyles.pfFeaturedStoryLink} to={categoryRoute(group.category)}>
-            View {label}
+          <Link className={portfolioStyles.pfFeaturedStoryButton} to={route}>
+            See more {label.toLowerCase()}
           </Link>
         </div>
       </div>
@@ -374,16 +336,64 @@ function FeaturedStoryCard({ group, variant, onOpen, loading = 'lazy' }: Feature
   );
 }
 
+function FeaturedTile({ group, loading }: { group: PortfolioGroup; loading: 'eager' | 'lazy' }) {
+  const label = categoryLabel(group.category);
+
+  return (
+    <Link
+      to={categoryRoute(group.category)}
+      className={portfolioStyles.pfFeaturedTile}
+      aria-label={`${group.title}, see more ${label.toLowerCase()}`}
+    >
+      <ProtectedPortfolioImage className={portfolioStyles.pfFeaturedStoryProtectedImage}>
+        <OptimizedImage
+          src={group.coverImage.url}
+          alt={group.coverImage.alt ?? group.title}
+          frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfFeaturedStoryImageFrame}`}
+          imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfFeaturedStoryImage}`}
+          loading={loading}
+          decoding="async"
+          optimizedWidth={720}
+          srcSetWidths={[360, 540, 720, 960]}
+          sizes="(max-width: 680px) calc(100vw - 32px), (max-width: 980px) 50vw, 31vw"
+          width={460}
+          height={345}
+          draggable={false}
+        />
+      </ProtectedPortfolioImage>
+      <span className={portfolioStyles.pfFeaturedTileCaption}>
+        <span className={portfolioStyles.pfFeaturedTileMeta}>
+          {label}
+          {group.dateDisplay ? ` · ${group.dateDisplay}` : ''}
+        </span>
+        <span className={portfolioStyles.pfFeaturedTileTitle}>{group.title}</span>
+      </span>
+    </Link>
+  );
+}
+
 export default function FeaturedPortfolio() {
   const { data, status, error } = useManifest<FeaturedManifest>('featured');
+  const { data: portraitData } = useManifest<PortraitManifest>('portraits');
+  const { data: natureData } = useManifest<NatureManifest>('nature');
   const [activeFilter, setActiveFilter] = useState(ALL);
-  const [activeLightbox, setActiveLightbox] = useState<ActiveLightbox | null>(null);
-  const openerRef = useRef<HTMLElement | null>(null);
 
   const groups = useMemo(() => {
     if (!data?.items) return [];
-    return normalise(data.items).sort(compareFeaturedGroups);
-  }, [data]);
+    const extras = [
+      ...pickExtras(
+        portraitData ? adaptPortraits(portraitData) : [],
+        featuredPicks.Portraits,
+        'Portraits Photography',
+      ),
+      ...pickExtras(
+        natureData ? adaptNature(natureData) : [],
+        featuredPicks.Nature,
+        'Nature Photography',
+      ),
+    ];
+    return [...normalise(data.items).sort(compareFeaturedGroups), ...extras];
+  }, [data, portraitData, natureData]);
 
   const filters = useMemo(() => {
     if (!groups.length) return [];
@@ -423,12 +433,6 @@ export default function FeaturedPortfolio() {
     });
   }, [groups]);
 
-  const handleOpen = useCallback((group: PortfolioGroup, initialIndex = 0) => {
-    openerRef.current =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    setActiveLightbox({ group, initialIndex });
-  }, []);
-
   // Start fetching the hero as soon as the lead is known, with the same srcset the card requests,
   // so the browser does not wait for the card to render before asking for it.
   const leadCover = featuredStories[0]?.coverImage.url;
@@ -441,15 +445,6 @@ export default function FeaturedPortfolio() {
     });
   }
 
-  const handleClose = useCallback(() => {
-    setActiveLightbox(null);
-    window.setTimeout(() => openerRef.current?.focus(), 0);
-  }, []);
-
-  const handleLightboxGroupChange = useCallback((group: PortfolioGroup, initialIndex: number) => {
-    setActiveLightbox({ group, initialIndex });
-  }, []);
-
   return (
     <div className={`${portfolioStyles.pfRoot} ${portfolioStyles.pfFeaturedRoot}`}>
       <header className={portfolioStyles.pfFeaturedHeader}>
@@ -457,8 +452,8 @@ export default function FeaturedPortfolio() {
           <p className={portfolioStyles.pfFeaturedDeck}>Latest Curated Edit</p>
           <h1 className={portfolioStyles.pfHeading}>Featured Work</h1>
           <p className={portfolioStyles.pfSubheading}>
-            Recent concert, event, and photojournalism work, edited for range, pace, and the moments
-            that hold up.
+            A quick look across concerts, events, photojournalism, portraits, and nature. Pick any
+            image to see the full set.
           </p>
         </div>
 
@@ -500,12 +495,7 @@ export default function FeaturedPortfolio() {
               className={portfolioStyles.pfFeaturedEditorial}
               aria-label="Featured portfolio highlights"
             >
-              <FeaturedStoryCard
-                group={featuredStories[0]}
-                variant="lead"
-                loading="eager"
-                onOpen={handleOpen}
-              />
+              <FeaturedStoryCard group={featuredStories[0]} variant="lead" loading="eager" />
               {featuredStories.length > 1 && (
                 <div className={portfolioStyles.pfFeaturedSupportStack}>
                   {featuredStories.slice(1).map((group) => (
@@ -514,7 +504,6 @@ export default function FeaturedPortfolio() {
                       group={group}
                       variant="support"
                       loading="eager"
-                      onOpen={handleOpen}
                     />
                   ))}
                 </div>
@@ -524,15 +513,11 @@ export default function FeaturedPortfolio() {
 
           <PortfolioFilters filters={filters} active={activeFilter} onChange={setActiveFilter} />
           {gridGroups.length > 0 && (
-            <PortfolioGrid
-              groups={gridGroups}
-              initialCount={9}
-              batchSize={6}
-              wideInitialCount={12}
-              gridClassName={portfolioStyles.pfFeaturedGrid}
-              cardImageSizes="(max-width: 600px) calc(100vw - 40px), (max-width: 980px) 50vw, 31vw"
-              eagerCount={3}
-            />
+            <div className={`${portfolioStyles.pfGrid} ${portfolioStyles.pfFeaturedGrid}`}>
+              {gridGroups.map((group, index) => (
+                <FeaturedTile key={group.id} group={group} loading={index < 3 ? 'eager' : 'lazy'} />
+              ))}
+            </div>
           )}
 
           {activeFilter !== ALL && gridGroups.length === 0 && (
@@ -544,19 +529,6 @@ export default function FeaturedPortfolio() {
             </div>
           )}
         </>
-      )}
-
-      {activeLightbox && (
-        <Suspense fallback={null}>
-          <PortfolioLightbox
-            key={`${activeLightbox.group.id}-${activeLightbox.initialIndex}`}
-            group={activeLightbox.group}
-            collection={filtered}
-            initialIndex={activeLightbox.initialIndex}
-            onChangeGroup={handleLightboxGroupChange}
-            onClose={handleClose}
-          />
-        </Suspense>
       )}
     </div>
   );

@@ -315,64 +315,6 @@
   pointer-events: none;
 }
 
-.pfFeaturedStoryStrip {
-  position: absolute;
-  bottom: clamp(22px, 3vw, 34px);
-  left: clamp(22px, 3vw, 34px);
-  z-index: 3;
-  display: flex;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.pfFeaturedStoryThumb {
-  display: block;
-  width: 96px;
-  height: 72px;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.4);
-  cursor: pointer;
-}
-
-.pfFeaturedStoryThumb:hover,
-.pfFeaturedStoryThumb:focus-visible {
-  border-color: #fff;
-}
-
-.pfFeaturedStoryThumb:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
-}
-
-.pfFeaturedStoryThumbFrame,
-.pfFeaturedStoryThumbImage {
-  width: 100%;
-  height: 100%;
-}
-
-.pfFeaturedStoryThumbImage {
-  object-fit: cover;
-}
-
-/* Room for the thumbnail strip under the lead copy; the strip is hidden on narrower screens. */
-@media (min-width: 1101px) {
-  .pfFeaturedStoryWithStrip .pfFeaturedStoryCopy {
-    padding-bottom: calc(clamp(22px, 3vw, 34px) + 72px + 16px);
-  }
-}
-
-@media (max-width: 1100px) {
-  .pfFeaturedStoryStrip {
-    display: none;
-  }
-}
-
 .pfFeaturedStorySupport .pfFeaturedStoryCopy {
   max-width: 90%;
   padding: 20px;
@@ -479,6 +421,55 @@
   max-width: 1560px;
   margin-inline: auto;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(320px, 22vw, 420px)), 1fr));
+}
+
+.pfFeaturedTile {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+  color: #fff;
+  text-decoration: none;
+  isolation: isolate;
+}
+
+.pfFeaturedTile:hover .pfFeaturedStoryImage,
+.pfFeaturedTile:focus-visible .pfFeaturedStoryImage {
+  transform: scale(1.025);
+  filter: contrast(1.06) saturate(1.04);
+}
+
+.pfFeaturedTile:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.pfFeaturedTileCaption {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 36px 16px 14px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.78) 100%);
+  pointer-events: none;
+}
+
+.pfFeaturedTileMeta {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pfFeaturedTileTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.25;
 }
 
 .pfFeaturedCategoryNote {
@@ -2143,6 +2134,8 @@
 
   .pfFeaturedStory:hover .pfFeaturedStoryImage,
   .pfFeaturedStory:focus-within .pfFeaturedStoryImage,
+  .pfFeaturedTile:hover .pfFeaturedStoryImage,
+  .pfFeaturedTile:focus-visible .pfFeaturedStoryImage,
   .pfCard:hover img,
   .pfCard:hover .pfCardAnchor,
   .pfCard:focus-within .pfCardAnchor,
