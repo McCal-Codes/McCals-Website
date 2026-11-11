@@ -4,6 +4,7 @@ import OptimizedImage from '@/components/OptimizedImage';
 import { useManifest, imageUrl } from '../portfolio/useManifest';
 import { generateId } from '@/utils/portfolio-ids';
 import { concertKeep } from '@/content/concertCuration';
+import { eventKeep } from '@/content/eventCuration';
 import { journalismKeep } from '@/content/journalismCuration';
 import type { PortfolioGroup } from '../portfolio/types';
 import PortfolioGrid from '../portfolio/PortfolioGrid';
@@ -172,6 +173,7 @@ function curatedImages(item: FeaturedItem): (string | FeaturedImage)[] {
   let keep: readonly string[] | undefined;
   if (item.type === 'Journalism') keep = journalismKeep[item.folderPath ?? ''];
   else if (item.type === 'Concert') keep = concertKeep[item.relativeFolderPath ?? ''];
+  else if (item.type === 'Events') keep = eventKeep[item.eventName ?? ''];
   if (!keep) return item.images;
 
   return item.images.filter((image) => keep.includes(resolveFilename(image)));
