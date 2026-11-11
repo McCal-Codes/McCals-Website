@@ -1,5 +1,6 @@
 import { imageUrl } from '@/components/portfolio';
 import type { PortfolioGroup } from '@/components/portfolio/types';
+import { natureKeep } from '@/content/natureCuration';
 
 interface NatureItem {
   collectionName: string;
@@ -66,7 +67,9 @@ function inferDateFromFilename(filename: string): Date | null {
   return null;
 }
 
-function summarizeCollectionDate(images: NatureImageEntry[]): Pick<PortfolioGroup, 'dateDisplay' | 'dateISO'> {
+function summarizeCollectionDate(
+  images: NatureImageEntry[],
+): Pick<PortfolioGroup, 'dateDisplay' | 'dateISO'> {
   const parsedDates = images
     .map((image) => inferDateFromFilename(normalizeNatureImage(image).filename))
     .filter((date): date is Date => date instanceof Date);
@@ -76,7 +79,9 @@ function summarizeCollectionDate(images: NatureImageEntry[]): Pick<PortfolioGrou
   }
 
   const uniqueMonths = new Set(
-    parsedDates.map((date) => `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, '0')}`),
+    parsedDates.map(
+      (date) => `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, '0')}`,
+    ),
   );
 
   if (uniqueMonths.size !== 1) {
@@ -157,7 +162,9 @@ function splitLandscapeCollection(item: NatureItem): NatureGroupSource[] {
 
   for (const image of item.images) {
     const filename = normalizeNatureImage(image).filename;
-    const matchedDefinition = bucketDefinitions.find((definition) => definition.matcher.test(filename));
+    const matchedDefinition = bucketDefinitions.find((definition) =>
+      definition.matcher.test(filename),
+    );
 
     if (matchedDefinition) {
       buckets.get(matchedDefinition.key)?.push(image);
@@ -210,8 +217,22 @@ function expandNatureCollection(item: NatureItem): NatureGroupSource[] {
   ];
 }
 
+function curate(collections: NatureItem[]): NatureItem[] {
+  return collections.map((item) => {
+    const keep = natureKeep[item.collectionName];
+    if (!keep) return item;
+
+    return {
+      ...item,
+      images: item.images.filter((image) =>
+        keep.includes(normalizeNatureImage(image).filename.split('/').pop() ?? ''),
+      ),
+    };
+  });
+}
+
 export function adaptNature(manifest: NatureManifest): PortfolioGroup[] {
-  return manifest.collections
+  return curate(manifest.collections)
     .filter((item) => item.images.length > 0)
     .flatMap((item) =>
       expandNatureCollection(item).map((groupSource) => {

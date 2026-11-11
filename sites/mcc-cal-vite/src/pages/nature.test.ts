@@ -1,5 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { adaptNature } from './nature-adapter';
+
+vi.mock('@/content/natureCuration', () => ({ natureKeep: {} }));
 
 describe('adaptNature', () => {
   it('uses prebuilt nature thumbs for card covers while keeping full-size lightbox images', () => {
