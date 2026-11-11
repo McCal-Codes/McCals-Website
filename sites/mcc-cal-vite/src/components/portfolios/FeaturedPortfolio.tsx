@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import OptimizedImage from '@/components/OptimizedImage';
 import { useManifest, imageUrl } from '../portfolio/useManifest';
 import { generateId } from '@/utils/portfolio-ids';
+import { concertKeep } from '@/content/concertCuration';
+import { journalismKeep } from '@/content/journalismCuration';
 import type { PortfolioGroup } from '../portfolio/types';
 import PortfolioGrid from '../portfolio/PortfolioGrid';
 import PortfolioFilters from '../portfolio/PortfolioFilters';
@@ -98,7 +100,13 @@ function resolveTitle(item: FeaturedItem): string {
 }
 
 function resolveDateISO(item: FeaturedItem): string | undefined {
-  return item.dateISO ?? item.concertDate?.iso ?? item.eventDate?.iso ?? item.date?.iso ?? item.metadata?.date;
+  return (
+    item.dateISO ??
+    item.concertDate?.iso ??
+    item.eventDate?.iso ??
+    item.date?.iso ??
+    item.metadata?.date
+  );
 }
 
 function resolveDateDisplay(item: FeaturedItem, dateISO?: string): string | undefined {
@@ -114,7 +122,11 @@ function resolveFilename(image: string | FeaturedImage): string {
   return image.filename ?? image.path?.split('/').pop() ?? '';
 }
 
-function resolveImageUrl(item: FeaturedItem, image: string | FeaturedImage, filename: string): string {
+function resolveImageUrl(
+  item: FeaturedItem,
+  image: string | FeaturedImage,
+  filename: string,
+): string {
   if (typeof image === 'object' && image.path?.startsWith('src/images/')) {
     return imageUrl.event(image.path);
   }
@@ -125,7 +137,10 @@ function resolveImageUrl(item: FeaturedItem, image: string | FeaturedImage, file
   }
 
   if (itemType === 'Concert' || item.category === 'Concert Photography') {
-    return imageUrl.concert(item.relativeFolderPath ?? `Concert/${item.folderPath ?? ''}`, filename);
+    return imageUrl.concert(
+      item.relativeFolderPath ?? `Concert/${item.folderPath ?? ''}`,
+      filename,
+    );
   }
 
   return imageUrl.featured(item.relativeFolderPath ?? item.folderPath ?? '', filename);
@@ -151,32 +166,50 @@ function normaliseImage(
   };
 }
 
-function normalise(items: FeaturedItem[]): PortfolioGroup[] {
-  return items.map((item) => {
-    const title = resolveTitle(item);
-    const dateISO = resolveDateISO(item);
-    const images = item.images.map((image) => normaliseImage(item, image, title));
-    const coverSource = item.coverImage ?? item.images[0];
-    const coverImage = coverSource
-      ? normaliseImage(item, coverSource, title, item.metadata)
-      : images[0];
+// Featured reuses the same editor's-eye keep-lists as the Concerts and Photojournalism pages,
+// so a story shows the same frames wherever it appears. Items with no list show in full.
+function curatedImages(item: FeaturedItem): (string | FeaturedImage)[] {
+  let keep: readonly string[] | undefined;
+  if (item.type === 'Journalism') keep = journalismKeep[item.folderPath ?? ''];
+  else if (item.type === 'Concert') keep = concertKeep[item.relativeFolderPath ?? ''];
+  if (!keep) return item.images;
 
-    return {
-      id: generateId(title, dateISO),
-      title,
-      dateDisplay: resolveDateDisplay(item, dateISO),
-      dateISO,
-      category: item.category,
-      tags: item.tags,
-      featuredRank: item.featuredRank,
-      featuredDescription: item.featuredDescription,
-      featuredCover: item.featuredCover,
-      sourcePath: item.sourcePath ?? item.relativeFolderPath ?? item.folderPath,
-      published: item.published ?? false,
-      images,
-      coverImage,
-    };
-  });
+  return item.images.filter((image) => keep.includes(resolveFilename(image)));
+}
+
+function normalise(items: FeaturedItem[]): PortfolioGroup[] {
+  return items
+    .filter((rawItem) => curatedImages(rawItem).length > 0)
+    .map((rawItem) => {
+      const item = { ...rawItem, images: curatedImages(rawItem) };
+      const title = resolveTitle(item);
+      const dateISO = resolveDateISO(item);
+      const images = item.images.map((image) => normaliseImage(item, image, title));
+      const cover = item.coverImage;
+      const coverKept =
+        cover !== undefined &&
+        item.images.some((image) => resolveFilename(image) === resolveFilename(cover));
+      const coverSource = coverKept ? cover : item.images[0];
+      const coverImage = coverSource
+        ? normaliseImage(item, coverSource, title, item.metadata)
+        : images[0];
+
+      return {
+        id: generateId(title, dateISO),
+        title,
+        dateDisplay: resolveDateDisplay(item, dateISO),
+        dateISO,
+        category: item.category,
+        tags: item.tags,
+        featuredRank: item.featuredRank,
+        featuredDescription: item.featuredDescription,
+        featuredCover: item.featuredCover,
+        sourcePath: item.sourcePath ?? item.relativeFolderPath ?? item.folderPath,
+        published: item.published ?? false,
+        images,
+        coverImage,
+      };
+    });
 }
 
 const ALL = 'All';
@@ -287,17 +320,14 @@ interface FeaturedStoryCardProps {
   loading?: 'eager' | 'lazy';
 }
 
-function FeaturedStoryCard({
-  group,
-  variant,
-  onOpen,
-  loading = 'lazy',
-}: FeaturedStoryCardProps) {
+function FeaturedStoryCard({ group, variant, onOpen, loading = 'lazy' }: FeaturedStoryCardProps) {
   const label = categoryLabel(group.category);
   const description = group.featuredDescription ?? group.coverImage.caption;
 
   return (
-    <article className={`${portfolioStyles.pfFeaturedStory} ${variant === 'lead' ? portfolioStyles.pfFeaturedStoryLead : portfolioStyles.pfFeaturedStorySupport}`}>
+    <article
+      className={`${portfolioStyles.pfFeaturedStory} ${variant === 'lead' ? portfolioStyles.pfFeaturedStoryLead : portfolioStyles.pfFeaturedStorySupport}`}
+    >
       <button
         type="button"
         className={portfolioStyles.pfFeaturedStoryImageButton}
@@ -314,7 +344,11 @@ function FeaturedStoryCard({
             decoding="async"
             optimizedWidth={variant === 'lead' ? 1280 : 720}
             srcSetWidths={variant === 'lead' ? [640, 960, 1280, 1600] : [360, 540, 720, 960]}
-            sizes={variant === 'lead' ? '(max-width: 980px) calc(100vw - 40px), 58vw' : '(max-width: 980px) calc(100vw - 40px), 28vw'}
+            sizes={
+              variant === 'lead'
+                ? '(max-width: 980px) calc(100vw - 40px), 58vw'
+                : '(max-width: 980px) calc(100vw - 40px), 28vw'
+            }
             width={variant === 'lead' ? 980 : 460}
             height={variant === 'lead' ? 620 : 310}
             draggable={false}
@@ -328,9 +362,7 @@ function FeaturedStoryCard({
           {group.dateDisplay && <span>{group.dateDisplay}</span>}
         </p>
         <h3 className={portfolioStyles.pfFeaturedStoryTitle}>{group.title}</h3>
-        {description && (
-          <p className={portfolioStyles.pfFeaturedStoryDescription}>{description}</p>
-        )}
+        {description && <p className={portfolioStyles.pfFeaturedStoryDescription}>{description}</p>}
         <div className={portfolioStyles.pfFeaturedStoryActions}>
           <button
             type="button"
@@ -383,7 +415,9 @@ export default function FeaturedPortfolio() {
     const categories = ['Concert', 'Events', 'Journalism'];
 
     return categories.map((category) => {
-      const categoryGroups = groups.filter((group) => shortCategory(group.category ?? '') === category);
+      const categoryGroups = groups.filter(
+        (group) => shortCategory(group.category ?? '') === category,
+      );
       const photoCount = categoryGroups.reduce((sum, group) => sum + group.images.length, 0);
 
       return {
@@ -396,7 +430,8 @@ export default function FeaturedPortfolio() {
   }, [groups]);
 
   const handleOpen = useCallback((group: PortfolioGroup) => {
-    openerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    openerRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
     setActiveLightbox({ group, initialIndex: 0 });
   }, []);
 
@@ -416,14 +451,19 @@ export default function FeaturedPortfolio() {
           <p className={portfolioStyles.pfFeaturedDeck}>Latest Curated Edit</p>
           <h1 className={portfolioStyles.pfHeading}>Featured Work</h1>
           <p className={portfolioStyles.pfSubheading}>
-            Recent concert, event, and photojournalism work, edited for range, pace, and the moments that hold up.
+            Recent concert, event, and photojournalism work, edited for range, pace, and the moments
+            that hold up.
           </p>
         </div>
 
         {groups.length > 0 && (
           <div className={portfolioStyles.pfFeaturedStats} aria-label="Featured portfolio summary">
             {categorySummaries.map((summary) => (
-              <Link key={summary.category} className={portfolioStyles.pfFeaturedStat} to={summary.href}>
+              <Link
+                key={summary.category}
+                className={portfolioStyles.pfFeaturedStat}
+                to={summary.href}
+              >
                 <span className={portfolioStyles.pfFeaturedStatValue}>{summary.groups}</span>
                 <span className={portfolioStyles.pfFeaturedStatLabel}>{summary.category}</span>
                 <span className={portfolioStyles.pfFeaturedStatMeta}>{summary.photos} photos</span>
@@ -450,7 +490,10 @@ export default function FeaturedPortfolio() {
       {status === 'success' && (
         <>
           {featuredStories.length > 0 && (
-            <section className={portfolioStyles.pfFeaturedEditorial} aria-label="Featured portfolio highlights">
+            <section
+              className={portfolioStyles.pfFeaturedEditorial}
+              aria-label="Featured portfolio highlights"
+            >
               <FeaturedStoryCard
                 group={featuredStories[0]}
                 variant="lead"
@@ -473,11 +516,7 @@ export default function FeaturedPortfolio() {
             </section>
           )}
 
-          <PortfolioFilters
-            filters={filters}
-            active={activeFilter}
-            onChange={setActiveFilter}
-          />
+          <PortfolioFilters filters={filters} active={activeFilter} onChange={setActiveFilter} />
           {gridGroups.length > 0 && (
             <PortfolioGrid
               groups={gridGroups}
