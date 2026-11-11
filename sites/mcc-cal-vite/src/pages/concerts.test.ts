@@ -3,7 +3,7 @@ import { adaptConcerts } from './concerts-adapter';
 
 vi.mock('@/content/concertCuration', () => ({
   concertKeep: {
-    'Concert/Listed Band/May 2025': ['b.jpg'],
+    'Concert/Listed Band/May 2025': ['c.jpg', 'b.jpg'],
     'Concert/Hidden Band/May 2025': [],
   },
 }));
@@ -67,7 +67,8 @@ describe('adaptConcerts', () => {
     });
 
     expect(groups.map((group) => group.title)).toEqual(['Listed Band', 'New Band']);
-    expect(groups[0]?.images.map((image) => image.filename)).toEqual(['b.jpg']);
+    expect(groups[0]?.images.map((image) => image.filename)).toEqual(['c.jpg', 'b.jpg']);
+    expect(groups[0]?.coverImage.filename).toBe('c.jpg');
     expect(groups[1]?.images).toHaveLength(2);
   });
 });

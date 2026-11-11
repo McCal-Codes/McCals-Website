@@ -22,7 +22,8 @@ function curate(bands: ConcertBand[]): ConcertBand[] {
     .map((band) => {
       const keep = concertKeep[band.relativeFolderPath];
       if (!keep) return band;
-      return { ...band, images: band.images.filter((filename) => keep.includes(filename)) };
+      // Keep-list order wins, so the first entry leads the album and becomes its cover.
+      return { ...band, images: keep.filter((filename) => band.images.includes(filename)) };
     })
     .filter((band) => band.images.length > 0);
 }

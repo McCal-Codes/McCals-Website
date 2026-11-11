@@ -51,7 +51,11 @@ function applyCuration(events: JournalismEvent[]): JournalismEvent[] {
     .map((event) => {
       const keep = journalismKeep[event.folderPath];
       if (!keep) return event;
-      return { ...event, images: event.images.filter((img) => keep.includes(img.filename)) };
+      // Keep-list order wins, so the first entry leads the story and becomes its cover.
+      return {
+        ...event,
+        images: keep.flatMap((name) => event.images.filter((img) => img.filename === name)),
+      };
     })
     .filter((event) => event.images.length > 0);
 }

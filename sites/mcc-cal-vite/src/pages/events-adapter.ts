@@ -31,7 +31,10 @@ function curate(events: EventItem[]): EventItem[] {
       if (!keep) return item;
       return {
         ...item,
-        images: item.images.filter((img) => keep.includes(img.path.split('/').pop() ?? '')),
+        // Keep-list order wins, so the first entry leads the album and becomes its cover.
+        images: keep.flatMap((name) =>
+          item.images.filter((img) => (img.path.split('/').pop() ?? '') === name),
+        ),
       };
     })
     .filter((item) => item.images.length > 0);
