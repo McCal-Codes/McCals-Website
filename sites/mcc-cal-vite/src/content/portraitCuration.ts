@@ -1,0 +1,81 @@
+// Editor's-eye keep-list for the Portraits page.
+// Key: album name. Value: filenames to show, in order. An album missing from
+// this map shows in full; an empty list hides it. Clear the map to restore all frames.
+export const portraitKeep: Record<string, readonly string[]> = {
+  'Annie Victoria': [
+    '231118_Super Shoot @ Ignite Studios__CAL8204.jpg',
+    '231118_Super Shoot @ Ignite Studios__CAL8363.jpg',
+    '231118_Super Shoot @ Ignite Studios__CAL8376.jpg',
+    '231118_Super Shoot @ Ignite Studios__CAL8393 2.jpg',
+  ],
+  'Clark 2023': [
+    'IMGP0073.jpg',
+    'IMGP0077.jpg',
+    'IMGP0082.jpg',
+    'IMGP0093.jpg',
+    'IMGP0110.jpg',
+    'IMGP0117.jpg',
+  ],
+  'Jay Thompson': [
+    '231118_Super Shoot @ Ignite Studios__CAL6662.jpg',
+    '231118_Super Shoot @ Ignite Studios__CAL6673 1.jpg',
+    '231118_Super Shoot @ Ignite Studios__CAL6820.jpg',
+    '231118_Super Shoot @ Ignite Studios__CAL6855 1.jpg',
+  ],
+  'Lucha 2022': [
+    'IMGP8492.jpg',
+    'IMGP8498.jpg',
+    'IMGP8503.jpg',
+    'IMGP8516.jpg',
+    'IMGP8557.jpg',
+    'IMGP8568.jpg',
+    'IMGP8578.jpg',
+  ],
+  'Lucha 2024': [
+    "240517_Lucha's Graduation Shoot_1571_CAL_Compressed.jpg",
+    "240517_Lucha's Graduation Shoot_1581_CAL_Compressed.jpg",
+    "240517_Lucha's Graduation Shoot_1588_CAL_Compressed.jpg",
+    "240517_Lucha's Graduation Shoot_1591_CAL_Compressed.jpg",
+    "240517_Lucha's Graduation Shoot_1596_CAL_Compressed.jpg",
+    "240517_Lucha's Graduation Shoot_1602_CAL_Compressed.jpg",
+    "240517_Lucha's Graduation Shoot_1607_CAL_Compressed.jpg",
+  ],
+  'Michael McCartney': ['240331_Michael McCartney_614.jpg'],
+  'Sam Rose': [
+    '251115 Samantha Rose_CAL899_webuse.jpg',
+    '251115 Samantha Rose_CAL910_webuse.jpg',
+    '251115 Samantha Rose_CAL937_webuse.jpg',
+    '251115 Samantha Rose_CAL960_webuse.jpg',
+    '251115 Samantha Rose_CAL986_webuse.jpg',
+    '251115 Samantha Rose_CAL997_webuse.jpg',
+    '251115 Samantha Rose_CAL1026_webuse.jpg',
+    '251115 Samantha Rose_CAL1074_webuse.jpg',
+    '251115 Samantha Rose_CAL1078_webuse.jpg',
+  ],
+  'Kayla Jackson': [
+    '240228_Studio Headshots_433.jpg',
+    '240228_Studio Headshots_435.jpg',
+    '240228_Studio Headshots_443.jpg',
+    '240228_Studio Headshots_448.jpg',
+  ],
+  'Kelly Gibson': ['240328_Kelly Gibson_607.jpg'],
+  'Danny Herz': [
+    '240828_Commercial Mock Shoot - Danny_1961_CAL_2048px.jpg',
+    '240828_Commercial Mock Shoot - Danny_1962_CAL_2048px.jpg',
+    '240828_Commercial Mock Shoot - Danny_1964_CAL_2048px.jpg',
+    '240828_Commercial Mock Shoot - Danny_1970_CAL_2048px.jpg',
+  ],
+  'Helen Wise': [
+    '240528_Helen Wise_1611_CAL_Compressed.jpg',
+    '240528_Helen Wise_1616_CAL_Compressed.jpg',
+    '240528_Helen Wise_1623_CAL_Compressed.jpg',
+    '240528_Helen Wise_1639_CAL_Compressed.jpg',
+  ],
+  'Liam Sulivan': [
+    '250425_Excused Chao’s with Liam _CAL3507-min.jpg',
+    '250425_Excused Chao’s with Liam _CAL3521-min.jpg',
+    '250425_Excused Chao’s with Liam _CAL3557-min.jpg',
+    '250425_Excused Chao’s with Liam _CAL3562-min.jpg',
+  ],
+  'Logan Spiker': ['Studio with logan0060.jpg', 'Studio with logan0066.jpg'],
+};
