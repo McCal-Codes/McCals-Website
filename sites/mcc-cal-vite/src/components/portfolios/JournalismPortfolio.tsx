@@ -41,11 +41,23 @@ interface JournalismManifest {
 }
 
 import { generateId } from '@/utils/portfolio-ids';
+import { journalismKeep } from '@/content/journalismCuration';
 
 // ── Normaliser ────────────────────────────────────────────────────────────────
 
+// Applies the curated keep list. Shoots absent from the list are shown in full.
+function applyCuration(events: JournalismEvent[]): JournalismEvent[] {
+  return events
+    .map((event) => {
+      const keep = journalismKeep[event.folderPath];
+      if (!keep) return event;
+      return { ...event, images: event.images.filter((img) => keep.includes(img.filename)) };
+    })
+    .filter((event) => event.images.length > 0);
+}
+
 function normalise(events: JournalismEvent[]): PortfolioGroup[] {
-  return events.map((event) => {
+  return applyCuration(events).map((event) => {
     const images = event.images.map((img) => ({
       url: img.url ?? imageUrl.journalism(event.folderPath, img.path),
       filename: img.filename,
@@ -135,9 +147,7 @@ export default function JournalismPortfolio() {
         .
       </p>
 
-      {status === 'loading' && (
-        <PortfolioSkeleton showFilters={true} count={8} />
-      )}
+      {status === 'loading' && <PortfolioSkeleton showFilters={true} count={8} />}
 
       {status === 'error' && (
         <div className={portfolioStyles.pfError}>
@@ -149,16 +159,17 @@ export default function JournalismPortfolio() {
       {status === 'success' && (
         <>
           {filtered.length === 0 ? (
-            <EmptyState 
+            <EmptyState
               type="journalism"
               title="No Journalism Found"
-              description={activeFilter === ALL 
-                ? "No published journalism work is currently available. Check back for political events, sports coverage, and community stories from Pittsburgh and beyond."
-                : `No journalism found in ${activeFilter}. Try selecting a different category or view all published work.`
+              description={
+                activeFilter === ALL
+                  ? 'No published journalism work is currently available. Check back for political events, sports coverage, and community stories from Pittsburgh and beyond.'
+                  : `No journalism found in ${activeFilter}. Try selecting a different category or view all published work.`
               }
               action={{
-                text: activeFilter === ALL ? "View Concert Photography" : "View All Journalism",
-                href: activeFilter === ALL ? "/concerts" : "/journalism"
+                text: activeFilter === ALL ? 'View Concert Photography' : 'View All Journalism',
+                href: activeFilter === ALL ? '/concerts' : '/journalism',
               }}
             />
           ) : (
