@@ -1,6 +1,7 @@
 import { imageUrl } from '@/components/portfolio';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { generateId } from '@/utils/portfolio-ids';
+import { portraitKeep } from '@/content/portraitCuration';
 
 interface PortraitAlbum {
   albumName: string;
@@ -126,7 +127,7 @@ function createSessionGroup(
   }
 
   const images = sessionImages.map((rawFilename, index) => {
-    const filename = useBasenamePaths ? rawFilename.split('/').pop() ?? rawFilename : rawFilename;
+    const filename = useBasenamePaths ? (rawFilename.split('/').pop() ?? rawFilename) : rawFilename;
     const metadata = getImageMetadata(imageMetadata, rawFilename);
     const caption = textOrUndefined(metadata?.caption);
     const description = textOrUndefined(metadata?.description);
@@ -156,17 +157,22 @@ export function adaptPortraits(manifest: PortraitManifest): PortfolioGroup[] {
   return manifest.collections.flatMap((item) => {
     const sessionGroups = item.albums?.length
       ? item.albums
-          .map((album) =>
-            createSessionGroup(
+          .map((album) => {
+            const keep = portraitKeep[album.albumName];
+            const albumImages = keep
+              ? album.images.filter((image) => keep.includes(image.split('/').pop() ?? image))
+              : album.images;
+
+            return createSessionGroup(
               item.collectionName,
               mergeTags(album.tags?.length ? album.tags : item.tags),
               album.albumName,
               album.folderPath,
-              album.images,
+              albumImages,
               true,
               album.imageMetadata,
-            ),
-          )
+            );
+          })
           .filter((group): group is PortfolioGroup => group !== null)
       : [];
 
