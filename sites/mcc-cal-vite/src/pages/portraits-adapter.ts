@@ -160,7 +160,10 @@ export function adaptPortraits(manifest: PortraitManifest): PortfolioGroup[] {
           .map((album) => {
             const keep = portraitKeep[album.albumName];
             const albumImages = keep
-              ? album.images.filter((image) => keep.includes(image.split('/').pop() ?? image))
+              ? // Keep-list order wins, so the first entry leads the album and becomes its cover.
+                keep.flatMap((name) =>
+                  album.images.filter((image) => (image.split('/').pop() ?? image) === name),
+                )
               : album.images;
 
             return createSessionGroup(

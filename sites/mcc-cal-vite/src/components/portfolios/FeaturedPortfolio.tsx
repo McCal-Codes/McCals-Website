@@ -169,14 +169,19 @@ function normaliseImage(
 
 // Featured reuses the same editor's-eye keep-lists as the Concerts and Photojournalism pages,
 // so a story shows the same frames wherever it appears. Items with no list show in full.
+function keepListFor(item: FeaturedItem): readonly string[] | undefined {
+  if (item.type === 'Journalism') return journalismKeep[item.folderPath ?? ''];
+  if (item.type === 'Concert') return concertKeep[item.relativeFolderPath ?? ''];
+  if (item.type === 'Events') return eventKeep[item.eventName ?? ''];
+  return undefined;
+}
+
+// Keep-list order wins, so the first entry leads the story and becomes its cover.
 function curatedImages(item: FeaturedItem): (string | FeaturedImage)[] {
-  let keep: readonly string[] | undefined;
-  if (item.type === 'Journalism') keep = journalismKeep[item.folderPath ?? ''];
-  else if (item.type === 'Concert') keep = concertKeep[item.relativeFolderPath ?? ''];
-  else if (item.type === 'Events') keep = eventKeep[item.eventName ?? ''];
+  const keep = keepListFor(item);
   if (!keep) return item.images;
 
-  return item.images.filter((image) => keep.includes(resolveFilename(image)));
+  return keep.flatMap((name) => item.images.filter((image) => resolveFilename(image) === name));
 }
 
 function normalise(items: FeaturedItem[]): PortfolioGroup[] {
@@ -191,7 +196,7 @@ function normalise(items: FeaturedItem[]): PortfolioGroup[] {
       const coverKept =
         cover !== undefined &&
         item.images.some((image) => resolveFilename(image) === resolveFilename(cover));
-      const coverSource = coverKept ? cover : item.images[0];
+      const coverSource = coverKept && !keepListFor(rawItem) ? cover : item.images[0];
       const coverImage = coverSource
         ? normaliseImage(item, coverSource, title, item.metadata)
         : images[0];
