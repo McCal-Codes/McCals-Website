@@ -1,9 +1,9 @@
 {
   "version": "1.0.0",
-  "generated": "2026-09-07T18:54:41.899Z",
+  "generated": "2026-11-11T16:54:13.555Z",
   "totalPortfolios": 5,
-  "totalItems": 70,
-  "totalImages": 2431,
+  "totalItems": 72,
+  "totalImages": 2466,
   "categories": [
     "Concert Photography",
     "Event Photography",
@@ -25,8 +25,8 @@
       "totalImages": 359
     },
     "Nature": {
-      "count": 2,
-      "totalImages": 50
+      "count": 4,
+      "totalImages": 85
     },
     "Portrait": {
       "count": 3,
@@ -59,11 +59,7 @@
         "260505 Fern Hollow Groundbreaking_SEW-FernHollow026_webuse.webp"
       ],
       "coverImage": "260505 Fern Hollow Groundbreaking_SEW-FernHollow005_webuse.webp",
-      "tags": [
-        "Documentary",
-        "Events",
-        "Published Work"
-      ],
+      "tags": ["Documentary", "Events", "Published Work"],
       "published": true
     },
     {
@@ -94,11 +90,7 @@
         "260327 ICE Prayer Service_SEW-ICE-prayers33_webuse.webp"
       ],
       "coverImage": "260327 ICE Prayer Service_SEW-ICE-prayers03_webuse.webp",
-      "tags": [
-        "Documentary",
-        "Events",
-        "Published Work"
-      ],
+      "tags": ["Documentary", "Events", "Published Work"],
       "published": true
     },
     {
@@ -131,6 +123,53 @@
         "IMGP9551.jpg"
       ],
       "coverImage": "CAL_4406.jpg"
+    },
+    {
+      "type": "Nature",
+      "category": "Nature Photography",
+      "name": "Flowers And Pollinators",
+      "folderPath": "Nature/Flowers and Pollinators",
+      "dateDisplay": "January 2026",
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 1,
+        "monthName": "January",
+        "iso": "2026-01-01",
+        "source": "fallback_current_year",
+        "description": "Fallback to current year",
+        "display": "January 2026"
+      },
+      "totalImages": 26,
+      "images": [
+        "IMGP6813.jpg",
+        "IMGP6817.jpg",
+        "IMGP6819.jpg",
+        "IMGP6823.jpg",
+        "IMGP6824.jpg",
+        "IMGP6826.jpg",
+        "IMGP6833.jpg",
+        "IMGP6834.jpg",
+        "IMGP6839.jpg",
+        "IMGP6843.jpg",
+        "IMGP6873.jpg",
+        "IMGP6875.jpg",
+        "IMGP6876.jpg",
+        "IMGP6888.jpg",
+        "IMGP6892.jpg",
+        "IMGP6905.jpg",
+        "IMGP6910.jpg",
+        "IMGP6915.jpg",
+        "IMGP6920.jpg",
+        "IMGP6922.jpg",
+        "IMGP6948.jpg",
+        "IMGP6949.jpg",
+        "IMGP6960.jpg",
+        "IMGP6965.jpg",
+        "IMGP6968.jpg",
+        "IMGP8389.jpg"
+      ],
+      "coverImage": "IMGP6813.jpg"
     },
     {
       "type": "Concert",
@@ -869,11 +908,7 @@
         "250912_Brentwood vs Springdale_CAL5275-min.jpg"
       ],
       "coverImage": "250912_Brentwood vs Springdale_CAL5167-min.jpg",
-      "tags": [
-        "Documentary",
-        "Events",
-        "Sports"
-      ],
+      "tags": ["Documentary", "Events", "Sports"],
       "published": false
     },
     {
@@ -1129,10 +1164,7 @@
         "250802_yardsale_CAL2693-min.webp"
       ],
       "coverImage": "250802_Brentwood Yard Sale _CAL2644-min.jpg",
-      "tags": [
-        "Documentary",
-        "Events"
-      ],
+      "tags": ["Documentary", "Events"],
       "published": false
     },
     {
@@ -1527,10 +1559,7 @@
         "250715_CMU Trump Protest_CAL1573-min.jpg"
       ],
       "coverImage": "250715_CMU Trump Protest_CAL1091-min.jpg",
-      "tags": [
-        "Politics",
-        "Protest"
-      ],
+      "tags": ["Politics", "Protest"],
       "published": false
     },
     {
@@ -1579,10 +1608,7 @@
         "250704_brentwood4th_CAL9895-min.webp"
       ],
       "coverImage": "250704_Brentwood 4th of July_CAL9762-min.jpg",
-      "tags": [
-        "Documentary",
-        "Events"
-      ],
+      "tags": ["Documentary", "Events"],
       "published": false
     },
     {
@@ -1646,10 +1672,7 @@
         "6-9-25_Caleb McCartney_152-min.jpg"
       ],
       "coverImage": "6-10-25_Caleb McCartney_210-min.jpg",
-      "tags": [
-        "Documentary",
-        "Events"
-      ],
+      "tags": ["Documentary", "Events"],
       "published": false
     },
     {
@@ -2149,10 +2172,7 @@
         "250315_Butler Democracy Protest_CAL9832-min.jpg"
       ],
       "coverImage": "250315_Butler Democracy Protest_CAL9640-min.jpg",
-      "tags": [
-        "Politics",
-        "Protest"
-      ],
+      "tags": ["Politics", "Protest"],
       "published": false
     },
     {
@@ -2224,12 +2244,38 @@
         "250309 Drag at Carnegie Coffee_CAL9579.jpg"
       ],
       "coverImage": "250309 Drag at Carnegie Coffee_CAL9040.jpg",
-      "tags": [
-        "Events",
-        "Journalism",
-        "Featured"
-      ],
+      "tags": ["Events", "Journalism", "Featured"],
       "published": false
+    },
+    {
+      "type": "Nature",
+      "category": "Nature Photography",
+      "name": "Sinbad And Salem",
+      "folderPath": "Nature/Sinbad and Salem",
+      "dateDisplay": "January 2025",
+      "date": {
+        "year": 2025,
+        "month": 1,
+        "day": 13,
+        "monthName": "January",
+        "iso": "2025-01-13",
+        "source": "yymmdd_solid",
+        "description": "YYMMDD (from start of filename)",
+        "display": "January 2025"
+      },
+      "totalImages": 9,
+      "images": [
+        "250113_Cats_CAL7778.jpg",
+        "250113_Cats_CAL7821.jpg",
+        "250113_Cats_CAL7822.jpg",
+        "250113_Cats_CAL7826.jpg",
+        "250113_Cats_CAL7839.jpg",
+        "250113_Cats_CAL7843.jpg",
+        "250113_Cats_CAL7845.jpg",
+        "250113_Cats_CAL7847.jpg",
+        "250113_Cats_CAL7849.jpg"
+      ],
+      "coverImage": "250113_Cats_CAL7778.jpg"
     },
     {
       "type": "Events",
@@ -2659,10 +2705,7 @@
         "241104_kamala-pgh-eve_CAL4837.jpg"
       ],
       "coverImage": "241104_kamala-pgh-eve_CAL3538.jpg",
-      "tags": [
-        "Politics",
-        "Presidential Campaign"
-      ],
+      "tags": ["Politics", "Presidential Campaign"],
       "published": false
     },
     {
@@ -2692,11 +2735,7 @@
         "241029_clinton-pitt_CAL3063.jpg"
       ],
       "coverImage": "241029_clinton-pitt_CAL2861.jpg",
-      "tags": [
-        "Politics",
-        "Published Work",
-        "Presidential Campaign"
-      ],
+      "tags": ["Politics", "Published Work", "Presidential Campaign"],
       "published": true
     },
     {
@@ -2806,11 +2845,7 @@
         "241014_Kamala Speaks at Erie_CAL6948.webp"
       ],
       "coverImage": "141024_Kamala Speaks at Erie_CAL3752.jpg",
-      "tags": [
-        "Politics",
-        "Presidential Campaign",
-        "Published Work"
-      ],
+      "tags": ["Politics", "Presidential Campaign", "Published Work"],
       "published": true
     },
     {
@@ -2866,10 +2901,7 @@
         "241012_JD Vance in Johnstown_CAL6652.webp"
       ],
       "coverImage": "241012_JD Vance in Johnstown_CAL3495.webp",
-      "tags": [
-        "Politics",
-        "Presidential Campaign"
-      ],
+      "tags": ["Politics", "Presidential Campaign"],
       "published": false
     },
     {
@@ -2910,11 +2942,7 @@
         "101024_Obama Speaks at Pittsburgh_CAL5993.jpg"
       ],
       "coverImage": "101024_Obama Speaks at Pittsburgh_CAL3017.jpg",
-      "tags": [
-        "Politics",
-        "Published Work",
-        "Presidential Campaign"
-      ],
+      "tags": ["Politics", "Published Work", "Presidential Campaign"],
       "published": true
     },
     {
@@ -2979,11 +3007,7 @@
         "051024_Trump_Rally_Attendee_Butler_PA.jpg"
       ],
       "coverImage": "051024 Caleb McCartney_Trump Returns to Butler PA_CAL2418.webp",
-      "tags": [
-        "Politics",
-        "Presidential Campaign",
-        "Published Work"
-      ],
+      "tags": ["Politics", "Presidential Campaign", "Published Work"],
       "published": true
     },
     {
@@ -3001,15 +3025,9 @@
         "display": "September 5, 2024"
       },
       "totalImages": 1,
-      "images": [
-        "050924_Tim_Walz_Erie_PA.jpg"
-      ],
+      "images": ["050924_Tim_Walz_Erie_PA.jpg"],
       "coverImage": "050924_Tim_Walz_Erie_PA.jpg",
-      "tags": [
-        "Politics",
-        "Presidential Campaign",
-        "Published Work"
-      ],
+      "tags": ["Politics", "Presidential Campaign", "Published Work"],
       "published": true
     },
     {
@@ -3199,12 +3217,7 @@
         "240430_Pro Palestine Protest at Pitt_CAL1512_webuse.jpg"
       ],
       "coverImage": "240430_Pro Palestine Protest at Pitt_CAL1489_webuse.jpg",
-      "tags": [
-        "Events",
-        "Journalism",
-        "Protest",
-        "Featured"
-      ],
+      "tags": ["Events", "Journalism", "Protest", "Featured"],
       "published": false
     },
     {
