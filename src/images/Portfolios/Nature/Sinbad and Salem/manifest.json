@@ -5,53 +5,71 @@
   "images": [
     {
       "filename": "250113_Cats_CAL7778.jpg",
+      "path": "250113_Cats_CAL7778.jpg",
       "caption": "Salem, a Maine coon, looks out from a bookshelf on Jan. 13, 2025.",
-      "alt": "Salem, a Maine coon, looks out from a bookshelf on Jan. 13, 2025."
+      "alt": "Salem, a Maine coon, looks out from a bookshelf on Jan. 13, 2025.",
+      "tags": ["sinbad and salem"]
     },
     {
       "filename": "250113_Cats_CAL7821.jpg",
+      "path": "250113_Cats_CAL7821.jpg",
       "caption": "Salem wears sunglasses beside books on a shelf on Jan. 13, 2025.",
-      "alt": "Salem wears sunglasses beside books on a shelf on Jan. 13, 2025."
+      "alt": "Salem wears sunglasses beside books on a shelf on Jan. 13, 2025.",
+      "tags": ["sinbad and salem"]
     },
     {
       "filename": "250113_Cats_CAL7822.jpg",
+      "path": "250113_Cats_CAL7822.jpg",
       "caption": "Salem wears silver-framed sunglasses on a bookshelf on Jan. 13, 2025.",
-      "alt": "Salem wears silver-framed sunglasses on a bookshelf on Jan. 13, 2025."
+      "alt": "Salem wears silver-framed sunglasses on a bookshelf on Jan. 13, 2025.",
+      "tags": ["sinbad and salem"]
     },
     {
       "filename": "250113_Cats_CAL7826.jpg",
+      "path": "250113_Cats_CAL7826.jpg",
       "caption": "Salem wears dark sunglasses next to a stack of books on Jan. 13, 2025.",
-      "alt": "Salem wears dark sunglasses next to a stack of books on Jan. 13, 2025."
+      "alt": "Salem wears dark sunglasses next to a stack of books on Jan. 13, 2025.",
+      "tags": ["sinbad and salem"]
     },
     {
       "filename": "250113_Cats_CAL7839.jpg",
+      "path": "250113_Cats_CAL7839.jpg",
       "caption": "Salem rests on a shelf, eyes catching the light on Jan. 13, 2025.",
-      "alt": "Salem rests on a shelf, eyes catching the light on Jan. 13, 2025."
+      "alt": "Salem rests on a shelf, eyes catching the light on Jan. 13, 2025.",
+      "tags": ["sinbad and salem"]
     },
     {
       "filename": "250113_Cats_CAL7843.jpg",
+      "path": "250113_Cats_CAL7843.jpg",
       "caption": "Salem looks into the camera from a bookshelf on Jan. 13, 2025.",
-      "alt": "Salem looks into the camera from a bookshelf on Jan. 13, 2025."
+      "alt": "Salem looks into the camera from a bookshelf on Jan. 13, 2025.",
+      "tags": ["sinbad and salem"]
     },
     {
       "filename": "250113_Cats_CAL7845.jpg",
+      "path": "250113_Cats_CAL7845.jpg",
       "caption": "Sinbad sits in front of books and a stuffed bear on a shelf on Jan. 13, 2025.",
-      "alt": "Sinbad sits in front of books and a stuffed bear on a shelf on Jan. 13, 2025."
+      "alt": "Sinbad sits in front of books and a stuffed bear on a shelf on Jan. 13, 2025.",
+      "tags": ["sinbad and salem"]
     },
     {
       "filename": "250113_Cats_CAL7847.jpg",
+      "path": "250113_Cats_CAL7847.jpg",
       "caption": "Sinbad watches from a shelf beside a stuffed bear on Jan. 13, 2025.",
-      "alt": "Sinbad watches from a shelf beside a stuffed bear on Jan. 13, 2025."
+      "alt": "Sinbad watches from a shelf beside a stuffed bear on Jan. 13, 2025.",
+      "tags": ["sinbad and salem"]
     },
     {
       "filename": "250113_Cats_CAL7849.jpg",
+      "path": "250113_Cats_CAL7849.jpg",
       "caption": "Sinbad stares into the camera, eyes reflecting the light on Jan. 13, 2025.",
-      "alt": "Sinbad stares into the camera, eyes reflecting the light on Jan. 13, 2025."
+      "alt": "Sinbad stares into the camera, eyes reflecting the light on Jan. 13, 2025.",
+      "tags": ["sinbad and salem"]
     }
   ],
-  "tags": ["cats", "pets"],
+  "tags": ["sinbad and salem"],
   "metadata": {
-    "generated": "2026-11-11T16:40:44.323Z",
+    "generated": "2026-11-11T16:47:05.271Z",
     "version": "1.0.0"
   }
 }
