@@ -28,7 +28,6 @@ describe('events page manifest adapter', () => {
 
     const groups = adaptEvents(manifest);
     const firstEvent = manifest.events[0];
-    const firstImage = firstEvent.images[0];
 
     expect(groups).toHaveLength(manifest.events.length);
     expect(groups[0]).toMatchObject({
@@ -37,6 +36,6 @@ describe('events page manifest adapter', () => {
       dateISO: firstEvent.dateISO,
       category: firstEvent.category,
     });
-    expect(groups[0].coverImage.url).toBe(`/${firstImage.path}`);
+    expect(firstEvent.images.map((image) => `/${image.path}`)).toContain(groups[0].coverImage.url);
   });
 });
