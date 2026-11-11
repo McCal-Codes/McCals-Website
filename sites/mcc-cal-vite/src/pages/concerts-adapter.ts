@@ -1,4 +1,5 @@
 import { imageUrl } from '@/components/portfolio';
+import { concertKeep } from '@/content/concertCuration';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 
 export interface ConcertBand {
@@ -14,8 +15,20 @@ export interface ConcertManifest {
   bands: ConcertBand[];
 }
 
+// A shoot listed in concertKeep shows only its curated frames (an empty list hides it).
+// A shoot missing from the map is shown in full, so new work is never hidden by accident.
+function curate(bands: ConcertBand[]): ConcertBand[] {
+  return bands
+    .map((band) => {
+      const keep = concertKeep[band.relativeFolderPath];
+      if (!keep) return band;
+      return { ...band, images: band.images.filter((filename) => keep.includes(filename)) };
+    })
+    .filter((band) => band.images.length > 0);
+}
+
 export function adaptConcerts(manifest: ConcertManifest): PortfolioGroup[] {
-  return manifest.bands.map((band) => {
+  return curate(manifest.bands).map((band) => {
     const images = band.images.map((filename) => ({
       url: imageUrl.concert(band.relativeFolderPath, filename),
       filename,

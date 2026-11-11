@@ -1,5 +1,12 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { adaptConcerts } from './concerts-adapter';
+
+vi.mock('@/content/concertCuration', () => ({
+  concertKeep: {
+    'Concert/Listed Band/May 2025': ['b.jpg'],
+    'Concert/Hidden Band/May 2025': [],
+  },
+}));
 
 describe('adaptConcerts', () => {
   it('keeps each show as its own card while preserving concert metadata', () => {
@@ -31,7 +38,9 @@ describe('adaptConcerts', () => {
       dateISO: '2025-10-12',
       category: 'Concert',
     });
-    expect(groups[0]?.coverImage.url).toContain('/Concert/Star Viper/October 2025/star-viper-1.jpg');
+    expect(groups[0]?.coverImage.url).toContain(
+      '/Concert/Star Viper/October 2025/star-viper-1.jpg',
+    );
     expect(groups[1]).toMatchObject({
       title: 'Star Viper',
       dateDisplay: 'December 2025',
@@ -40,5 +49,25 @@ describe('adaptConcerts', () => {
     });
     expect(groups[1]?.images).toHaveLength(2);
     expect(groups[0]?.id).not.toBe(groups[1]?.id);
+  });
+
+  it('shows only the curated frames of a listed shoot and hides empty shoots', () => {
+    const band = (name: string, images: string[]) => ({
+      bandName: name,
+      relativeFolderPath: `Concert/${name}/May 2025`,
+      totalImages: images.length,
+      images,
+    });
+    const groups = adaptConcerts({
+      bands: [
+        band('Listed Band', ['a.jpg', 'b.jpg', 'c.jpg']),
+        band('Hidden Band', ['x.jpg']),
+        band('New Band', ['n1.jpg', 'n2.jpg']),
+      ],
+    });
+
+    expect(groups.map((group) => group.title)).toEqual(['Listed Band', 'New Band']);
+    expect(groups[0]?.images.map((image) => image.filename)).toEqual(['b.jpg']);
+    expect(groups[1]?.images).toHaveLength(2);
   });
 });
