@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
-import { preload } from 'react-dom';
 import { Link } from 'react-router-dom';
-import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '@/utils/imageOptimization';
+import { imageRightsProperties } from '@/utils/jsonLd';
 import OptimizedImage from '@/components/OptimizedImage';
 import { useManifest, imageUrl } from '../portfolio/useManifest';
 import { generateId } from '@/utils/portfolio-ids';
@@ -11,8 +10,9 @@ import { journalismKeep } from '@/content/journalismCuration';
 import type { PortfolioGroup } from '../portfolio/types';
 import PortfolioFilters from '../portfolio/PortfolioFilters';
 import { portfolioStyles } from '../portfolio';
-import { ALL, FILTER_ORDER, getFeaturedStories, shortCategory } from './featuredStories';
+import { ALL, FILTER_ORDER, orderFeatured, shortCategory } from './featuredStories';
 import { featuredPicks } from '@/content/featuredPicks';
+import { featuredNames } from '@/content/featuredNames';
 import { adaptPortraits, type PortraitManifest } from '@/pages/portraits-adapter';
 import { adaptNature, type NatureManifest } from '@/pages/nature-adapter';
 import ProtectedPortfolioImage from '../portfolio/ProtectedPortfolioImage';
@@ -275,98 +275,54 @@ function filterDisplayLabel(filter: string) {
   return filter === 'Journalism' ? 'photojournalism' : filter.toLowerCase();
 }
 
-const LEAD_IMAGE_WIDTHS = [640, 960, 1280, 1600];
-const LEAD_IMAGE_SIZES = '(max-width: 980px) calc(100vw - 40px), 58vw';
+// Alt text a search engine can use. A written caption wins; otherwise describe the shoot instead
+// of the raw filename the adapters fall back to.
+function describePhoto(group: PortfolioGroup): string {
+  const caption = group.coverImage.caption;
+  if (caption) return caption;
 
-interface FeaturedStoryCardProps {
-  group: PortfolioGroup;
-  variant: 'lead' | 'support';
-  loading?: 'eager' | 'lazy';
+  const names = featuredNames[group.title];
+  const subject = names ? `${group.title} (${names})` : group.title;
+  const label = categoryLabel(group.category).toLowerCase();
+  const when = group.dateDisplay ? `, ${group.dateDisplay}` : '';
+  return `${subject}, ${label} photography by Caleb McCartney${when}`;
 }
 
-// Featured is for browsing: every image leads to its work page, where the full gallery lives.
-function FeaturedStoryCard({ group, variant, loading = 'lazy' }: FeaturedStoryCardProps) {
-  const label = categoryLabel(group.category);
-  const route = categoryRoute(group.category);
-  const description = group.featuredDescription ?? group.coverImage.caption;
-
-  return (
-    <article
-      className={`${portfolioStyles.pfFeaturedStory} ${variant === 'lead' ? portfolioStyles.pfFeaturedStoryLead : portfolioStyles.pfFeaturedStorySupport}`}
-    >
-      <Link
-        to={route}
-        className={portfolioStyles.pfFeaturedStoryImageButton}
-        aria-label={`${group.title}, see more ${label.toLowerCase()}`}
-      >
-        <ProtectedPortfolioImage className={portfolioStyles.pfFeaturedStoryProtectedImage}>
-          <OptimizedImage
-            src={group.coverImage.url}
-            alt={group.coverImage.alt ?? group.title}
-            frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfFeaturedStoryImageFrame}`}
-            imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfFeaturedStoryImage}`}
-            loading={loading}
-            decoding="async"
-            optimizedWidth={variant === 'lead' ? 1280 : 720}
-            srcSetWidths={variant === 'lead' ? LEAD_IMAGE_WIDTHS : [360, 540, 720, 960]}
-            sizes={
-              variant === 'lead' ? LEAD_IMAGE_SIZES : '(max-width: 980px) calc(100vw - 40px), 28vw'
-            }
-            width={variant === 'lead' ? 980 : 460}
-            height={variant === 'lead' ? 620 : 310}
-            draggable={false}
-          />
-        </ProtectedPortfolioImage>
-      </Link>
-
-      <div className={portfolioStyles.pfFeaturedStoryCopy}>
-        <p className={portfolioStyles.pfFeaturedStoryMeta}>
-          <span>{label}</span>
-          {group.dateDisplay && <span>{group.dateDisplay}</span>}
-        </p>
-        <h3 className={portfolioStyles.pfFeaturedStoryTitle}>{group.title}</h3>
-        {description && <p className={portfolioStyles.pfFeaturedStoryDescription}>{description}</p>}
-        <div className={portfolioStyles.pfFeaturedStoryActions}>
-          <Link className={portfolioStyles.pfFeaturedStoryButton} to={route}>
-            See more {label.toLowerCase()}
-          </Link>
-        </div>
-      </div>
-    </article>
-  );
+function toAbsoluteUrl(url: string) {
+  return url.startsWith('/') ? `${window.location.origin}${url}` : url;
 }
 
 function FeaturedTile({ group, loading }: { group: PortfolioGroup; loading: 'eager' | 'lazy' }) {
   const label = categoryLabel(group.category);
+  const names = featuredNames[group.title];
 
   return (
-    <Link
-      to={categoryRoute(group.category)}
-      className={portfolioStyles.pfFeaturedTile}
-      aria-label={`${group.title}, see more ${label.toLowerCase()}`}
-    >
-      <ProtectedPortfolioImage className={portfolioStyles.pfFeaturedStoryProtectedImage}>
-        <OptimizedImage
-          src={group.coverImage.url}
-          alt={group.coverImage.alt ?? group.title}
-          frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfFeaturedStoryImageFrame}`}
-          imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfFeaturedStoryImage}`}
-          loading={loading}
-          decoding="async"
-          optimizedWidth={720}
-          srcSetWidths={[360, 540, 720, 960]}
-          sizes="(max-width: 680px) calc(100vw - 32px), (max-width: 980px) 50vw, 31vw"
-          width={460}
-          height={345}
-          draggable={false}
-        />
-      </ProtectedPortfolioImage>
+    <Link to={categoryRoute(group.category)} className={portfolioStyles.pfFeaturedTile}>
+      <span className={portfolioStyles.pfFeaturedTileImage}>
+        <ProtectedPortfolioImage className={portfolioStyles.pfFeaturedStoryProtectedImage}>
+          <OptimizedImage
+            src={group.coverImage.url}
+            alt={describePhoto(group)}
+            frameClassName={`${portfolioStyles.pfBlurImageFrame} ${portfolioStyles.pfFeaturedStoryImageFrame}`}
+            imageClassName={`${portfolioStyles.pfBlurImage} ${portfolioStyles.pfFeaturedStoryImage}`}
+            loading={loading}
+            decoding="async"
+            optimizedWidth={720}
+            srcSetWidths={[360, 540, 720, 960]}
+            sizes="(max-width: 680px) calc(100vw - 32px), (max-width: 980px) 50vw, 31vw"
+            width={460}
+            height={345}
+            draggable={false}
+          />
+        </ProtectedPortfolioImage>
+      </span>
       <span className={portfolioStyles.pfFeaturedTileCaption}>
+        <span className={portfolioStyles.pfFeaturedTileTitle}>{group.title}</span>
+        {names && <span className={portfolioStyles.pfFeaturedTileNames}>{names}</span>}
         <span className={portfolioStyles.pfFeaturedTileMeta}>
           {label}
           {group.dateDisplay ? ` · ${group.dateDisplay}` : ''}
         </span>
-        <span className={portfolioStyles.pfFeaturedTileTitle}>{group.title}</span>
       </span>
     </Link>
   );
@@ -406,44 +362,35 @@ export default function FeaturedPortfolio() {
     return [ALL, ...ordered, ...remaining];
   }, [groups]);
 
-  const filtered = useMemo(() => {
-    if (activeFilter === ALL) return groups;
-    return groups.filter((g) => shortCategory(g.category ?? '') === activeFilter);
+  const visible = useMemo(() => {
+    const filtered =
+      activeFilter === ALL
+        ? groups
+        : groups.filter((g) => shortCategory(g.category ?? '') === activeFilter);
+    return orderFeatured(filtered);
   }, [groups, activeFilter]);
 
-  const featuredStories = getFeaturedStories(filtered, activeFilter);
-  const featuredStoryIds = new Set(featuredStories.map((group) => group.id));
-  const gridGroups = filtered.filter((group) => !featuredStoryIds.has(group.id));
-
-  const categorySummaries = useMemo(() => {
-    const categories = ['Concert', 'Events', 'Journalism'];
-
-    return categories.map((category) => {
-      const categoryGroups = groups.filter(
-        (group) => shortCategory(group.category ?? '') === category,
-      );
-      const photoCount = categoryGroups.reduce((sum, group) => sum + group.images.length, 0);
-
-      return {
-        category,
-        groups: categoryGroups.length,
-        photos: photoCount,
-        href: categoryRoute(`${category} Photography`),
-      };
+  // Structured data for the photos on the page, so search engines get the credit, copyright and
+  // licensing details with each image.
+  const galleryJsonLd = useMemo(() => {
+    if (!visible.length) return null;
+    const origin = window.location.origin;
+    return JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ImageGallery',
+      name: 'Featured Photography Portfolio',
+      url: `${origin}/featured-work`,
+      image: visible.map((group) => ({
+        '@type': 'ImageObject',
+        contentUrl: toAbsoluteUrl(group.coverImage.url),
+        name: group.title,
+        description: describePhoto(group),
+        ...(group.dateISO ? { dateCreated: group.dateISO } : {}),
+        ...imageRightsProperties(),
+        url: `${origin}${categoryRoute(group.category)}`,
+      })),
     });
-  }, [groups]);
-
-  // Start fetching the hero as soon as the lead is known, with the same srcset the card requests,
-  // so the browser does not wait for the card to render before asking for it.
-  const leadCover = featuredStories[0]?.coverImage.url;
-  if (leadCover) {
-    preload(getOptimizedImageUrl(leadCover, { width: 1280 }), {
-      as: 'image',
-      imageSrcSet: getResponsiveImageSrcSet(leadCover, LEAD_IMAGE_WIDTHS),
-      imageSizes: LEAD_IMAGE_SIZES,
-      fetchPriority: 'high',
-    });
-  }
+  }, [visible]);
 
   return (
     <div className={`${portfolioStyles.pfRoot} ${portfolioStyles.pfFeaturedRoot}`}>
@@ -456,22 +403,6 @@ export default function FeaturedPortfolio() {
             image to see the full set.
           </p>
         </div>
-
-        {groups.length > 0 && (
-          <div className={portfolioStyles.pfFeaturedStats} aria-label="Featured portfolio summary">
-            {categorySummaries.map((summary) => (
-              <Link
-                key={summary.category}
-                className={portfolioStyles.pfFeaturedStat}
-                to={summary.href}
-              >
-                <span className={portfolioStyles.pfFeaturedStatValue}>{summary.groups}</span>
-                <span className={portfolioStyles.pfFeaturedStatLabel}>{summary.category}</span>
-                <span className={portfolioStyles.pfFeaturedStatMeta}>{summary.photos} photos</span>
-              </Link>
-            ))}
-          </div>
-        )}
       </header>
 
       {status === 'loading' && (
@@ -490,39 +421,20 @@ export default function FeaturedPortfolio() {
 
       {status === 'success' && (
         <>
-          {featuredStories.length > 0 && (
-            <section
-              className={portfolioStyles.pfFeaturedEditorial}
-              aria-label="Featured portfolio highlights"
-            >
-              <FeaturedStoryCard group={featuredStories[0]} variant="lead" loading="eager" />
-              {featuredStories.length > 1 && (
-                <div className={portfolioStyles.pfFeaturedSupportStack}>
-                  {featuredStories.slice(1).map((group) => (
-                    <FeaturedStoryCard
-                      key={group.id}
-                      group={group}
-                      variant="support"
-                      loading="eager"
-                    />
-                  ))}
-                </div>
-              )}
-            </section>
-          )}
-
           <PortfolioFilters filters={filters} active={activeFilter} onChange={setActiveFilter} />
-          {gridGroups.length > 0 && (
+          {visible.length > 0 && (
             <div className={`${portfolioStyles.pfGrid} ${portfolioStyles.pfFeaturedGrid}`}>
-              {gridGroups.map((group, index) => (
-                <FeaturedTile key={group.id} group={group} loading={index < 3 ? 'eager' : 'lazy'} />
+              {visible.map((group, index) => (
+                <FeaturedTile key={group.id} group={group} loading={index < 6 ? 'eager' : 'lazy'} />
               ))}
             </div>
           )}
 
-          {activeFilter !== ALL && gridGroups.length === 0 && (
+          {galleryJsonLd && <script type="application/ld+json">{galleryJsonLd}</script>}
+
+          {activeFilter !== ALL && visible.length === 0 && (
             <div className={portfolioStyles.pfFeaturedCategoryNote}>
-              <p>That is the full curated {filterDisplayLabel(activeFilter)} edit.</p>
+              <p>Nothing featured in {filterDisplayLabel(activeFilter)} yet.</p>
               <Link to={categoryRoute(`${activeFilter} Photography`)}>
                 View the full {filterDisplayLabel(activeFilter)} portfolio
               </Link>

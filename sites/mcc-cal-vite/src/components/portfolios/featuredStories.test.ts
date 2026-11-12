@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PortfolioGroup } from '../portfolio/types';
-import { ALL, getFeaturedStories, pickLead } from './featuredStories';
+import { orderFeatured, pickLead } from './featuredStories';
 
 function group(id: string, category: string, featuredRank?: number): PortfolioGroup {
   const image = { url: `${id}.jpg`, filename: `${id}.jpg`, alt: id };
@@ -27,20 +27,17 @@ describe('pickLead', () => {
   });
 });
 
-describe('getFeaturedStories', () => {
-  const groups = [
-    group('new', 'Journalism Photography'),
-    group('show', 'Concert Photography', 1),
-    group('party', 'Events Photography'),
-    group('extra', 'Concert Photography'),
-  ];
-
-  it('leads with the ranked story and adds one from each other category', () => {
-    expect(getFeaturedStories(groups, ALL).map((g) => g.id)).toEqual(['show', 'party', 'new']);
+describe('orderFeatured', () => {
+  it('puts the ranked pick first and keeps the rest in the given order', () => {
+    const groups = [
+      group('new', 'Journalism Photography'),
+      group('show', 'Concert Photography', 1),
+      group('party', 'Events Photography'),
+    ];
+    expect(orderFeatured(groups).map((g) => g.id)).toEqual(['show', 'new', 'party']);
   });
 
-  it('keeps the ranked lead first in a filtered view', () => {
-    const concerts = groups.filter((g) => g.category === 'Concert Photography');
-    expect(getFeaturedStories(concerts, 'Concert').map((g) => g.id)).toEqual(['show', 'extra']);
+  it('returns an empty list for no stories', () => {
+    expect(orderFeatured([])).toEqual([]);
   });
 });
