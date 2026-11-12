@@ -1,6 +1,7 @@
 import { imageUrl } from '@/components/portfolio';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { natureKeep } from '@/content/natureCuration';
+import { describeImage } from '@/utils/altText';
 
 interface NatureItem {
   collectionName: string;
@@ -248,7 +249,12 @@ export function adaptNature(manifest: NatureManifest): PortfolioGroup[] {
               image.alt ||
               image.caption ||
               image.description ||
-              `${groupSource.title}, nature image ${index + 1}`,
+              describeImage({
+                title: groupSource.title,
+                kind: 'nature',
+                index,
+                total: groupSource.images.length,
+              }),
           };
         });
 
