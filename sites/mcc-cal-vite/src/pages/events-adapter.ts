@@ -1,6 +1,7 @@
 import { imageUrl } from '@/components/portfolio/useManifest';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { eventKeep } from '@/content/eventCuration';
+import { describeImage } from '@/utils/altText';
 
 export interface EventItem {
   title?: string;
@@ -45,14 +46,22 @@ export function adaptEvents(manifest: EventsManifest): PortfolioGroup[] {
     const name = item.title ?? item.eventName;
     const images = item.images.map((img, i) => {
       const filename = img.path.split('/').pop() ?? `image-${i}`;
-      const photoMatch = filename.match(/CAL(\d+)/);
-      const photoNum = photoMatch ? ` #${photoMatch[1]}` : '';
       return {
         url: imageUrl.event(img.path),
         filename,
         caption: img.caption,
         description: img.description,
-        alt: img.alt ?? img.caption ?? img.description ?? `${name}${photoNum}`,
+        alt:
+          img.alt ??
+          img.caption ??
+          img.description ??
+          describeImage({
+            title: name,
+            kind: 'event',
+            index: i,
+            total: item.images.length,
+            date: item.dateDisplay,
+          }),
       };
     });
     return {

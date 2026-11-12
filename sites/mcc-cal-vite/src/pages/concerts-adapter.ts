@@ -1,6 +1,7 @@
 import { imageUrl } from '@/components/portfolio';
 import { concertKeep } from '@/content/concertCuration';
 import type { PortfolioGroup } from '@/components/portfolio/types';
+import { describeImage } from '@/utils/altText';
 
 export interface ConcertBand {
   bandName: string;
@@ -30,10 +31,16 @@ function curate(bands: ConcertBand[]): ConcertBand[] {
 
 export function adaptConcerts(manifest: ConcertManifest): PortfolioGroup[] {
   return curate(manifest.bands).map((band) => {
-    const images = band.images.map((filename) => ({
+    const images = band.images.map((filename, index) => ({
       url: imageUrl.concert(band.relativeFolderPath, filename),
       filename,
-      alt: `${band.bandName} concert photo`,
+      alt: describeImage({
+        title: band.bandName,
+        kind: 'concert',
+        index,
+        total: band.images.length,
+        date: band.dateDisplay,
+      }),
     }));
 
     return {

@@ -42,6 +42,7 @@ interface JournalismManifest {
 
 import { generateId } from '@/utils/portfolio-ids';
 import { journalismKeep } from '@/content/journalismCuration';
+import { describeImage } from '@/utils/altText';
 
 // ── Normaliser ────────────────────────────────────────────────────────────────
 
@@ -62,12 +63,20 @@ function applyCuration(events: JournalismEvent[]): JournalismEvent[] {
 
 function normalise(events: JournalismEvent[]): PortfolioGroup[] {
   return applyCuration(events).map((event) => {
-    const images = event.images.map((img) => ({
+    const images = event.images.map((img, index) => ({
       url: img.url ?? imageUrl.journalism(event.folderPath, img.path),
       filename: img.filename,
       caption: img.caption,
       description: img.description,
-      alt: img.caption ?? event.eventName,
+      alt:
+        img.caption ??
+        describeImage({
+          title: event.eventName,
+          kind: 'photojournalism',
+          index,
+          total: event.images.length,
+          date: event.dateDisplay,
+        }),
     }));
 
     return {

@@ -2,6 +2,7 @@ import { imageUrl } from '@/components/portfolio';
 import type { PortfolioGroup } from '@/components/portfolio/types';
 import { generateId } from '@/utils/portfolio-ids';
 import { portraitKeep } from '@/content/portraitCuration';
+import { describeImage } from '@/utils/altText';
 
 interface PortraitAlbum {
   albumName: string;
@@ -136,7 +137,14 @@ function createSessionGroup(
     return {
       url: imageUrl.portrait(sessionPath, filename),
       filename: rawFilename.split('/').pop() ?? rawFilename,
-      alt: alt ?? `${sessionTitle}, ${category.toLowerCase()} portrait image ${index + 1}`,
+      alt:
+        alt ??
+        describeImage({
+          title: sessionTitle,
+          kind: `${category.toLowerCase()} portrait`,
+          index,
+          total: sessionImages.length,
+        }),
       ...(caption ? { caption } : {}),
       ...(description ? { description } : {}),
     };
