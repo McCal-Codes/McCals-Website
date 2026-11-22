@@ -86,7 +86,7 @@ export default function LicensingPage() {
     <LegalDocument
       title="Image Licensing"
       intro="Usage rights for photography by Caleb McCartney. What a licence covers, how it is scoped, and how to request one."
-      effectiveDate="2026-08-11"
+      effectiveDate="2026-11-22"
       navLabel="Image Licensing"
       navSections={NAV_SECTIONS}
       glanceItems={GLANCE_ITEMS}
@@ -246,7 +246,16 @@ export default function LicensingPage() {
             colour correction are acceptable; adding, removing, or moving elements is not.
           </li>
           <li>Using an image in a way that implies endorsement by a person depicted.</li>
-          <li>Using images to train machine learning models, absent a written agreement.</li>
+          <li>
+            Editing, retouching, filtering, or otherwise altering delivered images from personal and
+            client sessions, including portraits, engagements, and events. Delivered images are
+            final; any edits are made by the photographer on request.
+          </li>
+          <li>
+            Using AI or machine learning tools to edit, enhance, extend, restyle, or generate content
+            from an image, uploading an image to any AI tool or service, or using images to train
+            machine learning models, absent a written agreement.
+          </li>
         </ul>
       </section>
 

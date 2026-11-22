@@ -86,7 +86,7 @@ export default function TermsPage() {
     <LegalDocument
       title="Terms & Conditions"
       intro="The client agreement covering consultation, cost, intellectual property, cancellations, and liability for McCal Media photography and creative services."
-      effectiveDate="2026-08-11"
+      effectiveDate="2026-11-22"
       navLabel="Terms & Conditions"
       navSections={NAV_SECTIONS}
       glanceItems={GLANCE_ITEMS}
@@ -293,6 +293,13 @@ export default function TermsPage() {
             Client for the specific purpose agreed to in the licensing agreement. Any unauthorized
             use of the design, such as using the design for purposes other than those specified
             herein, will result in additional fees and/or royalty payments to the Contractor.
+          </p>
+          <p>
+            Delivered images are final. The Client may not edit or alter them in any way, including
+            with AI tools, and may not upload them to any AI tool or service or use them to train a
+            model. Any edits are made by the Contractor on request. See{' '}
+            <Link to="/licensing#restrictions">Image Licensing</Link> for the full list of
+            restrictions.
           </p>
           <p>
             Parties own their respective trademarks and intellectual property used in the standard
